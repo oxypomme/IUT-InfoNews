@@ -1,5 +1,5 @@
 <?php
-include "models/connect.php";
+include "../models/connect.php";
 session_start();
 if (isset($_POST['submit'])) {
     if (isset($_POST["login"]) and isset($_POST["passwd"])) {
@@ -11,17 +11,17 @@ if (isset($_POST['submit'])) {
             if ($row['match'] != 0) {
                 $_SESSION["login"] = $login;
                 if (isset($_GET['target']))
-                    header('Location:' . $_GET["target"]);
+                    header('Location:../' . $_GET["target"]);
                 else
-                    header('Location:index.php');
+                    header('Location:../index.php');
             } else
-                echo 'Adresse mail ou mot de passe incorect';
+                echo '<span class="error">Adresse mail ou mot de passe incorect</span>';
         }
     }
 }
 
 if (isset($_SESSION["login"]))
-    header('Location:index.php');
+    header('Location:../index.php');
 
 if (isset($_GET['target']))
     echo 'Pour accèder à cette page il est nécessaire de se connecter avec votre identifiant :';
