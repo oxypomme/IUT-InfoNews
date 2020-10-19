@@ -1,4 +1,5 @@
 <?php
+echo getcwd();
 include "connect.php";
 
 header('Content-Type: application/json');
