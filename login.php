@@ -5,12 +5,11 @@ if (isset($_POST['submit'])) {
     if (isset($_POST["login"]) and isset($_POST["passwd"])) {
         $login = htmlentities($_POST["login"]);
         $pass = htmlentities($_POST["passwd"]);
-        $reslog = $objPdo->prepare("SELECT COUNT(*) AS 'match' FROM redactor WHERE 'password' = '$pass' AND mail = '$login' LIMIT 1");
+        $reslog = $objPdo->prepare("SELECT COUNT(*) AS 'match' FROM redactor WHERE mail = '$login' AND passwrd = '$pass' LIMIT 1");
         $reslog->execute();
         foreach ($reslog as $row) {
-            echo '<script lang="javascript" type="text/javascript">alert(' . $row['match'] . ')</script>';
             if ($row['match'] != 0) {
-                $_SESSION["isLogged"] = true;
+                $_SESSION["login"] = $login;
                 if (isset($_GET['target']))
                     header('Location:' . $_GET["target"]);
                 else
@@ -21,7 +20,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-if (isset($_SESSION["isLogged"]))
+if (isset($_SESSION["login"]))
     header('Location:index.php');
 
 if (isset($_GET['target']))
