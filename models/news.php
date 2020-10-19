@@ -15,14 +15,16 @@ class News
     public $content;
     public $date;
     public $redactor;
+    public $lang;
 
-    function __construct($id, $theme, $content, $date, $redactor)
+    function __construct($id, $theme, $content, $date, $redactor, $lang)
     {
         $this->id = $id;
         $this->theme = $theme;
         $this->content = $content;
         $this->date = $date;
         $this->redactor = $redactor;
+        $this->lang = $lang;
     }
 }
 
@@ -47,7 +49,7 @@ $strSQL = "SELECT * FROM news WHERE theme LIKE '$theme%' ORDER BY date_news";
 $result = $objPdo->prepare($strSQL);
 $result->execute();
 foreach ($result as $row) {
-    $raw->news[] = new News($row['id_news'], $row['id_theme'], $row['content'], $row['date_news'], $row['id_redactor']);
+    $raw->news[] = new News($row['id_news'], $row['id_theme'], $row['content'], $row['date_news'], $row['id_redactor'], $row['language']);
 }
 
 echo json_encode($raw);
