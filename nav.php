@@ -15,7 +15,7 @@
             $result = $objPdo->prepare("SELECT last_name, first_name FROM redactor WHERE mail = '$mail'");
             $result->execute();
             foreach ($result as $row) {
-                echo '<li class="connect"><span>' . $row['last_name'] . ' ' . $row['first_name'] . '</span></li>';
+                echo '<li class="connect"><span>' . $row['last_name'] . ' ' . $row['first_name'] . '</span></li>'; //TODO: link to profile
             }
         } else { //TODO: not a new page, but an iframe or smthg
             echo '<li class="connect"><a href="php/login.php">Connexion</a></li>';

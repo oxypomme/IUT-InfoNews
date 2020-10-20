@@ -54,6 +54,8 @@ if (isset($_POST['submit'])) {
             $inputErrors['theme'] = "Theme vide ou incorrect";
     } else
         $inputErrors['name'] = "Nom vide ou incorrect";
+} else if (isset($_POST['cancel'])) {
+    header('Location:index.php');
 }
 
 //TODO: set fields when editing

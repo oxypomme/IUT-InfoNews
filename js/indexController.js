@@ -75,6 +75,7 @@ function setupNews(array) {
         icon.alt = array[i].lang;
         footer.appendChild(icon);
         lig.appendChild(footer);
+        //TODO: add delete/edit btn
 
         document.getElementById('news').appendChild(lig);
     }

@@ -56,6 +56,7 @@ include "php/createNews.php";
             <?php showError("others") ?><br />
 
             <input type="submit" name="submit" value="Valider" />
+            <input type="submit" name="cancel" value="Annuler" />
         </form>
     </main>
 
