@@ -17,7 +17,7 @@ function themesJSONtoArray(docJSON) // Transformation JSON en tableau
     return themes;
 }
 
-function setupTheme(array) {
+function setupTheme(array, withoutEmpty) {
     //TODO: select by default if it was a reload
     while (document.getElementById('themes').childNodes.length > 0)
         document.getElementById('themes').removeChild(
@@ -26,8 +26,10 @@ function setupTheme(array) {
 
     var blankOption = document.createElement("option");
     blankOption.selected = true;
-    blankOption.disabled = true;
-    blankOption.hidden = true;
+    if (!withoutEmpty) {
+        blankOption.disabled = true;
+        blankOption.hidden = true;
+    }
     document.getElementById('themes').appendChild(blankOption);
 
     for (var i = 0; i < array.length; ++i) {
@@ -39,7 +41,7 @@ function setupTheme(array) {
     }
 }
 
-function getAllThemes() {
+function getAllThemes(withoutEmpty) {
     var xhr;
     try {
         xhr = new XMLHttpRequest();
@@ -50,7 +52,7 @@ function getAllThemes() {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 var docJSON = xhr.response;
-                setupTheme(themesJSONtoArray(docJSON));
+                setupTheme(themesJSONtoArray(docJSON), withoutEmpty);
             }
         }
     };

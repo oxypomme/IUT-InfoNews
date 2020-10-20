@@ -12,13 +12,15 @@
 <body onLoad="getAllNews();">
     <header>
         <?php include "nav.php" ?>
-        <h1>Info News</h1>
     </header>
 
-    <main>
-        <section id="news">
+    <aside>
+        <?php include "php/filter.php" ?>
+    </aside>
 
-        </section>
+    <main>
+        <h1>Info News</h1>
+        <section id="news" />
     </main>
 
     <footer>

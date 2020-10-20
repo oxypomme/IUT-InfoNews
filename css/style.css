@@ -16,17 +16,39 @@ body {
 
 h1 {
     margin-left: 2%;
+    margin-top: 75px;
 }
+
+/*== ASIDE ==*/
+
+aside {
+    background-color: #333;
+    position: fixed;
+    top: 50px;
+    width: 200px;
+    height: 100vh;
+    color: white;
+}
+
+body>*:not(aside):not(header) {
+    padding-left: 200px;
+}
+
+
+/*== NEWS ==*/
 
 #news {
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 #news article {
     flex: 1;
+    min-width: 25%;
     width: 25%;
     max-width: 450px;
-    border: solid #111 2px;
+    border: solid #333 2px;
     padding: 25px;
     margin: 10px;
 }
@@ -54,7 +76,7 @@ h1 {
 #news p:nth-last-child(2) {
     height: 120px;
     padding-bottom: 10px;
-    border-bottom: solid #333 1px;
+    border-bottom: solid #666 1px;
 }
 
 #news p:last-child {
@@ -83,7 +105,11 @@ form select {
 /*== NAVBAR ==*/
 
 nav ul {
+    position: fixed;
+    width: 100%;
+    height: 50px;
     list-style-type: none;
+    top: 0;
     margin: 0;
     padding: 0;
     overflow: hidden;
