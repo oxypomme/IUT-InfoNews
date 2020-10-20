@@ -1,22 +1,37 @@
+function getSyncJSON(url) {
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(Microsoft.XMLHTTP);
+    xhr.open("GET", url, false);
+    //xhr.responseType = 'json';
+    xhr.send();
+    return (xhr.status == 200 ? xhr.response : false);
+}
+
 function newsJSONtoArray(docJSON) // Transformation JSON en tableau
 {
     var newsRAW = docJSON['news'];
-    var news = new Array();
+    var newsList = new Array();
     try {
         for (var i = 0; i < newsRAW.length; ++i) {
-            var theme = {};
-            theme.theme = newsRAW[i].theme;
-            theme.content = newsRAW[i].content;
-            theme.date = newsRAW[i].date;
-            theme.redactor = newsRAW[i].redactor;
-            theme.lang = newsRAW[i].lang;
-            news.push(theme);
-            news.sort((a, b) => a.id - b.id);
+            var news = {};
+
+            var theme = JSON.parse(getSyncJSON("models/themes.php?ID=" + newsRAW[i].theme)).themes[0];
+            news.theme = JSON.parse(theme.label).fr;
+
+            news.content = newsRAW[i].content;
+            news.date = newsRAW[i].date;
+
+            var redactor = JSON.parse(getSyncJSON("models/redactors.php?ID=" + newsRAW[i].redactor)).redactors[0];
+            news.redactor = redactor.lname + " " + redactor.fname;
+
+            news.lang = newsRAW[i].lang;
+
+            newsList.push(news);
+            newsList.sort((a, b) => a.id - b.id);
         }
     } catch (TypeError) {
 
     }
-    return news;
+    return newsList;
 }
 
 function setupNews(array) {
@@ -30,6 +45,10 @@ function setupNews(array) {
 
         var title = document.createElement("h3");
         title.innerHTML = content.title;
+        lig.appendChild(title);
+
+        var title = document.createElement("p");
+        title.innerHTML = array[i].theme;
         lig.appendChild(title);
 
         var img = document.createElement("img");

@@ -26,8 +26,13 @@ class Theme
 
 $raw = new ThemeList;
 
-$strSQL = "SELECT * FROM theme ORDER BY id_theme";
-$result = $objPdo->prepare($strSQL);
+$id = $_GET['ID'];
+if ($id == '')
+    $result = $objPdo->prepare("SELECT * FROM theme ORDER BY id_theme");
+else {
+    $result = $objPdo->prepare("SELECT * FROM theme WHERE id_theme = :id");
+    $result->bindValue('id', $id, PDO::PARAM_INT);
+}
 $result->execute();
 foreach ($result as $row) {
     $raw->themes[] = new Theme($row['id_theme'], $row['label'], $row['color'], $row['icon_theme']);
