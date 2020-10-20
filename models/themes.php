@@ -26,11 +26,11 @@ class Theme
 
 $raw = new ThemeList;
 
-$strSQL = "SELECT * FROM themes ORDER BY id_theme";
+$strSQL = "SELECT * FROM theme ORDER BY id_theme";
 $result = $objPdo->prepare($strSQL);
 $result->execute();
 foreach ($result as $row) {
-    $raw->themes[] = new Redactor($row['id_theme'], $row['label'], $row['color'], $row['icon_theme']);
+    $raw->themes[] = new Theme($row['id_theme'], $row['label'], $row['color'], $row['icon_theme']);
 }
 
 echo json_encode($raw);

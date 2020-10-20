@@ -1,4 +1,5 @@
 <?php
+include "../models/user.php";
 include "../models/connect.php";
 session_start();
 if (isset($_POST['submit'])) {
@@ -10,7 +11,7 @@ if (isset($_POST['submit'])) {
         $reslog->execute();
         foreach ($reslog as $row) {
             if ($row['match'] != 0) {
-                $_SESSION["login"] = $login;
+                $_SESSION["login"] = $login; // object
                 if (isset($_GET['target']))
                     header('Location:../' . $_GET["target"]);
                 else

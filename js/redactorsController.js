@@ -1,4 +1,4 @@
-function redactorJSONtoArray(docJSON) // Transformation JSON en tableau
+function themesJSONtoArray(docJSON) // Transformation JSON en tableau
 {
     var redactorsRAW = docJSON['redactors'];
     var redactors = new Array();
@@ -29,7 +29,7 @@ function getAllRedactors() {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 var docJSON = xhr.response;
-                redactorJSONtoArray(docJSON);
+                themesJSONtoArray(docJSON);
             }
         }
     };

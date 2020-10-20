@@ -28,20 +28,6 @@ class News
     }
 }
 
-// class NewsContent
-// {
-//     public $title;
-//     public $text;
-//     public $imgURL;
-
-//     function __construct($title, $text, $imgURL)
-//     {
-//         $this->title = $title;
-//         $this->text = $text;
-//         $this->imgURL = $imgURL;
-//     }
-// }
-
 $raw = new NewsList;
 
 $theme = $_GET['Theme'];

@@ -1,27 +1,12 @@
 <?php
 include "connect.php";
+include "redactorClass.php";
 
 header('Content-Type: application/json');
 
 class RedactorList
 {
     public $redactors;
-}
-
-class Redactor
-{
-    public $id;
-    public $lname;
-    public $fname;
-    public $mail;
-
-    function __construct($id, $lname, $fname, $mail)
-    {
-        $this->id = $id;
-        $this->lname = $lname;
-        $this->fname = $fname;
-        $this->mail = $mail;
-    }
 }
 
 $raw = new RedactorList;
