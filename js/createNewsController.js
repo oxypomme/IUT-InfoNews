@@ -18,10 +18,18 @@ function themesJSONtoArray(docJSON) // Transformation JSON en tableau
 }
 
 function setupTheme(array) {
+    //TODO: select by default if it was a reload
     while (document.getElementById('themes').childNodes.length > 0)
         document.getElementById('themes').removeChild(
             document.getElementById('themes').childNodes[0]
         );
+
+    var blankOption = document.createElement("option");
+    blankOption.selected = true;
+    blankOption.disabled = true;
+    blankOption.hidden = true;
+    document.getElementById('themes').appendChild(blankOption);
+
     for (var i = 0; i < array.length; ++i) {
         var lig = document.createElement("option");
         lig.value = array[i].id;
@@ -29,7 +37,6 @@ function setupTheme(array) {
         lig.innerHTML = JSON.parse(array[i].label).fr;
         document.getElementById('themes').appendChild(lig);
     }
-    document.getElementById('themes').appendChild(document.createElement("option"));
 }
 
 function getAllThemes() {
@@ -47,7 +54,7 @@ function getAllThemes() {
             }
         }
     };
-    xhr.open("GET", "../models/themes.php", true);
+    xhr.open("GET", "models/themes.php?ID=", true);
     xhr.responseType = 'json';
     xhr.send();
     //setTimeout("loop()", 5000);

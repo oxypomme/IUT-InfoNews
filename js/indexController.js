@@ -1,7 +1,6 @@
 function getSyncJSON(url) {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(Microsoft.XMLHTTP);
     xhr.open("GET", url, false);
-    //xhr.responseType = 'json';
     xhr.send();
     return (xhr.status == 200 ? xhr.response : false);
 }
