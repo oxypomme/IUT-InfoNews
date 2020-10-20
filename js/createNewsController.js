@@ -42,12 +42,7 @@ function setupTheme(array, withoutEmpty) {
 }
 
 function getAllThemes(withoutEmpty) {
-    var xhr;
-    try {
-        xhr = new XMLHttpRequest();
-    } catch (e) {
-        xhr = new ActiveXObject(Microsoft.XMLHTTP);
-    }
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(Microsoft.XMLHTTP);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
