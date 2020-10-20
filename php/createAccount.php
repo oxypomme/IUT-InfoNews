@@ -32,11 +32,11 @@ if (isset($_POST['submit'])) {
                         $insert_stmt = $objPdo->prepare("UPDATE `redactor` SET `last_name`=:lname, `first_name`=:fname, `mail`=:mail, `passwrd`=:pass WHERE `id_redactor`=:id");
                         $insert_stmt->bindValue('id', htmlspecialchars($_GET['id']), PDO::PARAM_INT);
                     } else
-                        $insert_stmt = $objPdo->prepare("INSERT INTO `redactor`(`last_name`, `first_name`, `mail`, `passwd`) VALUES (:lname, :fname, :mail, :pass)");
+                        $insert_stmt = $objPdo->prepare("INSERT INTO `redactor`(`last_name`, `first_name`, `mail`, `passwrd`) VALUES (:lname, :fname, :mail, :pass)");
                     $insert_stmt->bindValue('lname', $lname, PDO::PARAM_STR);
                     $insert_stmt->bindValue('fname', $fname, PDO::PARAM_STR);
                     $insert_stmt->bindValue('mail', $login, PDO::PARAM_STR);
-                    $insert_stmt->bindValue('pass', $passwd, PDO::PARAM_STR);
+                    $insert_stmt->bindValue('pass', crypt($passwd, '$2a$07$usesomesillystringforsalt'), PDO::PARAM_STR);
                     if (!$insert_stmt->execute()) {
                         $inputErrors['others'] = 'Une erreur MySQL est survenue.';
 
@@ -59,6 +59,8 @@ if (isset($_POST['submit'])) {
 
 //TODO: set fields when editing
 //TODO: check if mail is really a mail, etc.
+if (isset($_GET['id'])) {
+}
 
 session_start();
 if (isset($_SESSION["login"]))

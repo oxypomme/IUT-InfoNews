@@ -4,7 +4,8 @@ session_start();
 if (isset($_POST['submit'])) {
     if (isset($_POST["login"]) and isset($_POST["passwd"])) {
         $login = htmlentities($_POST["login"]);
-        $pass = htmlentities($_POST["passwd"]);
+        $pass = crypt(htmlentities($_POST["passwd"]), '$2a$07$usesomesillystringforsalt');
+        echo '<span class="error">' . $pass . '</span>';
         $reslog = $objPdo->prepare("SELECT COUNT(*) AS 'match' FROM redactor WHERE mail = '$login' AND passwrd = '$pass' LIMIT 1");
         $reslog->execute();
         foreach ($reslog as $row) {
