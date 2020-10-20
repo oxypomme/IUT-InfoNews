@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
 
 ?>
 
-<script src="../js/createNews.js"></script>
+<script src="../js/createNewsController.js"></script>
 
 <form method="post">
     <div>

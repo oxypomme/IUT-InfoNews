@@ -31,7 +31,10 @@ class News
 $raw = new NewsList;
 
 $theme = $_GET['Theme'];
-$strSQL = "SELECT * FROM news WHERE theme LIKE '$theme%' ORDER BY date_news";
+if ($theme != "")
+    $strSQL = "SELECT * FROM news WHERE theme LIKE '$theme%' ORDER BY date_news";
+else
+    $strSQL = "SELECT * FROM news ORDER BY date_news";
 $result = $objPdo->prepare($strSQL);
 $result->execute();
 foreach ($result as $row) {

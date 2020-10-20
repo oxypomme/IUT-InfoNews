@@ -52,7 +52,3 @@ function getAllThemes() {
     xhr.send();
     //setTimeout("loop()", 5000);
 }
-
-function test() {
-    alert("YES");
-}

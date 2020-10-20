@@ -1,5 +1,8 @@
 <h1>Hello World</h1>
-<script src="js/redactorsController.js"></script>
+<script src="js/indexController.js"></script>
 
-<body onLoad="getAllRedactors();">
+<body onLoad="getAllNews();">
+    <section id="news">
+
+    </section>
 </body>
