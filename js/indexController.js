@@ -50,16 +50,30 @@ function setupNews(array) {
         title.innerHTML = array[i].theme;
         lig.appendChild(title);
 
-        var img = document.createElement("img");
-        img.src = content.imgURL;
-        lig.appendChild(img);
+        var elmnt;
+        if (content.imgURL != "") {
+            elmnt = document.createElement("a");
+            elmnt.href = content.imgURL;
+            var img = document.createElement("img");
+            img.src = content.imgURL;
+            img.alt = content.title + "_image";
+            elmnt.appendChild(img);
+        } else {
+            elmnt = document.createElement("div");
+            elmnt.className = "spacer";
+        }
+        lig.appendChild(elmnt);
 
         var txt = document.createElement("p");
         txt.innerHTML = content.text;
         lig.appendChild(txt);
 
         var footer = document.createElement("p");
-        footer.innerHTML = array[i].redactor + " - " + array[i].date + " - " + array[i].lang;
+        footer.innerHTML = array[i].redactor + " - " + array[i].date + " - ";
+        var icon = document.createElement("img");
+        icon.src = "res/" + array[i].lang + ".png";
+        icon.alt = array[i].lang;
+        footer.appendChild(icon);
         lig.appendChild(footer);
 
         document.getElementById('news').appendChild(lig);
@@ -84,5 +98,5 @@ function getAllNews() {
     xhr.open("GET", "models/news.php?Theme=", true);
     xhr.responseType = 'json';
     xhr.send();
-    setTimeout("getAllNews()", 5000);
+    //setTimeout("getAllNews()", 5000);
 }
