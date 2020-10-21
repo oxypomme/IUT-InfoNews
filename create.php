@@ -15,10 +15,11 @@ include "php/createNews.php";
     <title>Info News - Création</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/apiController.js"></script>
     <script src="js/createNewsController.js"></script>
 </head>
 
-<body onLoad="getAllThemes();">
+<body onLoad="onLoad();">
     <header>
         <?php include "nav.php" ?>
         <h1>Créer un article</h1>
@@ -32,7 +33,7 @@ include "php/createNews.php";
                     <?php showError("name") ?>
                 </label>
                 <label>Theme :
-                    <select name="themes" id="themes" onfocus="getAllThemes();">
+                    <select name="themes" id="themes" onfocus="onLoad();">
                     </select>
                     <?php showError("theme") ?>
                 </label>
