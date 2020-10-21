@@ -18,7 +18,6 @@ function showError(string $errorName)
         echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
 }
 
-include "../models/connect.php";
 if (isset($_POST['submit'])) {
     if (isset($_POST["lname"]) && !empty($_POST['lname'])) {
         $lname = htmlspecialchars($_POST['lname']);
@@ -28,18 +27,29 @@ if (isset($_POST['submit'])) {
                 $login = htmlspecialchars($_POST["login"]);
                 if (isset($_POST["passwd"]) && !empty($_POST['passwd'])) {
                     $passwd = htmlspecialchars($_POST["passwd"]);
+                    $data = array('lname' => $lname, 'fname' => $fname, 'mail' => $login, 'pass' => $passwd);
                     if (isset($_GET['id'])) {
-                        $insert_stmt = $objPdo->prepare("UPDATE `redactor` SET `last_name`=:lname, `first_name`=:fname, `mail`=:mail, `passwrd`=:pass WHERE `id_redactor`=:id");
-                        $insert_stmt->bindValue('id', htmlspecialchars($_GET['id']), PDO::PARAM_INT);
+                        $data['id'] = htmlspecialchars($_GET['id']);
+                        $data['method'] = 'UPDATE';
                     } else
-                        $insert_stmt = $objPdo->prepare("INSERT INTO `redactor`(`last_name`, `first_name`, `mail`, `passwrd`) VALUES (:lname, :fname, :mail, :pass)");
-                    $insert_stmt->bindValue('lname', $lname, PDO::PARAM_STR);
-                    $insert_stmt->bindValue('fname', $fname, PDO::PARAM_STR);
-                    $insert_stmt->bindValue('mail', $login, PDO::PARAM_STR);
-                    $insert_stmt->bindValue('pass', crypt($passwd, '$2a$07$usesomesillystringforsalt'), PDO::PARAM_STR);
-                    if (!$insert_stmt->execute()) {
-                        $inputErrors['others'] = 'Une erreur MySQL est survenue.';
+                        $data['method'] = 'NEW';
+                    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/models/redactors.php';
+                    $options = array(
+                        'http' => array(
+                            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                            'method'  => 'POST',
+                            'content' => http_build_query($data)
+                        )
+                    );
+                    $context = stream_context_create($options);
+                    $result = file_get_contents($path, false, $context);
 
+                    if ($result === FALSE)
+                        $inputErrors['others'] = 'Une erreur HTTP est survenue.';
+                    else if (($err = json_decode($result)->sucess) !== true) {
+                        $inputErrors['others'] = $err;
+
+                        include "../models/connect.php";
                         $reslog = $objPdo->prepare("SELECT COUNT(*) AS 'match' FROM redactor WHERE mail = '$login' LIMIT 1");
                         $reslog->execute();
                         foreach ($reslog as $row)
@@ -56,6 +66,7 @@ if (isset($_POST['submit'])) {
     } else
         $inputErrors['lname'] = 'Nom vide ou incorrect';
 }
+
 
 //TODO: set fields when editing
 //TODO: check if mail is really a mail, etc.

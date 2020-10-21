@@ -49,19 +49,19 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
                 $raw->sucess = "MySQL error when getting redactor ID";
             else
                 foreach ($redactResult as $row) {
-                    $insert_stmt->bindValue('theme', htmlentities($_POST['theme']), PDO::PARAM_INT);
-                    $insert_stmt->bindValue('content',  htmlentities($_POST['content']), PDO::PARAM_STR);
-                    $insert_stmt->bindValue('redactor', $row['id_redactor'], PDO::PARAM_INT);
-                    $insert_stmt->bindValue('lang', htmlentities($_POST['lang']), PDO::PARAM_STR);
+                    $result->bindValue('theme', htmlentities($_POST['theme']), PDO::PARAM_INT);
+                    $result->bindValue('content',  $_POST['content'], PDO::PARAM_STR);
+                    $result->bindValue('redactor', htmlentities($row['id_redactor']), PDO::PARAM_INT);
+                    $result->bindValue('lang', htmlentities($_POST['lang']), PDO::PARAM_STR);
                     break;
                 }
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'UPDATE') {
-        $insert_stmt = $objPdo->prepare("UPDATE `redactor` SET `id_theme`=:theme, `content`=:content, `language`=:lang WHERE `id_news`=:id");
+        $result = $objPdo->prepare("UPDATE `redactor` SET `id_theme`=:theme, `content`=:content, `language`=:lang WHERE `id_news`=:id");
         if (isset($_POST['id']) and isset($_POST['theme']) and isset($_POST['content']) and isset($_POST['lang'])) {
             $result->bindValue('theme', htmlentities($_POST['theme']), PDO::PARAM_STR);
-            $result->bindValue('content', htmlentities($_POST['content']), PDO::PARAM_STR);
+            $result->bindValue('content', $_POST['content'], PDO::PARAM_STR);
             $result->bindValue('lang', htmlentities($_POST['lang']), PDO::PARAM_STR);
             $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);
         } else

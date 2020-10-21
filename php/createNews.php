@@ -35,15 +35,31 @@ if (isset($_POST['submit'])) {
                     if (isset($_POST['imgURL']))
                         $imgURL = htmlentities($_POST['imgURL']);
                     $content = new News($name, $text, $imgURL);
+                    $data = array('theme' => $theme, 'content' => json_encode($content), 'lang' => $lang);
                     if (isset($_GET['id'])) {
-                    } else
-                        $insert_stmt = $objPdo->prepare("INSERT INTO `news`(`id_theme`, `content`, `id_redactor`, `language`) VALUES (:theme, :content, :redactor, :lang)");
-                    $insert_stmt->bindValue('theme', $theme, PDO::PARAM_INT);
-                    $insert_stmt->bindValue('content', json_encode($content), PDO::PARAM_STR);
-                    $insert_stmt->bindValue('redactor', 1, PDO::PARAM_INT);
-                    $insert_stmt->bindValue('lang', $lang, PDO::PARAM_STR);
-                    if (!$insert_stmt->execute()) {
-                        $inputErrors['others'] = 'Une erreur MySQL est survenue.';
+                        $data['id'] = htmlspecialchars($_GET['id']);
+                        $data['method'] = 'UPDATE';
+                    } else {
+                        $data['method'] = 'NEW';
+                        $data['mail'] = $_SESSION['login'];
+                    }
+                    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/models/news.php';
+                    $options = array(
+                        'http' => array(
+                            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                            'method'  => 'POST',
+                            'content' => http_build_query($data)
+                        )
+                    );
+                    $context = stream_context_create($options);
+                    $result = file_get_contents($path, false, $context);
+
+                    var_dump($result);
+
+                    if ($result === FALSE)
+                        $inputErrors['others'] = 'Une erreur HTTP est survenue.';
+                    else if (($err = json_decode($result)->sucess) !== true) {
+                        $inputErrors['others'] = $err;
                     } else
                         header('Location:index.php');
                 } else
