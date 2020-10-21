@@ -44,7 +44,7 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'UPDATE') {
-        $insert_stmt = $objPdo->prepare("UPDATE `theme` SET `label`=:label, `color`=:color, `icon_theme`=:iconURL WHERE `id_theme`=:id");
+        $result = $objPdo->prepare("UPDATE `theme` SET `label`=:label, `color`=:color, `icon_theme`=:iconURL WHERE `id_theme`=:id");
         if (isset($_POST['label']) and isset($_POST['color']) and isset($_POST['iconURL']) and isset($_POST['id'])) {
             $result->bindValue('label', htmlentities($_POST['label']), PDO::PARAM_STR);
             $result->bindValue('color', htmlentities($_POST['color']), PDO::PARAM_STR);
@@ -53,7 +53,7 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'DELETE') {
-        $insert_stmt = $objPdo->prepare("DELETE FROM `theme` WHERE `id_theme`=:id");
+        $result = $objPdo->prepare("DELETE FROM `theme` WHERE `id_theme`=:id");
         if (isset($_POST['id'])) {
             $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);
         } else

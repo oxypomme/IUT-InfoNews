@@ -11,7 +11,6 @@ class RedactorList
 }
 
 $raw = new RedactorList;
-
 if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     $id = $_GET['ID'];
     if ($id == '')
@@ -22,28 +21,28 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     }
 } else {
     if ($_POST['method'] == 'NEW') {
-        if (isset($_GET['lname']) and isset($_GET['fname']) and isset($_GET['mail']) and isset($_GET['pass'])) {
-            $insert_stmt = $objPdo->prepare("INSERT INTO `redactor`(`last_name`, `first_name`, `mail`, `passwrd`) VALUES (:lname, :fname, :mail, :pass)");
-            $insert_stmt->bindValue('lname', htmlentities($_POST['lname']), PDO::PARAM_STR);
-            $insert_stmt->bindValue('fname', htmlentities($_POST['fname']), PDO::PARAM_STR);
-            $insert_stmt->bindValue('mail', htmlentities($_POST['mail']), PDO::PARAM_STR);
-            $insert_stmt->bindValue('pass', crypt(htmlentities($_POST['pass']), '$2a$07$usesomesillystringforsalt'), PDO::PARAM_STR);
+        if (isset($_POST['lname']) and isset($_POST['fname']) and isset($_POST['mail']) and isset($_POST['pass'])) {
+            $result = $objPdo->prepare("INSERT INTO `redactor`(`last_name`, `first_name`, `mail`, `passwrd`) VALUES (:lname, :fname, :mail, :pass)");
+            $result->bindValue('lname', htmlentities($_POST['lname']), PDO::PARAM_STR);
+            $result->bindValue('fname', htmlentities($_POST['fname']), PDO::PARAM_STR);
+            $result->bindValue('mail', htmlentities($_POST['mail']), PDO::PARAM_STR);
+            $result->bindValue('pass', crypt(htmlentities($_POST['pass']), '$2a$07$usesomesillystringforsalt'), PDO::PARAM_STR);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'UPDATE') {
-        if (isset($_GET['id']) and isset($_GET['lname']) and isset($_GET['fname']) and isset($_GET['mail']) and isset($_GET['pass'])) {
-            $insert_stmt = $objPdo->prepare("UPDATE `redactor` SET `last_name`=:lname, `first_name`=:fname, `mail`=:mail, `passwrd`=:pass WHERE `id_redactor`=:id");
-            $insert_stmt->bindValue('id', htmlentities($_GET['id']), PDO::PARAM_INT);
-            $insert_stmt->bindValue('lname', htmlentities($_POST['lname']), PDO::PARAM_STR);
-            $insert_stmt->bindValue('fname', htmlentities($_POST['fname']), PDO::PARAM_STR);
-            $insert_stmt->bindValue('mail', htmlentities($_POST['mail']), PDO::PARAM_STR);
-            $insert_stmt->bindValue('pass', crypt(htmlentities($_POST['pass']), '$2a$07$usesomesillystringforsalt'), PDO::PARAM_STR);
+        if (isset($_POST['id']) and isset($_POST['lname']) and isset($_POST['fname']) and isset($_POST['mail']) and isset($_POST['pass'])) {
+            $result = $objPdo->prepare("UPDATE `redactor` SET `last_name`=:lname, `first_name`=:fname, `mail`=:mail, `passwrd`=:pass WHERE `id_redactor`=:id");
+            $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);
+            $result->bindValue('lname', htmlentities($_POST['lname']), PDO::PARAM_STR);
+            $result->bindValue('fname', htmlentities($_POST['fname']), PDO::PARAM_STR);
+            $result->bindValue('mail', htmlentities($_POST['mail']), PDO::PARAM_STR);
+            $result->bindValue('pass', crypt(htmlentities($_POST['pass']), '$2a$07$usesomesillystringforsalt'), PDO::PARAM_STR);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'DELETE') {
-        if (isset($_GET['id'])) {
-            $insert_stmt = $objPdo->prepare("DELETE FROM `redactor` WHERE `id_redactor`=:id");
-            $insert_stmt->bindValue('id', htmlentities($_GET['id']), PDO::PARAM_INT);
+        if (isset($_POST['id'])) {
+            $result = $objPdo->prepare("DELETE FROM `redactor` WHERE `id_redactor`=:id");
+            $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else {
