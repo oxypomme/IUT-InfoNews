@@ -33,6 +33,7 @@ $raw = new NewsList;
 if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     $theme = intval($_GET['Theme']);
     $sort = (isset($_GET['Sort']) ? strtoupper($_GET['Sort']) : 'DESC');
+    $lang = (isset($_GET['Lang']) ? strtoupper($_GET['Sort']) : 'DESC');
 
     if ($theme == '')
         $result = $objPdo->prepare("SELECT * FROM news ORDER BY date_news $sort");
@@ -43,18 +44,11 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
 } else {
     if ($_POST['method'] == 'NEW') {
         $result = $objPdo->prepare("INSERT INTO `news`(`id_theme`, `content`, `id_redactor`, `language`) VALUES (:theme, :content, :redactor, :lang)");
-        if (isset($_POST['theme']) and isset($_POST['content']) and isset($_POST['mail']) and isset($_POST['lang'])) {
-            $redactResult = $objPdo->prepare("SELECT id_redactor FROM `redactor` WHERE mail = '" . $_POST['mail'] . "' LIMIT 1");
-            if (!$redactResult->execute())
-                $raw->sucess = "MySQL error when getting redactor ID";
-            else
-                foreach ($redactResult as $row) {
-                    $result->bindValue('theme', htmlentities($_POST['theme']), PDO::PARAM_INT);
-                    $result->bindValue('content',  $_POST['content'], PDO::PARAM_STR);
-                    $result->bindValue('redactor', htmlentities($row['id_redactor']), PDO::PARAM_INT);
-                    $result->bindValue('lang', htmlentities($_POST['lang']), PDO::PARAM_STR);
-                    break;
-                }
+        if (isset($_POST['theme']) and isset($_POST['content']) and isset($_POST['idredact']) and isset($_POST['lang'])) {
+            $result->bindValue('theme', htmlentities($_POST['theme']), PDO::PARAM_INT);
+            $result->bindValue('content',  $_POST['content'], PDO::PARAM_STR);
+            $result->bindValue('redactor', htmlentities($_POST['idredact']), PDO::PARAM_INT);
+            $result->bindValue('lang', htmlentities($_POST['lang']), PDO::PARAM_STR);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'UPDATE') {

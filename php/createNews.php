@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
                         $data['method'] = 'UPDATE';
                     } else {
                         $data['method'] = 'NEW';
-                        $data['mail'] = $_SESSION['login'];
+                        $data['idredact'] = $_SESSION['login'];
                     }
                     $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/models/news.php';
                     $options = array(
