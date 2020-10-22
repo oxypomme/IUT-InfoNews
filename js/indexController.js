@@ -76,7 +76,6 @@ function setupNews(array) {
             footer.appendChild(btn);
         }
         lig.appendChild(footer);
-        //TODO: add delete/edit btn
 
         document.getElementById('news').appendChild(lig);
     });
@@ -88,7 +87,7 @@ function getRadio(radios) {
             if (radios[i].checked)
                 return radios[i].value;
 
-    } catch (error) { }
+    } catch (error) {}
     return '';
 }
 

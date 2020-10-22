@@ -74,6 +74,14 @@ if (isset($_GET['ID'])) {
         $news = json_decode($result);
         if ($news->sucess) {
             $news = $news->news[0];
+            if (session_id() == "")
+                session_start();
+            if ($_SESSION['login'] != $news->redactor) {
+                echo "<script lang=\"javascript\" type=\"text/javascript\">
+                    alert(\"Vous n'êtes pas autorisé à modifier cet article !\");
+                    window.location.href = 'index.php';
+                </script>";
+            }
             $theme = $news->theme;
             $content = json_decode($news->content);
             $name = $content->title;
