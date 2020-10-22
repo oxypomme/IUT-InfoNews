@@ -47,7 +47,7 @@ class News {
     }
 }
 
-function jsonRequest(address, asyncProc = false, reqType = "GET") {
+function jsonRequest(address, asyncProc = false, reqType = "GET", content = '') {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
     if (asyncProc) {
         xhr.onreadystatechange = function () {
@@ -58,7 +58,9 @@ function jsonRequest(address, asyncProc = false, reqType = "GET") {
         xhr.responseType = 'json';
     }
     xhr.open(reqType, address, !(!asyncProc));
-    xhr.send();
+    if (reqType == 'POST')
+        xhr.setRequestHeader('Content-Type', ' application/x-www-form-urlencoded');
+    xhr.send(content);
     if (!asyncProc)
         return (xhr.status == 200 ? xhr.response : false);
 }

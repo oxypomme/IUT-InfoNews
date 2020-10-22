@@ -74,9 +74,14 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     }
 }
 
-$result->execute();
-foreach ($result as $row) {
-    $raw->news[] = new News($row['id_news'], $row['id_theme'], $row['content'], $row['date_news'], $row['id_redactor'], $row['language']);
+if (!$result->execute()) {
+    if ($raw->sucess == true)
+        $raw->sucess = "MySQL error";
+} else {
+    foreach ($result as $row) {
+        $raw->news[] = new News($row['id_news'], $row['id_theme'], $row['content'], $row['date_news'], $row['id_redactor'], $row['language']);
+    }
+    $raw->sucess = true;
 }
 
 echo json_encode($raw);

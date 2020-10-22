@@ -74,6 +74,12 @@ body>*:not(aside):not(header) {
     margin-bottom: 4px;
 }
 
+#news button {
+    width: 25%;
+    float: right;
+    margin: 5px;
+}
+
 /* #news article a img,
 #news article .spacer {
     height: 210px;
