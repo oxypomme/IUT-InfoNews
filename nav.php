@@ -4,6 +4,12 @@
     <ul>
         <li><a href="index.php">Accueil</a></li>
         <li><a href="create.php">Creer un article</a></li>
+        <li class="dropbtn connect" onclick="showDropdown()"> Dropdown
+            <ul class="dropdown-content" id="navdropdown">
+                <li><a href="#"><img src="res/fr.png" />Français</a></li>
+                <li><a href="#"><img src="res/fr.png" />English</a></li>
+            </ul>
+        </li>
         <?php
         if (session_id() == "")
             session_start();
