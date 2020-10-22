@@ -23,7 +23,7 @@ h1 {
 /*== ASIDE ==*/
 
 aside {
-    background-color: #333;
+    background-color: #222;
     position: fixed;
     top: 50px;
     width: 200px;
@@ -51,6 +51,7 @@ body>*:not(aside):not(header) {
     max-width: 450px;
     padding: 25px;
     margin: 10px;
+    background-color: #eee5;
 }
 
 @media (max-width: 1050px) {
