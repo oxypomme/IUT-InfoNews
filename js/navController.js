@@ -11,25 +11,26 @@ function showDropdown(elt) {
 }
 
 function updateLangDropdown() {
-    document.getElementById("nav-" + getCookie('lang')).classList.toggle("active");
+    var element = document.getElementById("nav-" + getCookie('lang'));
+    if (element != null && element.classList != null)
+        element.classList.toggle("active");
 }
 
 function clearAllDropdowns() {
     var allDropBtns = document.getElementsByClassName('dropbtn');
     for (let i = 0; i < allDropBtns.length; i++) {
-        if (allDropBtns[i].classList.contains('active'))
+        if (allDropBtns[i].classList != null && allDropBtns[i].classList.contains('active'))
             allDropBtns[i].classList.remove("active");
-        var dropDown = allDropBtns[i].getElementsByTagName('ul')[0];
-        if (dropDown.classList.contains('show'))
-            dropDown.classList.remove("show");
 
-        dropDown.childNodes.forEach(child => {
-            try {
-                if (child.classList.contains('active'))
-                    child.classList.remove('active');
-            } catch (error) { }
-        });
+        var dropDown = allDropBtns[i].getElementsByTagName('ul')[0];
+        if (dropDown.classList != null && dropDown.classList.contains('show'))
+            dropDown.classList.remove("show");
     }
+
+    dropDown.childNodes.forEach(child => {
+        if (child != undefined && child.classList != null && child.classList.contains('active'))
+            child.classList.remove('active');
+    });
 }
 
 // Close the dropdown if the user clicks outside of it
