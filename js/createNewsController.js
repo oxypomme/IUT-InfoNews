@@ -1,9 +1,9 @@
 function setupThemes(array) {
-    //TODO: select by default if it was a reload
-    while (document.getElementById('themes').childNodes.length > 0)
+    while (document.getElementById('themes').childNodes.length > 0) {
         document.getElementById('themes').removeChild(
             document.getElementById('themes').childNodes[0]
         );
+    }
 
     var blankOption = document.createElement("option");
     blankOption.selected = true;
@@ -14,6 +14,8 @@ function setupThemes(array) {
     array.forEach(theme => {
         var lig = document.createElement("option");
         lig.value = theme.id;
+        if (getPostedTheme() == theme.id)
+            lig.selected = true;
         //lig.style = "background-image:url(" + theme.iconURL + ");";
         lig.innerHTML = theme;
         document.getElementById('themes').appendChild(lig);

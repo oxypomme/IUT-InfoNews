@@ -16,6 +16,11 @@ include "php/createNews.php";
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/apiController.js"></script>
+    <script lang="javascript" type="text/javascript">
+        function getPostedTheme() {
+            return <?php echo (isset($_POST['themes']) ? $_POST['themes'] : '') ?>;
+        }
+    </script>
     <script src="js/createNewsController.js"></script>
 </head>
 
@@ -43,7 +48,7 @@ include "php/createNews.php";
             </div>
             <div>
                 <label>Texte :<br />
-                    <textarea name="text" rows="4" cols="50" value=<?php echo '"' . $text . '"' ?>></textarea>
+                    <textarea name="text" rows="4" cols="50"><?php echo $text ?></textarea>
                     <?php showError("text") ?>
                 </label>
                 <label>Langue :

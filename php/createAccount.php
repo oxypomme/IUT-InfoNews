@@ -7,10 +7,10 @@ $inputErrors = array(
     'others' => false
 );
 
-$lname = '';
-$fname = '';
-$login = '';
-$passwd = '';
+$lname = isset($_POST["lname"]) ? htmlspecialchars($_POST['lname']) : '';
+$fname = isset($_POST["fname"]) ? htmlspecialchars($_POST['fname']) : '';
+$login = isset($_POST["login"]) ? htmlspecialchars($_POST['login']) : '';
+$passwd = isset($_POST["passwd"]) ? htmlspecialchars($_POST['passwd']) : '';
 
 function showError($errorName)
 {
@@ -20,13 +20,9 @@ function showError($errorName)
 
 if (isset($_POST['submit'])) {
     if (isset($_POST["lname"]) && !empty($_POST['lname'])) {
-        $lname = htmlspecialchars($_POST['lname']);
         if (isset($_POST["fname"]) && !empty($_POST['fname'])) {
-            $fname = htmlspecialchars($_POST["fname"]);
             if (isset($_POST["login"]) && !empty($_POST['login'])) {
-                $login = htmlspecialchars($_POST["login"]);
                 if (isset($_POST["passwd"]) && !empty($_POST['passwd'])) {
-                    $passwd = htmlspecialchars($_POST["passwd"]);
                     $data = array('lname' => $lname, 'fname' => $fname, 'mail' => $login, 'pass' => $passwd);
                     if (isset($_GET['id'])) {
                         $data['id'] = htmlspecialchars($_GET['id']);

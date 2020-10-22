@@ -7,11 +7,11 @@ $inputErrors = array(
     'others' => false
 );
 
-$name = '';
-$theme = '';
-$text = '';
-$lang = '';
-$imgURL = '';
+$name = isset($_POST["name"]) ? htmlspecialchars($_POST['name']) : '';
+$theme = isset($_POST["themes"]) ? htmlspecialchars($_POST['themes']) : '';
+$text = isset($_POST["text"]) ? htmlspecialchars($_POST['text']) : '';
+$lang = isset($_POST["lang"]) ? htmlspecialchars($_POST['lang']) : '';
+$imgURL = isset($_POST["imgURL"]) ? htmlspecialchars($_POST['imgURL']) : '';
 
 function showError($errorName)
 {
@@ -25,15 +25,9 @@ if (session_id() == "")
     session_start();
 if (isset($_POST['submit'])) {
     if (isset($_POST["name"]) && !empty($_POST['name'])) {
-        $name = htmlspecialchars($_POST['name']);
         if (isset($_POST['themes']) && !empty($_POST['themes'])) {
-            $theme = htmlspecialchars($_POST['themes']);
             if (isset($_POST['text']) && !empty($_POST['text'])) {
-                $text = htmlspecialchars($_POST['text']);
                 if (isset($_POST['lang']) && !empty($_POST['lang'])) {
-                    $lang = htmlspecialchars($_POST['lang']);
-                    if (isset($_POST['imgURL']))
-                        $imgURL = htmlentities($_POST['imgURL']);
                     $content = new News($name, $text, $imgURL);
                     $data = array('theme' => $theme, 'content' => json_encode($content), 'lang' => $lang);
                     if (isset($_GET['id'])) {
