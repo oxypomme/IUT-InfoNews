@@ -28,7 +28,6 @@ class Theme {
         var lang = getCookie('lang');
         return this[(lang != "" ? lang : 'fr')];
     }
-
 }
 
 class News {

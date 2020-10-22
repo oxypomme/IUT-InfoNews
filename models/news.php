@@ -32,7 +32,7 @@ class News
 $raw = new NewsList;
 if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     $sort = (isset($_GET['Sort']) ? strtoupper($_GET['Sort']) : 'DESC');
-    $theme = (isset($_GET['Theme']) ? $_GET['Theme'] : '');
+    $theme = (isset($_GET['Theme']) ? intval($_GET['Theme']) : '');
     $lang = (isset($_GET['Lang']) ? strtolower($_GET['Lang']) : '');
     $id = (isset($_GET['ID']) ? intval($_GET['ID']) : -1);
 
@@ -40,7 +40,7 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
 
     $sqlstr = 'SELECT * FROM news';
     if ($theme != '') {
-        $sqlstr .= ' WHERE id_theme = ' . intval($theme);
+        $sqlstr .= ' WHERE id_theme = ' . $theme;
         $isFirstFilter = false;
     }
     if ($lang != '') {

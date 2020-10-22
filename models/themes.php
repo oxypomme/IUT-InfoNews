@@ -27,13 +27,15 @@ class Theme
 
 $raw = new ThemeList;
 if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
-    $id = $_GET['ID'];
-    if ($id == '')
-        $result = $objPdo->prepare("SELECT * FROM theme ORDER BY id_theme");
-    else {
-        $result = $objPdo->prepare("SELECT * FROM theme WHERE id_theme = :id");
-        $result->bindValue('id', $id, PDO::PARAM_INT);
-    }
+    $id = (isset($_GET['ID']) ? intval($_GET['ID']) : -1);
+
+    $isFirstFilter = true;
+
+    $sqlstr = 'SELECT * FROM theme';
+    if ($id > 0)
+        $sqlstr .= ' WHERE id_theme = ' . $id;
+    $sqlstr .= " ORDER BY id_theme";
+    $result = $objPdo->prepare($sqlstr);
 } else {
     if ($_POST['method'] == 'NEW') {
         $result = $objPdo->prepare("INSERT INTO `theme`(`label`, `color`, `icon_theme`) VALUES (:label, :color, :iconURL)");
@@ -54,8 +56,8 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'DELETE') {
         $result = $objPdo->prepare("DELETE FROM `theme` WHERE `id_theme`=:id");
-        if (isset($_POST['id'])) {
-            $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);
+        if (isset($_POST['ID'])) {
+            $result->bindValue('id', htmlentities($_POST['ID']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else {
