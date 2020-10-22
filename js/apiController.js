@@ -25,8 +25,8 @@ class Theme {
     }
 
     toString() {
-        //TODO: Cookies
-        return this.fr;
+        var lang = getCookie('lang');
+        return Reflect.get(this, (lang != "" ? lang : 'fr'));
     }
 
 }

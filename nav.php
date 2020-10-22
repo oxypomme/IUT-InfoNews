@@ -6,8 +6,8 @@
         <li><a href="create.php">Creer un article</a></li>
         <li class="dropbtn connect" onclick="showDropdown()"> Dropdown
             <ul class="dropdown-content" id="navdropdown">
-                <li><a href="#"><img src="res/fr.png" />Français</a></li>
-                <li><a href="#"><img src="res/fr.png" />English</a></li>
+                <li><a href="#" onclick="changeLanguage('fr')"><img src="res/fr.png" alt="fr" />Français</a></li>
+                <li><a href="#" onclick="changeLanguage('en')"><img src="res/en.png" alt="en" />English</a></li>
             </ul>
         </li>
         <?php
