@@ -73,9 +73,8 @@ function setupNews(array) {
     });
 }
 
-function getSort() {
+function getRadio(radios) {
     try {
-        var radios = document.getElementsByName('sort');
         for (var i = 0, length = radios.length; i < length; i++)
             if (radios[i].checked)
                 return radios[i].value;
@@ -91,7 +90,8 @@ function onLoad() {
 }
 
 function onFilterChange() {
-    getNews(document.getElementById("themes").value, getSort(), setupNews);
+    let test = getRadio(document.getElementsByName('lang'));
+    getNews(document.getElementById("themes").value, getRadio(document.getElementsByName('sort')), getRadio(document.getElementsByName('lang')), setupNews);
 }
 
 function onThemeFocus() {

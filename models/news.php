@@ -31,16 +31,19 @@ class News
 
 $raw = new NewsList;
 if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
-    $theme = intval($_GET['Theme']);
     $sort = (isset($_GET['Sort']) ? strtoupper($_GET['Sort']) : 'DESC');
-    $lang = (isset($_GET['Lang']) ? strtoupper($_GET['Sort']) : 'DESC');
+    $theme = (isset($_GET['Theme']) ? $_GET['Theme'] : '');
+    $lang = (isset($_GET['Lang']) ? strtolower($_GET['Lang']) : '');
 
-    if ($theme == '')
-        $result = $objPdo->prepare("SELECT * FROM news ORDER BY date_news $sort");
-    else {
-        $result = $objPdo->prepare("SELECT * FROM news WHERE id_theme = :theme ORDER BY date_news $sort");
-        $result->bindValue('theme', $theme, PDO::PARAM_INT);
+    $sqlstr = 'SELECT * FROM news';
+    if ($theme != '') {
+        $sqlstr .= ' WHERE id_theme = ' . intval($theme);
     }
+    if ($lang != '') {
+        $sqlstr .= ($theme != '' ? ' AND' : ' WHERE') . ' language = "' . $lang . '"';
+    }
+    $sqlstr .= " ORDER BY date_news $sort";
+    $result = $objPdo->prepare($sqlstr);
 } else {
     if ($_POST['method'] == 'NEW') {
         $result = $objPdo->prepare("INSERT INTO `news`(`id_theme`, `content`, `id_redactor`, `language`) VALUES (:theme, :content, :redactor, :lang)");

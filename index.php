@@ -33,6 +33,21 @@
                     <select name="themes" id="themes" onfocus="onThemeFocus();"></select>
                 </label>
             </div>
+            <div>
+                Afficher :<br />
+                <label>
+                    <input type="radio" name="lang" value="" checked />
+                    Tous
+                </label>
+                <label>
+                    <input type="radio" name="lang" value="fr" />
+                    Français
+                </label>
+                <label>
+                    <input type="radio" name="lang" value="en" />
+                    Anglais
+                </label>
+            </div>
         </form>
     </aside>
 

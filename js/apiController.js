@@ -105,9 +105,9 @@ function getThemes(id = "", asyncProc = false) {
     }
 }
 
-function getNews(theme = "", sort = "", asyncProc = false) {
+function getNews(theme = "", sort = "", lang = "", asyncProc = false) {
     if (!asyncProc) {
-        var docJSON = JSON.parse(jsonRequest("models/news.php?Theme=" + theme + "&Sort=" + sort));
+        var docJSON = JSON.parse(jsonRequest("models/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang));
         var newsList = new Array();
         if (docJSON['news'] != null)
             docJSON['news'].forEach(news => {
@@ -115,7 +115,7 @@ function getNews(theme = "", sort = "", asyncProc = false) {
             });
         return newsList;
     } else {
-        jsonRequest("models/news.php?Theme=" + theme + "&Sort=" + sort, function (docJSON) {
+        jsonRequest("models/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, function (docJSON) {
             var newsList = new Array();
             if (docJSON['news'] != null)
                 docJSON['news'].forEach(news => {
