@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
 
 //TODO: set fields when editing
 //TODO: check if mail is really a mail, etc.
-if (isset($_GET['id'])) {
+if (isset($_GET['ID'])) {
 }
 
 session_start();

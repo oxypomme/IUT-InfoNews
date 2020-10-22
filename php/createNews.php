@@ -66,7 +66,6 @@ if (isset($_POST['submit'])) {
     header('Location:index.php');
 }
 
-//TODO: set fields when editing
 if (isset($_GET['ID'])) {
     $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/models/news.php?ID=' . htmlentities($_GET['ID']);
     $result = file_get_contents($path);
