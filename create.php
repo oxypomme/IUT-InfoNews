@@ -18,7 +18,7 @@ include "php/createNews.php";
     <script src="js/apiController.js"></script>
     <script lang="javascript" type="text/javascript">
         function getPostedTheme() {
-            return <?php echo (isset($_POST['themes']) ? $_POST['themes'] : '') ?>;
+            return <?php echo (isset($_POST['themes']) ? $_POST['themes'] : $theme) ?>;
         }
     </script>
     <script src="js/createNewsController.js"></script>

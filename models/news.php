@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 class NewsList
 {
     public $news;
-    public $sucess;
+    public $sucess = true;
 }
 
 class News
@@ -34,13 +34,22 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     $sort = (isset($_GET['Sort']) ? strtoupper($_GET['Sort']) : 'DESC');
     $theme = (isset($_GET['Theme']) ? $_GET['Theme'] : '');
     $lang = (isset($_GET['Lang']) ? strtolower($_GET['Lang']) : '');
+    $id = (isset($_GET['ID']) ? intval($_GET['ID']) : -1);
+
+    $isFirstFilter = true;
 
     $sqlstr = 'SELECT * FROM news';
     if ($theme != '') {
         $sqlstr .= ' WHERE id_theme = ' . intval($theme);
+        $isFirstFilter = false;
     }
     if ($lang != '') {
-        $sqlstr .= ($theme != '' ? ' AND' : ' WHERE') . ' language = "' . $lang . '"';
+        $sqlstr .= (!$isFirstFilter ? ' AND' : ' WHERE') . ' language = "' . $lang . '"';
+        $isFirstFilter = false;
+    }
+    if ($id > 0) {
+        $sqlstr .= (!$isFirstFilter != '' ? ' AND' : ' WHERE') . ' id_news = "' . $id . '"';
+        $isFirstFilter = false;
     }
     $sqlstr .= " ORDER BY date_news $sort";
     $result = $objPdo->prepare($sqlstr);
@@ -55,18 +64,18 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'UPDATE') {
-        $result = $objPdo->prepare("UPDATE `redactor` SET `id_theme`=:theme, `content`=:content, `language`=:lang WHERE `id_news`=:id");
-        if (isset($_POST['id']) and isset($_POST['theme']) and isset($_POST['content']) and isset($_POST['lang'])) {
+        $result = $objPdo->prepare("UPDATE `news` SET `id_theme`=:theme, `content`=:content, `language`=:lang WHERE `id_news`=:id");
+        if (isset($_POST['ID']) and isset($_POST['theme']) and isset($_POST['content']) and isset($_POST['lang'])) {
             $result->bindValue('theme', htmlentities($_POST['theme']), PDO::PARAM_STR);
             $result->bindValue('content', $_POST['content'], PDO::PARAM_STR);
             $result->bindValue('lang', htmlentities($_POST['lang']), PDO::PARAM_STR);
-            $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);
+            $result->bindValue('id', htmlentities($_POST['ID']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'DELETE') {
         $result = $objPdo->prepare("DELETE FROM `news` WHERE `id_news`=:id");
-        if (isset($_POST['id'])) {
-            $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);
+        if (isset($_POST['ID'])) {
+            $result->bindValue('id', htmlentities($_POST['ID']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else {

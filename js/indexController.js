@@ -70,6 +70,9 @@ function setupNews(array) {
             footer.appendChild(btn);
             btn = document.createElement("button");
             btn.innerHTML = "Editer";
+            btn.onclick = function () {
+                window.location.href = "create.php?ID=" + news.id;
+            };
             footer.appendChild(btn);
         }
         lig.appendChild(footer);

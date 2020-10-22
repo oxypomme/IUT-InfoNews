@@ -30,8 +30,8 @@ if (isset($_POST['submit'])) {
                 if (isset($_POST['lang']) && !empty($_POST['lang'])) {
                     $content = new News($name, $text, $imgURL);
                     $data = array('theme' => $theme, 'content' => json_encode($content), 'lang' => $lang);
-                    if (isset($_GET['id'])) {
-                        $data['id'] = htmlspecialchars($_GET['id']);
+                    if (isset($_GET['ID'])) {
+                        $data['ID'] = htmlspecialchars($_GET['ID']);
                         $data['method'] = 'UPDATE';
                     } else {
                         $data['method'] = 'NEW';
@@ -47,8 +47,6 @@ if (isset($_POST['submit'])) {
                     );
                     $context = stream_context_create($options);
                     $result = file_get_contents($path, false, $context);
-
-                    var_dump($result);
 
                     if ($result === FALSE)
                         $inputErrors['others'] = 'Une erreur HTTP est survenue.';
@@ -69,5 +67,19 @@ if (isset($_POST['submit'])) {
 }
 
 //TODO: set fields when editing
-if (isset($_GET['id'])) {
+if (isset($_GET['ID'])) {
+    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/models/news.php?ID=' . htmlentities($_GET['ID']);
+    $result = file_get_contents($path);
+    if ($result !== false) {
+        $news = json_decode($result);
+        if ($news->sucess) {
+            $news = $news->news[0];
+            $theme = $news->theme;
+            $content = json_decode($news->content);
+            $name = $content->title;
+            $text = $content->text;
+            $imgURL = $content->imgURL;
+            $lang = $news->lang; //BUG: didn't update the form ?
+        }
+    }
 }
