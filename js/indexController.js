@@ -43,7 +43,7 @@ function setupNews(array) {
             elmnt.appendChild(img);
         } else {
             elmnt = document.createElement("div");
-            elmnt.className = "spacer";
+            elmnt.className = "spacer image";
         }
         lig.appendChild(elmnt);
 
@@ -57,6 +57,15 @@ function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
+        var sessionvars = JSON.parse(jsonRequest("models/session.php?Name=idlogin", false));
+        if (sessionvars.idlogin == news.redactor.id) {
+            var btn = document.createElement("button");
+            btn.innerHTML = "Editer";
+            footer.appendChild(btn);
+            btn = document.createElement("button");
+            btn.innerHTML = "Supprimer";
+            footer.appendChild(btn);
+        }
         lig.appendChild(footer);
         //TODO: add delete/edit btn
 

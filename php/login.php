@@ -6,17 +6,18 @@ if (isset($_POST['submit'])) {
     if (isset($_POST["login"]) and isset($_POST["passwd"])) {
         $login = htmlentities($_POST["login"]);
         $pass = crypt(htmlentities($_POST["passwd"]), '$2a$07$usesomesillystringforsalt');
-        $reslog = $objPdo->prepare("SELECT COUNT(*) AS 'match' FROM redactor WHERE mail = '$login' AND passwrd = '$pass' LIMIT 1");
+        $reslog = $objPdo->prepare("SELECT id_redactor, COUNT(*) AS 'match' FROM redactor WHERE mail = '$login' AND passwrd = '$pass' LIMIT 1");
         $reslog->execute();
         foreach ($reslog as $row) {
             if ($row['match'] != 0) {
-                $_SESSION["login"] = $login;
+                $_SESSION["login"] = $row['id_redactor'];
                 if (isset($_GET['target'])) {
                     header('Location:../' . $_GET["target"]);
                 } else
                     header('Location:../index.php');
             } else
                 echo '<span class="error">Adresse mail ou mot de passe incorect</span>';
+            break;
         }
     }
 }
