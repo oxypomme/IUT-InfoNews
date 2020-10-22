@@ -22,6 +22,10 @@ function setupThemes(array) {
     });
 }
 
+function onChangeLanguage() {
+    onLoad();
+}
+
 function onLoad() {
     getThemes("", setupThemes);
 }

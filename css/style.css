@@ -145,7 +145,8 @@ nav>ul>li>* {
 }
 
 .dropbtn:hover,
-nav li a:hover {
+nav li a:hover,
+nav .active {
     background-color: #111;
 }
 

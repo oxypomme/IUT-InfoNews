@@ -89,8 +89,12 @@ function onLoad() {
     setTimeout("onLoad()", 60000);
 }
 
+function onChangeLanguage() {
+    onFilterChange();
+    onThemeFocus();
+}
+
 function onFilterChange() {
-    let test = getRadio(document.getElementsByName('lang'));
     getNews(document.getElementById("themes").value, getRadio(document.getElementsByName('sort')), getRadio(document.getElementsByName('lang')), setupNews);
 }
 
