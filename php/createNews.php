@@ -13,7 +13,7 @@ $text = '';
 $lang = '';
 $imgURL = '';
 
-function showError(string $errorName)
+function showError($errorName)
 {
     if ($GLOBALS['inputErrors'][$errorName])
         echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
