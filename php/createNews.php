@@ -19,8 +19,11 @@ function showError($errorName)
         echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
 }
 
-include 'models/connect.php';
+include 'api/connect.php';
 include 'models/newsClass.php';
+
+$base_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/api/news.php';
+
 if (session_id() == "")
     session_start();
 if (isset($_POST['submit'])) {
@@ -28,6 +31,8 @@ if (isset($_POST['submit'])) {
         if (isset($_POST['themes']) && !empty($_POST['themes'])) {
             if (isset($_POST['text']) && !empty($_POST['text'])) {
                 if (isset($_POST['lang']) && !empty($_POST['lang'])) {
+                    include 'httpRequests.php';
+
                     $content = new News($name, $text, $imgURL);
                     $data = array('theme' => $theme, 'content' => json_encode($content), 'lang' => $lang);
                     if (isset($_GET['ID'])) {
@@ -37,16 +42,7 @@ if (isset($_POST['submit'])) {
                         $data['method'] = 'NEW';
                         $data['idredact'] = $_SESSION['login'];
                     }
-                    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/api/news.php';
-                    $options = array(
-                        'http' => array(
-                            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                            'method'  => 'POST',
-                            'content' => http_build_query($data)
-                        )
-                    );
-                    $context = stream_context_create($options);
-                    $result = file_get_contents($path, false, $context);
+                    $result = httpRequest($base_path, $data);
 
                     if ($result === FALSE)
                         $inputErrors['others'] = 'Une erreur HTTP est survenue.';

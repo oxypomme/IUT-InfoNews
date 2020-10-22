@@ -64,65 +64,62 @@ function jsonRequest(address, asyncProc = false, reqType = "GET", content = '') 
         return (xhr.status == 200 ? xhr.response : false);
 }
 
+function jsonToRedactors(docJSON) {
+    var redactorList = new Array();
+    if (docJSON['redactors'] != null)
+        docJSON['redactors'].forEach(redactor => {
+            redactorList.push(new Redactor(redactor.id, redactor.lname, redactor.fname, redactor.mail));
+        });
+    return redactorList;
+}
+
 function getRedactors(id = "", asyncProc = false) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/redactors.php?ID=" + id));
-        var redactorList = new Array();
-        if (docJSON['redactors'] != null)
-            docJSON['redactors'].forEach(redactor => {
-                redactorList.push(new Redactor(redactor.id, redactor.lname, redactor.fname, redactor.mail));
-            });
-        return redactorList;
+        return jsonToRedactors(docJSON);
     } else {
         jsonRequest("api/redactors.php?ID=" + id, function (docJSON) {
-            var redactorList = new Array();
-            if (docJSON['redactors'] != null)
-                docJSON['redactors'].forEach(redactor => {
-                    redactorList.push(new Redactor(redactor.id, redactor.lname, redactor.fname, redactor.mail));
-                });
-            asyncProc(redactorList);
+            asyncProc(jsonToRedactors(docJSON));
         });
     }
+}
+
+function jsonToTheme(docJSON) {
+    var themeList = new Array();
+    if (docJSON['themes'] != null)
+        docJSON['themes'].forEach(theme => {
+            themeList.push(new Theme(theme.id, theme.label, theme.color, theme.icon_theme));
+        });
+    return themeList;
 }
 
 function getThemes(id = "", asyncProc = false) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/themes.php?ID=" + id));
-        var themeList = new Array();
-        if (docJSON['themes'] != null)
-            docJSON['themes'].forEach(theme => {
-                themeList.push(new Theme(theme.id, theme.label, theme.color, theme.icon_theme));
-            });
-        return themeList;
+        return jsonToTheme(docJSON);
     } else {
         jsonRequest("api/themes.php?ID=" + id, function (docJSON) {
-            var themeList = new Array();
-            if (docJSON['themes'] != null)
-                docJSON['themes'].forEach(theme => {
-                    themeList.push(new Theme(theme.id, theme.label, theme.color, theme.icon_theme));
-                });
-            asyncProc(themeList);
+            asyncProc(jsonToTheme(docJSON));
         });
     }
+}
+
+function jsonToNews(docJSON) {
+    var newsList = new Array();
+    if (docJSON['news'] != null)
+        docJSON['news'].forEach(news => {
+            newsList.push(new News(news.id, news.content, getThemes(news.theme)[0], getRedactors(news.redactor)[0], news.date, news.lang))
+        });
+    return newsList;
 }
 
 function getNews(theme = "", sort = "", lang = "", asyncProc = false) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang));
-        var newsList = new Array();
-        if (docJSON['news'] != null)
-            docJSON['news'].forEach(news => {
-                newsList.push(new News(news.id, news.content, getThemes(news.theme)[0], getRedactors(news.redactor)[0], news.date, news.lang))
-            });
-        return newsList;
+        jsonToNews(docJSON);
     } else {
         jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, function (docJSON) {
-            var newsList = new Array();
-            if (docJSON['news'] != null)
-                docJSON['news'].forEach(news => {
-                    newsList.push(new News(news.id, news.content, getThemes(news.theme)[0], getRedactors(news.redactor)[0], news.date, news.lang))
-                });
-            asyncProc(newsList);
+            asyncProc(jsonToNews(docJSON));
         });
     }
 }

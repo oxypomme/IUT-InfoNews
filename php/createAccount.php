@@ -18,27 +18,22 @@ function showError($errorName)
         echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
 }
 
+$base_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/api/redactors.php';
+
 if (isset($_POST['submit'])) {
     if (isset($_POST["lname"]) && !empty($_POST['lname'])) {
         if (isset($_POST["fname"]) && !empty($_POST['fname'])) {
             if (isset($_POST["login"]) && !empty($_POST['login'])) {
                 if (isset($_POST["passwd"]) && !empty($_POST['passwd'])) {
+                    include 'httpRequests.php';
+
                     $data = array('lname' => $lname, 'fname' => $fname, 'mail' => $login, 'pass' => $passwd);
                     if (isset($_GET['ID'])) {
                         $data['ID'] = htmlspecialchars($_GET['ID']);
                         $data['method'] = 'UPDATE';
                     } else
                         $data['method'] = 'NEW';
-                    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/api/redactors.php';
-                    $options = array(
-                        'http' => array(
-                            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                            'method'  => 'POST',
-                            'content' => http_build_query($data)
-                        )
-                    );
-                    $context = stream_context_create($options);
-                    $result = file_get_contents($path, false, $context);
+                    $result = httpRequest($base_path, $data);
 
                     if ($result === FALSE)
                         $inputErrors['others'] = 'Une erreur HTTP est survenue.';
@@ -71,8 +66,7 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['ID'])) {
     if (session_id() == "")
         session_start();
-    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/api/redactors.php?ID=' . $_SESSION['login'];
-    $result = file_get_contents($path);
+    $result = file_get_contents($base_path . '?ID=' . $_SESSION['login']);
     if ($result !== false) {
         $redactors = json_decode($result);
         if ($redactors->sucess) {
