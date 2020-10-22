@@ -1,5 +1,9 @@
+function changeLanguage(lang) {
+    document.cookie = "lang=" + lang;
+}
+
 function showDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("navdropdown").classList.toggle("show");
 }
 
 // Close the dropdown if the user clicks outside of it
