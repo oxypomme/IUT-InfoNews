@@ -31,10 +31,13 @@ aside {
     color: white;
 }
 
-body>*:not(aside):not(header) {
+body:not(.iframable)>*:not(aside):not(header) {
     padding-left: 200px;
 }
 
+.iframable {
+    padding-left: 20px;
+}
 
 /*== NEWS ==*/
 
@@ -156,7 +159,7 @@ nav .active {
 }
 
 iframe {
-    position: absolute;
+    position: fixed;
     /* display: none; */
     background-color: white;
     z-index: 1;

@@ -81,32 +81,45 @@ if (isset($_SESSION["login"]))
 
 ?>
 
-<form method="post">
-    <div>
-        <label>Nom :</br>
-            <input type="text" name="lname" value=<?php echo '"' . $lname . '"' ?> />
-        </label>
-        <?php showError("lname") ?>
-    </div>
-    <div>
-        <label>Prénom :</br>
-            <input type="text" name="fname" value=<?php echo '"' . $fname . '"' ?> />
-        </label>
-        <?php showError("fname") ?>
-    </div>
-    <div>
-        <label>Adresse mail :</br>
-            <input type="text" name="login" value=<?php echo '"' . $login . '"' ?> />
-        </label>
-        <?php showError("login") ?>
-    </div>
-    <div>
-        <label>Mot de passe :</br>
-            <input type="passsword" name="passwd" value=<?php echo '"' . $passwd . '"' ?> />
-        </label>
-        <?php showError("passwd") ?>
-    </div>
-    <?php showError("others") ?><br />
+<!DOCTYPE html>
+<html lang="fr">
 
-    <input type="submit" name="submit" value="Valider" />
-</form>
+<head>
+    <meta charset="UTF-8">
+    <title>Info News - Login</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body class="iframable">
+    <form method="post">
+        <div>
+            <label>Nom :</br>
+                <input type="text" name="lname" value=<?php echo '"' . $lname . '"' ?> />
+            </label>
+            <?php showError("lname") ?>
+        </div>
+        <div>
+            <label>Prénom :</br>
+                <input type="text" name="fname" value=<?php echo '"' . $fname . '"' ?> />
+            </label>
+            <?php showError("fname") ?>
+        </div>
+        <div>
+            <label>Adresse mail :</br>
+                <input type="text" name="login" value=<?php echo '"' . $login . '"' ?> />
+            </label>
+            <?php showError("login") ?>
+        </div>
+        <div>
+            <label>Mot de passe :</br>
+                <input type="passsword" name="passwd" value=<?php echo '"' . $passwd . '"' ?> />
+            </label>
+            <?php showError("passwd") ?>
+        </div>
+        <?php showError("others") ?><br />
+
+        <input type="submit" name="submit" value="Valider" />
+    </form>
+</body>
+
+</html>

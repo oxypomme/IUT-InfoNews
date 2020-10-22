@@ -39,17 +39,30 @@ if (isset($_GET['target']))
     echo 'Pour accèder à cette page il est nécessaire de se connecter avec votre identifiant :';
 ?>
 
-<form method="post">
-    <div>
-        <label>Adresse mail :</br>
-            <input type="text" name="login" value="" />
-        </label>
-    </div>
-    <div>
-        <label>Mot de passe :</br>
-            <input type="passsword" name="passwd" value="" />
-        </label>
-    </div>
+<!DOCTYPE html>
+<html lang="fr">
 
-    <input type="submit" name="submit" value="Valider" />
-</form>
+<head>
+    <meta charset="UTF-8">
+    <title>Info News - Login</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body class="iframable">
+    <form method="post">
+        <div>
+            <label>Adresse mail :</br>
+                <input type="text" name="login" value="" />
+            </label>
+        </div>
+        <div>
+            <label>Mot de passe :</br>
+                <input type="passsword" name="passwd" value="" />
+            </label>
+        </div>
+
+        <input type="submit" name="submit" value="Valider" />
+    </form>
+</body>
+
+</html>
