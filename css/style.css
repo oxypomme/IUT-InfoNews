@@ -162,6 +162,7 @@ iframe {
     position: fixed;
     /* display: none; */
     background-color: white;
+    border: solid #ccc 2px;
     z-index: 1;
     right: 0;
     top: 50px;

@@ -24,8 +24,8 @@ if (isset($_POST['submit'])) {
             if (isset($_POST["login"]) && !empty($_POST['login'])) {
                 if (isset($_POST["passwd"]) && !empty($_POST['passwd'])) {
                     $data = array('lname' => $lname, 'fname' => $fname, 'mail' => $login, 'pass' => $passwd);
-                    if (isset($_GET['id'])) {
-                        $data['id'] = htmlspecialchars($_GET['id']);
+                    if (isset($_GET['ID'])) {
+                        $data['ID'] = htmlspecialchars($_GET['ID']);
                         $data['method'] = 'UPDATE';
                     } else
                         $data['method'] = 'NEW';
@@ -67,13 +67,34 @@ if (isset($_POST['submit'])) {
 }
 
 
-//TODO: set fields when editing
 //TODO: check if mail is really a mail, etc.
 if (isset($_GET['ID'])) {
+    if (session_id() == "")
+        session_start();
+    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/models/redactors.php?ID=' . $_SESSION['login'];
+    $result = file_get_contents($path);
+    if ($result !== false) {
+        $redactors = json_decode($result);
+        if ($redactors->sucess) {
+            $redactors = $redactors->redactors[0];
+            if (session_id() == "")
+                session_start();
+            if ($_SESSION['login'] != $redactors->id) { //Maybe useless but it safier
+                echo "<script lang=\"javascript\" type=\"text/javascript\">
+                    alert(\"Vous n'êtes pas autorisé à modifier le profil d'un autre !\");
+                    window.location.href = 'index.php';
+                </script>";
+            }
+            $lname = $redactors->lname;
+            $fname = $redactors->fname;
+            $login = $redactors->mail;
+        }
+    }
 }
 
-session_start();
-if (isset($_SESSION["login"]))
+if (session_id() == "")
+    session_start();
+if (isset($_SESSION["login"]) and !isset($_GET['ID']))
     // header('Location:../index.php');
     echo "<script lang=\"javascript\" type=\"text/javascript\">
     parent.closeIFrame();
@@ -86,7 +107,7 @@ if (isset($_SESSION["login"]))
 
 <head>
     <meta charset="UTF-8">
-    <title>Info News - Login</title>
+    <title>Info redactors - Login</title>
     <link rel="stylesheet" href="../css/style.css" />
 </head>
 

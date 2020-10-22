@@ -15,13 +15,13 @@
             foreach ($result as $row) {
                 echo '<li class="dropbtn connect" onclick="showDropdown(this); updateLangDropdown();"> ' . $row['last_name'] . ' ' . $row['first_name'];
                 echo '<ul class="dropdown-content">';
-                echo '<li style="cursor: default;"><span>Profil</span></li>'; //TODO: link to profile
+                echo '<li><a href="#" onclick="setIframe(\'php/createAccount.php?ID=' . $id . '\', 240)">Profil</a></li>';
                 echo '<li><a href="#" onclick="unlogAccount()">Déconnexion</a></li>';
                 break;
             }
             echo '</ul>';
             echo '</li>';
-        } else { //TODO: not a new page, but an iframe or smthg
+        } else {
             echo '<li class="dropbtn connect" onclick="showDropdown(this); updateLangDropdown();"> Compte';
             echo '<ul class="dropdown-content">';
             echo '<li><a href="#" onclick="setIframe(\'php/login.php\', 160)">Connexion</a></li>';
