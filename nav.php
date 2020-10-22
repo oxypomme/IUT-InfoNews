@@ -23,7 +23,7 @@
             echo '<li class="connect"><a href="php/createAccount.php">Créer un compte</a></li>';
         }
         ?>
-        <li class="dropbtn connect" onclick="showDropdown()"> Dropdown
+        <li class="dropbtn connect" onclick="showDropdown()"> Langue
             <ul class="dropdown-content" id="navdropdown">
                 <li><a href="#" onclick="changeLanguage('fr')"><img src="res/fr.png" alt="fr" />Français</a></li>
                 <li><a href="#" onclick="changeLanguage('en')"><img src="res/en.png" alt="en" />English</a></li>
