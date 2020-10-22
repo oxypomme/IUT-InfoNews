@@ -3,30 +3,39 @@ function changeLanguage(lang) {
     onChangeLanguage(lang);
 }
 
-function showDropdown() {
-    document.getElementById("navdropdown").classList.toggle("show");
-    document.getElementById("navdropbtn").classList.toggle("active");
+function showDropdown(elt) {
+    clearAllDropdowns();
+    elt.classList.toggle("active");
+    elt.getElementsByTagName('ul')[0].classList.toggle("show");
+
+}
+
+function updateLangDropdown() {
     document.getElementById("nav-" + getCookie('lang')).classList.toggle("active");
+}
+
+function clearAllDropdowns() {
+    var allDropBtns = document.getElementsByClassName('dropbtn');
+    for (let i = 0; i < allDropBtns.length; i++) {
+        if (allDropBtns[i].classList.contains('active'))
+            allDropBtns[i].classList.remove("active");
+        var dropDown = allDropBtns[i].getElementsByTagName('ul')[0];
+        if (dropDown.classList.contains('show'))
+            dropDown.classList.remove("show");
+
+        dropDown.childNodes.forEach(child => {
+            try {
+                if (child.classList.contains('active'))
+                    child.classList.remove('active');
+            } catch (error) { }
+        });
+    }
 }
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function (e) {
-    if (!e.target.matches('.dropbtn')) {
-        var myDropdown = document.getElementById("navdropdown");
-        if (myDropdown.classList.contains('show'))
-            myDropdown.classList.remove('show');
-
-        myDropdown.childNodes.forEach(child => {
-            try {
-                if (child.classList.contains('active'))
-                    child.classList.remove('active');
-            } catch (error) {}
-        });
-
-        var myDropbtn = document.getElementById("navdropbtn");
-        if (myDropbtn.classList.contains('active'))
-            myDropbtn.classList.remove("active")
-    }
+    if (!e.target.matches('.dropbtn') && !e.target.matches('.dropdown-content > li > a'))
+        clearAllDropdowns();
 }
 
 function unlogAccount() {
