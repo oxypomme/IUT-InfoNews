@@ -49,15 +49,12 @@ body>*:not(aside):not(header) {
     min-width: 400px;
     width: 25%;
     max-width: 450px;
-    border: solid #333 2px;
     padding: 25px;
     margin: 10px;
 }
 
 @media (max-width: 1050px) {
     #news article {
-        /* width: 100%;
-        max-width: 100%; */
         margin-left: auto;
         margin-right: auto;
     }

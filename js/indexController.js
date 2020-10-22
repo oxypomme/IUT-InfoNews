@@ -24,6 +24,7 @@ function setupNews(array) {
         );
     array.forEach(news => {
         var lig = document.createElement("article");
+        lig.style.border = "solid " + news.theme.color || "#333" + " 2px";
 
         var title = document.createElement("h3");
         title.innerHTML = news.title;
@@ -84,7 +85,7 @@ function getRadio(radios) {
             if (radios[i].checked)
                 return radios[i].value;
 
-    } catch (error) {}
+    } catch (error) { }
     return '';
 }
 
