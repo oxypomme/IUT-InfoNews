@@ -4,12 +4,6 @@
     <ul>
         <li><a href="index.php">Accueil</a></li>
         <li><a href="create.php">Creer un article</a></li>
-        <li class="dropbtn connect" onclick="showDropdown()"> Dropdown
-            <ul class="dropdown-content" id="navdropdown">
-                <li><a href="#" onclick="changeLanguage('fr')"><img src="res/fr.png" alt="fr" />Français</a></li>
-                <li><a href="#" onclick="changeLanguage('en')"><img src="res/en.png" alt="en" />English</a></li>
-            </ul>
-        </li>
         <?php
         if (session_id() == "")
             session_start();
@@ -29,5 +23,11 @@
             echo '<li class="connect"><a href="php/createAccount.php">Créer un compte</a></li>';
         }
         ?>
+        <li class="dropbtn connect" onclick="showDropdown()"> Dropdown
+            <ul class="dropdown-content" id="navdropdown">
+                <li><a href="#" onclick="changeLanguage('fr')"><img src="res/fr.png" alt="fr" />Français</a></li>
+                <li><a href="#" onclick="changeLanguage('en')"><img src="res/en.png" alt="en" />English</a></li>
+            </ul>
+        </li>
     </ul>
 </nav>
