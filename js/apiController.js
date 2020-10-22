@@ -26,7 +26,7 @@ class Theme {
 
     toString() {
         var lang = getCookie('lang');
-        return Reflect.get(this, (lang != "" ? lang : 'fr'));
+        return this[(lang != "" ? lang : 'fr')];
     }
 
 }
