@@ -47,7 +47,7 @@ class News {
     }
 }
 
-function jsonRequest(address, asyncProc = true, reqType = "GET") {
+function jsonRequest(address, asyncProc = false, reqType = "GET") {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
     if (asyncProc) {
         xhr.onreadystatechange = function () {
@@ -65,7 +65,7 @@ function jsonRequest(address, asyncProc = true, reqType = "GET") {
 
 function getRedactors(id = "", asyncProc = false) {
     if (!asyncProc) {
-        var docJSON = JSON.parse(jsonRequest("models/redactors.php?ID=" + id, false));
+        var docJSON = JSON.parse(jsonRequest("models/redactors.php?ID=" + id));
         var redactorList = new Array();
         if (docJSON['redactors'] != null)
             docJSON['redactors'].forEach(redactor => {
@@ -86,7 +86,7 @@ function getRedactors(id = "", asyncProc = false) {
 
 function getThemes(id = "", asyncProc = false) {
     if (!asyncProc) {
-        var docJSON = JSON.parse(jsonRequest("models/themes.php?ID=" + id, false));
+        var docJSON = JSON.parse(jsonRequest("models/themes.php?ID=" + id));
         var themeList = new Array();
         if (docJSON['themes'] != null)
             docJSON['themes'].forEach(theme => {
@@ -107,7 +107,7 @@ function getThemes(id = "", asyncProc = false) {
 
 function getNews(theme = "", sort = "", asyncProc = false) {
     if (!asyncProc) {
-        var docJSON = JSON.parse(jsonRequest("models/news.php?Theme=" + theme + "&Sort=" + sort), false);
+        var docJSON = JSON.parse(jsonRequest("models/news.php?Theme=" + theme + "&Sort=" + sort));
         var newsList = new Array();
         if (docJSON['news'] != null)
             docJSON['news'].forEach(news => {
@@ -124,4 +124,20 @@ function getNews(theme = "", sort = "", asyncProc = false) {
             asyncProc(newsList);
         });
     }
+}
+
+function getCookie(name) {
+    var cname = name + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(cname) == 0) {
+            return c.substring(cname.length, c.length);
+        }
+    }
+    return "";
 }
