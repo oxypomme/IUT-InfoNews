@@ -155,6 +155,15 @@ nav .active {
     background-color: #111;
 }
 
+iframe {
+    position: absolute;
+    /* display: none; */
+    background-color: white;
+    z-index: 1;
+    right: 0;
+    top: 50px;
+}
+
 
 .dropbtn {
     cursor: pointer;
@@ -170,7 +179,7 @@ nav .active {
     height: auto;
     min-width: 100px;
     top: 50px;
-    z-index: 1;
+    z-index: 2;
     list-style: none;
     padding: 0;
     margin: 0;

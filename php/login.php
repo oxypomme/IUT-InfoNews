@@ -14,7 +14,10 @@ if (isset($_POST['submit'])) {
                 if (isset($_GET['target'])) {
                     header('Location:../' . $_GET["target"]);
                 } else
-                    header('Location:../index.php');
+                    // header('Location:../index.php');
+                    echo "<script lang=\"javascript\" type=\"text/javascript\">
+                    parent.closeIFrame();
+                    </script>";
             } else
                 echo '<span class="error">Adresse mail ou mot de passe incorect</span>';
             break;
@@ -23,10 +26,13 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_SESSION["login"])) {
-    if (isset($_GET['target']))
-        header('Location:../' . $_GET['target']);
-    else
-        header('Location:../index.php');
+    // if (isset($_GET['target']))
+    //     header('Location:../' . $_GET['target']);
+    // else
+    //     header('Location:../index.php');
+    echo "<script lang=\"javascript\" type=\"text/javascript\">
+    parent.closeIFrame();
+    </script>";
 }
 
 if (isset($_GET['target']))

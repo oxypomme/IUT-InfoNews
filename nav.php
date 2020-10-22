@@ -24,8 +24,8 @@
         } else { //TODO: not a new page, but an iframe or smthg
             echo '<li class="dropbtn connect" onclick="showDropdown(this); updateLangDropdown();"> Compte';
             echo '<ul class="dropdown-content">';
-            echo '<li><a href="php/login.php">Connexion</a></li>';
-            echo '<li><a href="php/createAccount.php">Créer un compte</a></li>';
+            echo '<li><a href="#" onclick="setIframe(\'php/login.php\', 160)">Connexion</a></li>';
+            echo '<li><a href="#" onclick="setIframe(\'php/createAccount.php\', 240)">Créer un compte</a></li>';
             echo '</ul>';
             echo '</li>';
         }
@@ -37,4 +37,5 @@
             </ul>
         </li>
     </ul>
+    <iframe id="iframeLog" style="display: none;"></iframe>
 </nav>

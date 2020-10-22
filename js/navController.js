@@ -43,3 +43,14 @@ function unlogAccount() {
     if (confirm("Souhaitez vous vous déconnecter ?"))
         window.location.assign("php/logout.php")
 }
+
+function closeIFrame() {
+    document.getElementById('iframeLog').remove();
+    document.location.reload();
+}
+
+function setIframe(link, height) {
+    document.getElementById('iframeLog').src = link;
+    document.getElementById('iframeLog').style.display = "block";
+    document.getElementById('iframeLog').height = height;
+}

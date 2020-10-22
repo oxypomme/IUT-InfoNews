@@ -52,7 +52,10 @@ if (isset($_POST['submit'])) {
                             if ($row['match'] != 0)
                                 $inputErrors['others'] = "L'adresse mail est déjà utilisée.";
                     } else
-                        header('Location:login.php');
+                        // header('Location:login.php');
+                        echo "<script lang=\"javascript\" type=\"text/javascript\">
+                        parent.closeIFrame();
+                        </script>";
                 } else
                     $inputErrors['passwd'] = 'Mot de passe vide ou incorrect';
             } else
@@ -71,7 +74,11 @@ if (isset($_GET['ID'])) {
 
 session_start();
 if (isset($_SESSION["login"]))
-    header('Location:../index.php');
+    // header('Location:../index.php');
+    echo "<script lang=\"javascript\" type=\"text/javascript\">
+    parent.closeIFrame();
+    </script>";
+
 ?>
 
 <form method="post">
