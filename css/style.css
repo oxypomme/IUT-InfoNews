@@ -45,12 +45,21 @@ body>*:not(aside):not(header) {
 
 #news article {
     flex: 1;
-    min-width: 25%;
+    min-width: 400px;
     width: 25%;
     max-width: 450px;
     border: solid #333 2px;
     padding: 25px;
     margin: 10px;
+}
+
+@media (max-width: 1050px) {
+    #news article {
+        /* width: 100%;
+        max-width: 100%; */
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 #news article * {
@@ -64,26 +73,27 @@ body>*:not(aside):not(header) {
     margin-bottom: 4px;
 }
 
-#news article a img,
+/* #news article a img,
 #news article .spacer {
     height: 210px;
-}
+} */
 
 #news p {
     margin: 0;
 }
 
-#news p:nth-last-child(2) {
-    height: 120px;
+#news article p:nth-last-child(2) {
+    /* height: 120px; */
+    height: auto;
     padding-bottom: 10px;
     border-bottom: solid #666 1px;
 }
 
-#news p:last-child {
+#news article p:last-child {
     margin-top: 10px;
 }
 
-#news p:last-child>img {
+#news article p:last-child>img {
     width: 16px;
     vertical-align: text-top;
 }
@@ -104,34 +114,73 @@ form select {
 
 /*== NAVBAR ==*/
 
-nav ul {
+nav>ul {
     position: fixed;
     width: 100%;
     list-style-type: none;
     top: 0;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #333;
 }
 
-nav .connect {
+nav>ul>.connect {
     float: right;
 }
 
-nav li {
+nav>ul>li {
     float: left;
 }
 
 nav li>* {
-    height: 50px;
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
 }
 
+nav>ul>li>* {
+    height: 50px;
+    padding: 14px 16px;
+}
+
+.dropbtn:hover,
 nav li a:hover {
     background-color: #111;
+}
+
+
+.dropbtn {
+    cursor: pointer;
+    color: white;
+    height: 50px;
+    padding: 14px 16px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    height: auto;
+    min-width: 100px;
+    top: 50px;
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    transform: translateX(-16px);
+}
+
+.dropdown-content a {
+    padding: 5px;
+}
+
+.dropdown-content img {
+    width: 16px;
+    margin-right: 4px;
+    vertical-align: text-top;
+}
+
+.show {
+    display: block;
 }
