@@ -1,5 +1,5 @@
 <?php
-include "../models/connect.php";
+include "../api/connect.php";
 if (session_id() == "")
     session_start();
 if (isset($_POST['submit'])) {

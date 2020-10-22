@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
                         $data['method'] = 'UPDATE';
                     } else
                         $data['method'] = 'NEW';
-                    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/models/redactors.php';
+                    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/api/redactors.php';
                     $options = array(
                         'http' => array(
                             'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
                     else if (($err = json_decode($result)->sucess) !== true) {
                         $inputErrors['others'] = $err;
 
-                        include "../models/connect.php";
+                        include "../api/connect.php";
                         $reslog = $objPdo->prepare("SELECT COUNT(*) AS 'match' FROM redactor WHERE mail = '$login' LIMIT 1");
                         $reslog->execute();
                         foreach ($reslog as $row)
@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['ID'])) {
     if (session_id() == "")
         session_start();
-    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/models/redactors.php?ID=' . $_SESSION['login'];
+    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/api/redactors.php?ID=' . $_SESSION['login'];
     $result = file_get_contents($path);
     if ($result !== false) {
         $redactors = json_decode($result);

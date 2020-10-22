@@ -9,7 +9,7 @@
             session_start();
         if (isset($_SESSION['login'])) {
             $id = $_SESSION['login'];
-            include "models/connect.php";
+            include "api/connect.php";
             $result = $objPdo->prepare("SELECT id_redactor, last_name, first_name FROM redactor WHERE id_redactor = '$id' LIMIT 1");
             $result->execute();
             foreach ($result as $row) {

@@ -66,7 +66,7 @@ function jsonRequest(address, asyncProc = false, reqType = "GET", content = '') 
 
 function getRedactors(id = "", asyncProc = false) {
     if (!asyncProc) {
-        var docJSON = JSON.parse(jsonRequest("models/redactors.php?ID=" + id));
+        var docJSON = JSON.parse(jsonRequest("api/redactors.php?ID=" + id));
         var redactorList = new Array();
         if (docJSON['redactors'] != null)
             docJSON['redactors'].forEach(redactor => {
@@ -74,7 +74,7 @@ function getRedactors(id = "", asyncProc = false) {
             });
         return redactorList;
     } else {
-        jsonRequest("models/redactors.php?ID=" + id, function (docJSON) {
+        jsonRequest("api/redactors.php?ID=" + id, function (docJSON) {
             var redactorList = new Array();
             if (docJSON['redactors'] != null)
                 docJSON['redactors'].forEach(redactor => {
@@ -87,7 +87,7 @@ function getRedactors(id = "", asyncProc = false) {
 
 function getThemes(id = "", asyncProc = false) {
     if (!asyncProc) {
-        var docJSON = JSON.parse(jsonRequest("models/themes.php?ID=" + id));
+        var docJSON = JSON.parse(jsonRequest("api/themes.php?ID=" + id));
         var themeList = new Array();
         if (docJSON['themes'] != null)
             docJSON['themes'].forEach(theme => {
@@ -95,7 +95,7 @@ function getThemes(id = "", asyncProc = false) {
             });
         return themeList;
     } else {
-        jsonRequest("models/themes.php?ID=" + id, function (docJSON) {
+        jsonRequest("api/themes.php?ID=" + id, function (docJSON) {
             var themeList = new Array();
             if (docJSON['themes'] != null)
                 docJSON['themes'].forEach(theme => {
@@ -108,7 +108,7 @@ function getThemes(id = "", asyncProc = false) {
 
 function getNews(theme = "", sort = "", lang = "", asyncProc = false) {
     if (!asyncProc) {
-        var docJSON = JSON.parse(jsonRequest("models/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang));
+        var docJSON = JSON.parse(jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang));
         var newsList = new Array();
         if (docJSON['news'] != null)
             docJSON['news'].forEach(news => {
@@ -116,7 +116,7 @@ function getNews(theme = "", sort = "", lang = "", asyncProc = false) {
             });
         return newsList;
     } else {
-        jsonRequest("models/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, function (docJSON) {
+        jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, function (docJSON) {
             var newsList = new Array();
             if (docJSON['news'] != null)
                 docJSON['news'].forEach(news => {

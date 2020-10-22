@@ -58,12 +58,12 @@ function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
-        var sessionvars = JSON.parse(jsonRequest("models/session.php?Name=idlogin", false));
+        var sessionvars = JSON.parse(jsonRequest("api/session.php?Name=idlogin", false));
         if (sessionvars.idlogin == news.redactor.id) {
             var btn = document.createElement("button");
             btn.innerHTML = "Supprimer";
             btn.onclick = function () {
-                jsonRequest("models/news.php", function (response) {
+                jsonRequest("api/news.php", function (response) {
                     onFilterChange();
                 }, "POST", "method=DELETE&id=" + news.id)
             };

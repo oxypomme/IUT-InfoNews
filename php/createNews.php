@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
                         $data['method'] = 'NEW';
                         $data['idredact'] = $_SESSION['login'];
                     }
-                    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/models/news.php';
+                    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/api/news.php';
                     $options = array(
                         'http' => array(
                             'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_GET['ID'])) {
-    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/models/news.php?ID=' . htmlentities($_GET['ID']);
+    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/api/news.php?ID=' . htmlentities($_GET['ID']);
     $result = file_get_contents($path);
     if ($result !== false) {
         $news = json_decode($result);
