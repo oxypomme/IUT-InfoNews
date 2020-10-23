@@ -3,7 +3,8 @@
 <nav>
     <ul>
         <li><a href="index.php">Accueil</a></li>
-        <li><a href="create.php">Creer un article</a></li>
+        <li><a href="news_view.php">Creer un article</a></li>
+        <li><a href="themes_view.php">Creer un theme</a></li>
         <?php
         if (session_id() == "")
             session_start();

@@ -5,14 +5,14 @@
 if (session_id() == "")
     session_start();
 if (!isset($_SESSION['login'])) {
-    header("Location:php/login.php?target=create.php");
+    header("Location:php/login.php?target=news_view.php");
 }
 include "php/createNews.php";
 ?>
 
 <head>
     <meta charset="UTF-8">
-    <title>Info News - Création</title>
+    <title>Info News - Création d'Article</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/apiController.js"></script>

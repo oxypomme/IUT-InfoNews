@@ -40,7 +40,7 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     if ($_POST['method'] == 'NEW') {
         $result = $objPdo->prepare("INSERT INTO `theme`(`label`, `color`, `icon_theme`) VALUES (:label, :color, :iconURL)");
         if (isset($_POST['label']) and isset($_POST['color']) and isset($_POST['iconURL'])) {
-            $result->bindValue('label', htmlentities($_POST['label']), PDO::PARAM_STR);
+            $result->bindValue('label', $_POST['label'], PDO::PARAM_STR);
             $result->bindValue('color', htmlentities($_POST['color']), PDO::PARAM_STR);
             $result->bindValue('iconURL', htmlentities($_POST['iconURL']), PDO::PARAM_STR);
         } else
@@ -48,7 +48,7 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     } else  if ($_POST['method'] == 'UPDATE') {
         $result = $objPdo->prepare("UPDATE `theme` SET `label`=:label, `color`=:color, `icon_theme`=:iconURL WHERE `id_theme`=:id");
         if (isset($_POST['label']) and isset($_POST['color']) and isset($_POST['iconURL']) and isset($_POST['id'])) {
-            $result->bindValue('label', htmlentities($_POST['label']), PDO::PARAM_STR);
+            $result->bindValue('label', $_POST['label'], PDO::PARAM_STR);
             $result->bindValue('color', htmlentities($_POST['color']), PDO::PARAM_STR);
             $result->bindValue('iconURL', htmlentities($_POST['iconURL']), PDO::PARAM_STR);
             $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);

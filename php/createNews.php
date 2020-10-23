@@ -19,7 +19,6 @@ function showError($errorName)
         echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
 }
 
-include 'api/connect.php';
 include 'models/newsClass.php';
 
 $base_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/api/news.php';
@@ -46,9 +45,9 @@ if (isset($_POST['submit'])) {
 
                     if ($result === FALSE)
                         $inputErrors['others'] = 'Une erreur HTTP est survenue.';
-                    else if (($err = json_decode($result)->sucess) !== true) {
+                    else if (($err = json_decode($result)->sucess) !== true)
                         $inputErrors['others'] = $err;
-                    } else
+                    else
                         header('Location:index.php');
                 } else
                     $inputErrors['lang'] = "Langue incorrecte";
@@ -63,8 +62,7 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_GET['ID'])) {
-    $path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/api/news.php?ID=' . htmlentities($_GET['ID']);
-    $result = file_get_contents($path);
+    $result = file_get_contents($base_path . '?ID=' . htmlentities($_GET['ID']));
     if ($result !== false) {
         $news = json_decode($result);
         if ($news->sucess) {
