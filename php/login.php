@@ -57,7 +57,7 @@ if (isset($_GET['target']))
         </div>
         <div>
             <label>Mot de passe :</br>
-                <input type="passsword" name="passwd" value="" />
+                <input type="password" name="passwd" value="" />
             </label>
         </div>
 

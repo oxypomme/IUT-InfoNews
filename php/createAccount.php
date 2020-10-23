@@ -15,7 +15,8 @@ $passwd = isset($_POST["passwd"]) ? htmlentities($_POST['passwd']) : '';
 function showError($errorName)
 {
     if ($GLOBALS['inputErrors'][$errorName])
-        echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
+        // echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
+        echo $GLOBALS['inputErrors'][$errorName];
 }
 
 $base_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/api/redactors.php';
@@ -61,8 +62,6 @@ if (isset($_POST['submit'])) {
         $inputErrors['lname'] = 'Nom vide ou incorrect';
 }
 
-
-//TODO: check if mail is really a mail, etc.
 if (isset($_GET['ID'])) {
     if (session_id() == "")
         session_start();
@@ -103,35 +102,38 @@ if (isset($_SESSION["login"]) and !isset($_GET['ID']))
     <meta charset="UTF-8">
     <title>Info redactors - Login</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/createAccountController.js"></script>
 </head>
 
 <body class="iframable">
-    <form method="post">
+    <form name="redactor" method="post" onsubmit="return validate()">
         <div>
             <label>Nom :</br>
                 <input type="text" name="lname" value=<?php echo '"' . $lname . '"' ?> />
             </label>
-            <?php showError("lname") ?>
+            <span id="lname" class="error"><?php showError("lname") ?></span>
         </div>
         <div>
             <label>Prénom :</br>
                 <input type="text" name="fname" value=<?php echo '"' . $fname . '"' ?> />
             </label>
-            <?php showError("fname") ?>
+            <span id="fname" class="error"><?php showError("fname") ?></span>
         </div>
         <div>
             <label>Adresse mail :</br>
                 <input type="text" name="login" value=<?php echo '"' . $login . '"' ?> />
             </label>
-            <?php showError("login") ?>
+            <span id="login" class="error"><?php showError("login") ?></span>
         </div>
         <div>
-            <label>Mot de passe :</br>
-                <input type="passsword" name="passwd" value=<?php echo '"' . $passwd . '"' ?> />
+            <label>Mot de passe : (6 caractères)</br>
+                <input type="password" name="passwd" value=<?php echo '"' . $passwd . '"' ?> onkeyup="checkPassword()" />
             </label>
-            <?php showError("passwd") ?>
+            <!-- <progrsess id="passwordStrenghBar" max="100" value="0"></progress><span id="passwordStrengh">Faible</span> -->
+            <meter id="passwordStrenghBar" min="0" max="100" low="45" high="80" optimum="100" value="0"></meter><span id="passwordStrengh">Faible</span>
+            <span id="passwd" class="error"><?php showError("passwd") ?></span>
         </div>
-        <?php showError("others") ?><br />
+        <span class="error"><?php showError("others") ?></span>
 
         <input type="submit" name="submit" value="Valider" />
     </form>

@@ -20,6 +20,11 @@ h1 {
     margin-top: 75px;
 }
 
+meter {
+    width: 100px;
+    margin-right: 6px;
+}
+
 /*== ASIDE ==*/
 
 aside {
