@@ -1,0 +1,30 @@
+h1 {
+    margin-top: 15px;
+}
+
+aside {
+    position: relative;
+    display: block;
+    top: 0px;
+    width: 100%;
+    height: auto;
+}
+
+body:not(.iframable)>*:not(aside):not(header) {
+    padding-left: inherit;
+}
+
+nav>ul {
+    position: relative;
+}
+
+nav>ul>li,
+nav>ul>.connect {
+    float: inherit;
+}
+
+.dropbtn,
+nav>ul>li>* {
+    height: 30px;
+    padding: 0;
+}

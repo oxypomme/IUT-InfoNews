@@ -34,6 +34,7 @@ aside {
     width: 200px;
     height: 100vh;
     color: white;
+    padding: 5px;
 }
 
 body:not(.iframable)>*:not(aside):not(header) {
@@ -157,6 +158,8 @@ nav>ul>li>* {
     padding: 14px 16px;
 }
 
+
+
 .dropbtn:hover,
 nav li a:hover,
 nav .active {
@@ -179,6 +182,7 @@ iframe {
     color: white;
     height: 50px;
     padding: 14px 16px;
+    text-align: center;
 }
 
 .dropdown-content {

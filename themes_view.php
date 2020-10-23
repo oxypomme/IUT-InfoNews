@@ -14,7 +14,8 @@ include "php/createTheme.php";
     <meta charset="UTF-8">
     <title></title>
     <link rel="icon" href="favicon.ico" />
-    <link rel="stylesheet" href="css/style.css" />>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" media="screen and (max-width:720px)" href="css/mobile.css" />
 </head>
 
 <body>

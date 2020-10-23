@@ -6,6 +6,7 @@
     <title>Info News</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" media="screen and (max-width:720px)" href="css/mobile.css" />
     <script src="js/apiController.js"></script>
     <script src="js/indexController.js"></script>
 </head>
