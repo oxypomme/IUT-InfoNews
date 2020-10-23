@@ -71,7 +71,7 @@ function setupNews(array) {
             btn = document.createElement("button");
             btn.innerHTML = "Editer";
             btn.onclick = function () {
-                window.location.href = "create.php?ID=" + news.id;
+                window.location.href = "news_view.php?ID=" + news.id;
             };
             footer.appendChild(btn);
         }
@@ -87,7 +87,7 @@ function getRadio(radios) {
             if (radios[i].checked)
                 return radios[i].value;
 
-    } catch (error) {}
+    } catch (error) { }
     return '';
 }
 
