@@ -20,32 +20,39 @@
         <form id="filters" onchange="onFilterChange();">
             <div>
                 Trier par :<br />
-                <label>
+                <label class="radio-container">
                     <input type="radio" name="sort" value="desc" checked />
+                    <span></span>
                     Plus récent d'abord
                 </label>
-                <label>
+                <label class="radio-container">
                     <input type="radio" name="sort" value="asc" />
+                    <span></span>
                     Plus vieux d'abord
                 </label>
             </div>
             <div>
-                <label>Theme :
-                    <select name="themes" id="themes" onfocus="onThemeFocus();"></select>
+                <label class="select-container">Theme :
+                    <div>
+                        <select name="themes" id="themes" onfocus="onThemeFocus();"></select>
+                    </div>
                 </label>
             </div>
             <div>
                 Afficher :<br />
-                <label>
+                <label class="radio-container">
                     <input type="radio" name="lang" value="" checked />
+                    <span></span>
                     Tous
                 </label>
-                <label>
+                <label class="radio-container">
                     <input type="radio" name="lang" value="fr" />
+                    <span></span>
                     Français
                 </label>
-                <label>
+                <label class="radio-container">
                     <input type="radio" name="lang" value="en" />
+                    <span></span>
                     Anglais
                 </label>
             </div>

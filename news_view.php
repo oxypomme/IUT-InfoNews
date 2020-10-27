@@ -38,9 +38,11 @@ include "php/createNews.php";
                     <input type="text" name="name" value=<?php echo '"' . $name . '"' ?> />
                     <?php showError("name") ?>
                 </label>
-                <label>Theme :
-                    <select name="themes" id="themes" onfocus="onLoad();">
-                    </select>
+                <label class="select-container">Theme :
+                    <div>
+                        <select name="themes" id="themes" onfocus="onLoad();">
+                        </select>
+                    </div>
                     <?php showError("theme") ?>
                 </label>
                 <label>Image d'en-tête :
@@ -52,11 +54,13 @@ include "php/createNews.php";
                     <textarea name="text" rows="4" cols="50"><?php echo $text ?></textarea>
                     <?php showError("text") ?>
                 </label>
-                <label>Langue :
-                    <select name="lang" value=<?php echo '"' . $lang . '"' ?>>
-                        <option value="fr">Français</option>
-                        <option value="en">English</option>
-                    </select>
+                <label class="select-container">Langue :
+                    <div>
+                        <select name="lang" value=<?php echo '"' . $lang . '"' ?>>
+                            <option value="fr">Français</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
                     <?php showError("lang") ?>
                 </label>
             </div>

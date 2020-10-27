@@ -24,15 +24,6 @@ function setupNews(array) {
         );
     array.forEach(news => {
         var lig = document.createElement("article");
-        lig.style.border = "solid " + news.theme.color || "#333" + " 2px";
-
-        var title = document.createElement("h3");
-        title.innerHTML = news.title;
-        lig.appendChild(title);
-
-        var theme = document.createElement("p");
-        theme.innerHTML = news.theme;
-        lig.appendChild(theme);
 
         var elmnt;
         if (news.imgURL != "") {
@@ -48,6 +39,17 @@ function setupNews(array) {
         }
         lig.appendChild(elmnt);
 
+        let header = document.createElement("div");
+        var theme = document.createElement("h4");
+        theme.style.color = news.theme.color || "#333";
+        theme.innerHTML = news.theme;
+        header.appendChild(theme);
+
+        var title = document.createElement("h3");
+        title.innerHTML = news.title;
+        header.appendChild(title);
+        lig.appendChild(header);
+
         var txt = document.createElement("p");
         txt.innerHTML = news.text;
         lig.appendChild(txt);
@@ -60,20 +62,23 @@ function setupNews(array) {
         footer.appendChild(icon);
         var sessionvars = JSON.parse(jsonRequest("api/session.php?Name=idlogin", false));
         if (sessionvars.idlogin == news.redactor.id) {
-            var btn = document.createElement("button");
+            let div = document.createElement("div");
+            div.classList.add("buttonsholder");
+            let btn = document.createElement("button");
             btn.innerHTML = "Supprimer";
             btn.onclick = function () {
                 jsonRequest("api/news.php", function (response) {
                     onFilterChange();
                 }, "POST", "method=DELETE&id=" + news.id)
             };
-            footer.appendChild(btn);
+            div.appendChild(btn);
             btn = document.createElement("button");
             btn.innerHTML = "Editer";
             btn.onclick = function () {
                 window.location.href = "news_view.php?ID=" + news.id;
             };
-            footer.appendChild(btn);
+            div.appendChild(btn);
+            footer.appendChild(div);
         }
         lig.appendChild(footer);
 
@@ -87,7 +92,7 @@ function getRadio(radios) {
             if (radios[i].checked)
                 return radios[i].value;
 
-    } catch (error) { }
+    } catch (error) {}
     return '';
 }
 

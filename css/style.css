@@ -58,9 +58,10 @@ body:not(.iframable)>*:not(aside):not(header) {
     min-width: 400px;
     width: 25%;
     max-width: 450px;
-    padding: 25px;
     margin: 10px;
     background-color: #eee5;
+    border-radius: 24px;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
 @media (max-width: 1050px) {
@@ -72,7 +73,6 @@ body:not(.iframable)>*:not(aside):not(header) {
 
 #news article * {
     width: 100%;
-    margin-left: 10px;
     word-break: break-word;
     margin: 0;
 }
@@ -83,33 +83,59 @@ body:not(.iframable)>*:not(aside):not(header) {
 
 #news button {
     width: 25%;
-    float: right;
+    float: left;
     margin: 5px;
 }
 
-/* #news article a img,
-#news article .spacer {
-    height: 210px;
-} */
 
-#news p {
-    margin: 0;
+#news article a img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    filter: brightness(100%);
+    transition: filter 0.25s ease-in-out;
+}
+
+#news article a:hover img {
+    filter: brightness(80%);
+    transition: filter 0.25s ease-in-out;
+}
+
+#news article>div:nth-child(2) {
+    margin: 16px;
+}
+
+#news article p {
+    margin: 0 16px 8px 16px;
+    width: calc(100% - 32px);
 }
 
 #news article p:nth-last-child(2) {
-    /* height: 120px; */
     height: auto;
     padding-bottom: 10px;
     border-bottom: solid #666 1px;
 }
 
-#news article p:last-child {
-    margin-top: 10px;
-}
-
 #news article p:last-child>img {
     width: 16px;
     vertical-align: text-top;
+}
+
+#news article div.buttonsholder {
+    margin-bottom: 32px;
+}
+
+#news article div.buttonsholder>button {
+    font-family: 'Nunito', Arial, Helvetica, sans-serif;
+    background-color: #ddd;
+    transition: background-color 0.25s ease-in-out;
+    border-radius: 15px;
+    border-color: transparent;
+    text-transform: uppercase;
+}
+
+#news article div.buttonsholder>button:hover {
+    background-color: #ccc;
+    transition: background-color 0.25s ease-in-out;
 }
 
 /*== FORMS ==*/
@@ -124,6 +150,130 @@ form div {
 
 form select {
     width: 100px;
+}
+
+form label.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+form input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+form input[type="radio"]+span {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 13px;
+    width: 13px;
+    background-color: #eee;
+    transition: background-color 0.25s ease-in-out;
+    border-radius: 50%;
+}
+
+form label.radio-container:hover input[type="radio"]~span {
+    background-color: #ccc;
+    transition: background-color 0.25s ease-in-out;
+}
+
+form label.radio-container input[type="radio"]:checked~span {
+    background-color: #2196F3;
+    top: 9px;
+    left: 9px;
+    height: 5px;
+    width: 5px;
+}
+
+form input[type="radio"]+span:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+form label.radio-container input[type="radio"]:checked~span:after {
+    display: block;
+}
+
+form label.radio-container input[type="radio"]+span:after {
+    top: -4px;
+    left: -4px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: transparent;
+    border: solid #2196f3 2px;
+}
+
+form select {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    color: rgb(134, 134, 134);
+    font-family: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+}
+
+form label.select-container div {
+    margin: 0;
+    border: 1px solid rgba(204, 204, 204, 0.87);
+    border-radius: 0.25em;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+form select option {
+    background-color: transparent;
+}
+
+form input[type="text"],
+form input[type="url"],
+form input[type="password"],
+textarea {
+    border: solid #ccc 1px;
+    transition: border-color 0.25s ease-in-out;
+    border-radius: 16px;
+    line-height: 2em;
+    padding: 5px;
+    margin: 5px 0;
+    outline: none;
+}
+
+form input[type="text"]:focus,
+form input[type="url"]:focus,
+form input[type="password"]:focus,
+textarea:focus {
+    border-color: #222;
+    transition: border-color 0.25s ease-in-out;
+}
+
+form input[type="submit"] {
+    border: none;
+    border-radius: 16px;
+    background-color: #ddd;
+    transition: background-color 0.25s ease-in-out;
+    padding: 4px 16px;
+    font-family: 'Nunito', Arial, Helvetica, sans-serif;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+form input[type="submit"]:hover {
+    background-color: #ccc;
+    transition: background-color 0.25s ease-in-out;
 }
 
 /*== NAVBAR ==*/
