@@ -232,11 +232,14 @@ form select {
 }
 
 form label.select-container div {
+    display: inline-block;
     margin: 0;
     border: 1px solid rgba(204, 204, 204, 0.87);
     border-radius: 0.25em;
     cursor: pointer;
     background-color: transparent;
+    min-width: 125px;
+    width: auto;
 }
 
 :not(aside)>form label.select-container div {
