@@ -162,10 +162,6 @@ form div {
     margin-top: 15px;
 }
 
-form select {
-    width: 100px;
-}
-
 form label.radio-container {
     display: block;
     position: relative;

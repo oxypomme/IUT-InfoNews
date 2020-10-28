@@ -28,3 +28,7 @@ nav>ul>li>* {
     height: 30px;
     padding: 0;
 }
+
+form fieldset {
+    width: 100%;
+}
