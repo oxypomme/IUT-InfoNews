@@ -9,9 +9,13 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
     padding: 0;
+}
+
+body {
     font-family: 'Nunito', Arial, Helvetica, sans-serif;
     background-color: #e6e6e6;
     overflow-x: hidden;
@@ -44,8 +48,13 @@ aside {
     box-shadow: rgba(0, 0, 0, 0.265) 3px 0px 6px 0px;
 }
 
-body:not(.iframable)>*:not(aside):not(header) {
-    padding-left: 200px;
+main {
+    padding-left: 50px;
+}
+
+section,
+main>h1 {
+    padding-left: 150px;
 }
 
 .iframable {
@@ -310,7 +319,7 @@ form div label {
 }
 
 aside>form div label {
-    color: white;
+    color: white !important;
 }
 
 form input[type="text"],

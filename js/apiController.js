@@ -48,12 +48,15 @@ class News {
 
 function jsonRequest(address, asyncProc = false, reqType = "GET", content = '') {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    var promise;
     if (asyncProc) {
-        xhr.onreadystatechange = function () {
-            if (this.readyState == 4) {
-                asyncProc(this.response);
-            }
-        };
+        promise = new Promise((resolve) => {
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    resolve(this.response);
+                }
+            };
+        });
         xhr.responseType = 'json';
     }
     xhr.open(reqType, address, !(!asyncProc));
@@ -62,6 +65,7 @@ function jsonRequest(address, asyncProc = false, reqType = "GET", content = '') 
     xhr.send(content);
     if (!asyncProc)
         return (xhr.status == 200 ? xhr.response : false);
+    return promise;
 }
 
 function jsonToRedactors(docJSON) {
@@ -78,8 +82,11 @@ function getRedactors(id = "", asyncProc = false) {
         var docJSON = JSON.parse(jsonRequest("api/redactors.php?ID=" + id));
         return jsonToRedactors(docJSON);
     } else {
-        jsonRequest("api/redactors.php?ID=" + id, function (docJSON) {
-            asyncProc(jsonToRedactors(docJSON));
+        return new Promise(resolve => {
+            let promise = jsonRequest("api/redactors.php?ID=" + id, true);
+            promise.then((value) => {
+                resolve(jsonToRedactors(value));
+            });
         });
     }
 }
@@ -98,18 +105,24 @@ function getThemes(id = "", asyncProc = false) {
         var docJSON = JSON.parse(jsonRequest("api/themes.php?ID=" + id));
         return jsonToTheme(docJSON);
     } else {
-        jsonRequest("api/themes.php?ID=" + id, function (docJSON) {
-            asyncProc(jsonToTheme(docJSON));
+        return new Promise(resolve => {
+            let promise = jsonRequest("api/themes.php?ID=" + id, true);
+            promise.then((value) => {
+                resolve(jsonToTheme(value));
+            });
         });
     }
 }
 
-function jsonToNews(docJSON) {
+async function jsonToNews(docJSON) {
     var newsList = new Array();
     if (docJSON['news'] != null)
-        docJSON['news'].forEach(news => {
-            newsList.push(new News(news.id, news.content, getThemes(news.theme)[0], getRedactors(news.redactor)[0], news.date, news.lang))
-        });
+        for (const news of docJSON['news']) {
+            let themes = await getThemes(news.theme, true);
+            let redactors = await getRedactors(news.redactor, true);
+
+            newsList.push(new News(news.id, news.content, themes[0], redactors[0], news.date, news.lang));
+        };
     return newsList;
 }
 
@@ -118,8 +131,11 @@ function getNews(theme = "", sort = "", lang = "", asyncProc = false) {
         var docJSON = JSON.parse(jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang));
         jsonToNews(docJSON);
     } else {
-        jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, function (docJSON) {
-            asyncProc(jsonToNews(docJSON));
+        return new Promise(resolve => {
+            let promise = jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, true);
+            promise.then((value) => {
+                resolve(jsonToNews(value));
+            });
         });
     }
 }

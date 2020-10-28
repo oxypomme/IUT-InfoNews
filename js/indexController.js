@@ -61,29 +61,32 @@ function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
-        var sessionvars = JSON.parse(jsonRequest("api/session.php?Name=idlogin", false));
-        if (sessionvars.idlogin == news.redactor.id) {
-            let div = document.createElement("div");
-            div.classList.add("buttonsholder");
-            let delBtn = document.createElement("button");
-            delBtn.innerHTML = "Supprimer";
-            delBtn.onclick = function () {
-                jsonRequest("api/news.php", function (response) {
-                    onFilterChange();
-                }, "POST", "method=DELETE&ID=" + news.id)
-            };
-            div.appendChild(delBtn);
-            let editBtn = document.createElement("button");
-            editBtn.innerHTML = "Editer";
-            editBtn.onclick = function () {
-                window.location.href = "news_view.php?ID=" + news.id;
-            };
-            div.appendChild(editBtn);
-            footer.appendChild(div);
-        }
-        lig.appendChild(footer);
+        var promise = jsonRequest("api/session.php?Name=idlogin", true);
+        promise.then((sessionvars) => {
+            if (sessionvars.idlogin == news.redactor.id) {
+                let div = document.createElement("div");
+                div.classList.add("buttonsholder");
+                let delBtn = document.createElement("button");
+                delBtn.innerHTML = "Supprimer";
+                delBtn.onclick = function () {
+                    let delpromise = jsonRequest("api/news.php", true, "POST", "method=DELETE&ID=" + news.id)
+                    delpromise.then(() => {
+                        onFilterChange();
+                    });
+                };
+                div.appendChild(delBtn);
+                let editBtn = document.createElement("button");
+                editBtn.innerHTML = "Editer";
+                editBtn.onclick = function () {
+                    window.location.href = "news_view.php?ID=" + news.id;
+                };
+                div.appendChild(editBtn);
+                footer.appendChild(div);
+            }
+            lig.appendChild(footer);
 
-        document.getElementById('news').appendChild(lig);
+            document.getElementById('news').appendChild(lig);
+        });
     });
 }
 
@@ -109,9 +112,15 @@ function onChangeLanguage() {
 }
 
 function onFilterChange() {
-    getNews(document.getElementById("themes").value, getRadio(document.getElementsByName('sort')), getRadio(document.getElementsByName('lang')), setupNews);
+    let promise = getNews(document.getElementById("themes").value, getRadio(document.getElementsByName('sort')), getRadio(document.getElementsByName('lang')), true);
+    promise.then((value) => {
+        setupNews(value);
+    });
 }
 
 function onThemeFocus() {
-    getThemes("", setupThemes);
+    let promise = getThemes("", true);
+    promise.then((value) => {
+        setupThemes(value);
+    });
 }
