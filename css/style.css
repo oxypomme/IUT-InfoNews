@@ -9,6 +9,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Nunito', Arial, Helvetica, sans-serif;
+    background-color: #e6e6e6;
 }
 
 .error {
@@ -35,6 +36,7 @@ aside {
     height: 100vh;
     color: white;
     padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.265) 3px 0px 6px 0px;
 }
 
 body:not(.iframable)>*:not(aside):not(header) {
@@ -59,8 +61,8 @@ body:not(.iframable)>*:not(aside):not(header) {
     width: 25%;
     max-width: 450px;
     margin: 10px;
-    background-color: #eee5;
-    border-radius: 24px;
+    background-color: #fff9;
+    border-radius: 12px;
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
@@ -87,12 +89,12 @@ body:not(.iframable)>*:not(aside):not(header) {
     margin: 5px;
 }
 
-
 #news article a img {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     filter: brightness(100%);
     transition: filter 0.25s ease-in-out;
+    z-index: 0;
 }
 
 #news article a:hover img {
@@ -228,6 +230,10 @@ form select {
     outline: none;
 }
 
+:not(aside)>form select {
+    background-color: white;
+}
+
 form label.select-container div {
     margin: 0;
     border: 1px solid rgba(204, 204, 204, 0.87);
@@ -279,6 +285,7 @@ form input[type="submit"]:hover {
 /*== NAVBAR ==*/
 
 nav>ul {
+    z-index: 1;
     position: fixed;
     width: 100%;
     list-style-type: none;
@@ -286,6 +293,7 @@ nav>ul {
     margin: 0;
     padding: 0;
     background-color: #333;
+    box-shadow: rgba(0, 0, 0, 0.265) 0px 0px 6px 3px;
 }
 
 nav>ul>.connect {
@@ -307,8 +315,6 @@ nav>ul>li>* {
     height: 50px;
     padding: 14px 16px;
 }
-
-
 
 .dropbtn:hover,
 nav li a:hover,
