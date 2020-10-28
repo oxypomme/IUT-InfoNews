@@ -31,25 +31,25 @@ include "php/createTheme.php";
             <fieldset>
                 <legend>Nom</legend>
                 <div>
-                    <input type="text" name="frname" value=<?php echo '"' . $frname . '"' ?> required />
+                    <input type="text" name="frname" value=<?= '"' . $frname . '"' ?> required />
                     <label>Français*</label>
                     <?php showError("frname") ?>
                 </div>
                 <div>
-                    <input type="text" name="enname" value=<?php echo '"' . $enname . '"' ?> required />
+                    <input type="text" name="enname" value=<?= '"' . $enname . '"' ?> required />
                     <label>Anglais*</label>
                     <?php showError("enname") ?>
                 </div>
             </fieldset>
             <div>
                 <div class="color-container">
-                    <input type="color" name="color" value=<?php echo '"' . ($color ? $color : '#000000') . '"' ?> />
+                    <input type="color" name="color" value=<?= '"' . ($color ? $color : '#000000') . '"' ?> />
                 </div>
                 <label for="color">Couleur du theme</label>
                 <?php showError("color") ?>
             </div>
             <div>
-                <input type="url" name="iconURL" value=<?php echo '"' . $iconURL . '"' ?> required />
+                <input type="url" name="iconURL" value=<?= '"' . $iconURL . '"' ?> required />
                 <label for="iconURL">Icone*</label>
                 <?php showError("iconURL") ?>
             </div>

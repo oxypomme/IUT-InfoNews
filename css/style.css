@@ -174,10 +174,6 @@ form div {
     margin-top: 15px;
 }
 
-form select {
-    width: 100px;
-}
-
 form label.radio-container {
     display: block;
     position: relative;
@@ -310,7 +306,7 @@ form div label {
     left: 5px;
     top: 8px;
     transition: 0.2s ease all;
-    color: #111;
+    color: #777;
 }
 
 aside>form div label {
@@ -360,10 +356,11 @@ form textarea:focus~label {
 }
 
 form .select-container~label,
-#createPass,
-.color-container~label {
+form .color-container~label,
+#createPass {
     top: -20px;
     font-size: 14px;
+    color: #111;
 }
 
 .color-container input[type="color"] {

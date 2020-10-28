@@ -80,7 +80,7 @@ if (isset($_GET['ID'])) {
             $name = $content->title;
             $text = $content->text;
             $imgURL = $content->imgURL;
-            $lang = $news->lang; //BUG: didn't update the form ?
+            $lang = $news->lang;
         }
     }
 }

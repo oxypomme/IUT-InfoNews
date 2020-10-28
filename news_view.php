@@ -20,7 +20,7 @@ include "php/createNews.php";
     <script src="js/apiController.js"></script>
     <script lang="javascript" type="text/javascript">
         function getPostedTheme() {
-            return <?php echo (isset($_POST['themes']) ? $_POST['themes'] : $theme) ?>;
+            return <?= (isset($_POST['themes']) ? $_POST['themes'] : $theme) ?>;
         }
     </script>
     <script src="js/createNewsController.js"></script>
@@ -35,7 +35,7 @@ include "php/createNews.php";
     <main>
         <form method="post">
             <div>
-                <input type="text" name="name" value=<?php echo '"' . $name . '"' ?> required />
+                <input type="text" name="name" value=<?= '"' . $name . '"' ?> required />
                 <?php showError("name") ?>
                 <label for="name">Nom*</label>
             </div>
@@ -48,22 +48,22 @@ include "php/createNews.php";
                 <?php showError("theme") ?>
             </div>
             <div>
-                <input type="url" name="imgURL" value=<?php echo '"' . $imgURL . '"' ?> />
+                <input type="url" name="imgURL" value=<?= '"' . $imgURL . '"' ?> />
                 <label for="imgURL">Image d'en-tête</label>
             </div>
             <div>
-                <textarea name="text" rows="4" cols="50" required><?php echo $text ?></textarea>
+                <textarea name="text" rows="4" cols="50" required><?= $text ?></textarea>
                 <?php showError("text") ?>
                 <label for="text">Texte*</label>
             </div>
             <div>
                 <div class="select-container">
-                    <select name="lang" value=<?php echo '"' . $lang . '"' ?>>
-                        <option value="fr">Français</option>
-                        <option value="en">English</option>
+                    <select name="lang">
+                        <option value="fr" <?= ($lang == 'fr' ? 'selected' : '') ?>>Français</option>
+                        <option value="en" <?= ($lang == 'en' ? 'selected' : '') ?>>English</option>
                     </select>
                 </div>
-                <label>Langue</label>
+                <label for="lang">Langue</label>
                 <?php showError("lang") ?>
             </div>
             <?php showError("others") ?><br />
