@@ -130,15 +130,21 @@ body:not(.iframable)>*:not(aside):not(header) {
 #news article div.buttonsholder>button {
     font-family: 'Nunito', Arial, Helvetica, sans-serif;
     background-color: #ddd;
-    transition: background-color 0.25s ease-in-out;
+    transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
     border-radius: 15px;
     border-color: transparent;
     text-transform: uppercase;
+    outline: none;
 }
 
 #news article div.buttonsholder>button:hover {
     background-color: #ccc;
     transition: background-color 0.25s ease-in-out;
+}
+
+#news article div.buttonsholder>button:focus {
+    border-color: #222;
+    transition: border-color 0.25s ease-in-out;
 }
 
 /*== FORMS ==*/
@@ -272,18 +278,24 @@ textarea:focus {
 }
 
 form input[type="submit"] {
-    border: none;
+    border-color: transparent;
     border-radius: 16px;
     background-color: #ddd;
-    transition: background-color 0.25s ease-in-out;
+    transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
     padding: 4px 16px;
     font-family: 'Nunito', Arial, Helvetica, sans-serif;
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    outline: none;
 }
 
 form input[type="submit"]:hover {
     background-color: #ccc;
     transition: background-color 0.25s ease-in-out;
+}
+
+form input[type="submit"]:focus {
+    border: solid #222 2px;
+    transition: border-color 0.25s ease-in-out;
 }
 
 /*== NAVBAR ==*/

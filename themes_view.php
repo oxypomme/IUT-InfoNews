@@ -38,7 +38,7 @@ include "php/createTheme.php";
             </div>
             <div>
                 <label>Couleur :
-                    <input type="color" name="color" value=<?php echo '"' . $color . '"' ?> />
+                    <input type="color" name="color" value=<?php echo '"' . ($color ? $color : '#ffffff') . '"' ?> />
                 </label>
                 <?php showError("color") ?>
             </div>
