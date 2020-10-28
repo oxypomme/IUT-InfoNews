@@ -10,6 +10,7 @@ body {
     padding: 0;
     font-family: 'Nunito', Arial, Helvetica, sans-serif;
     background-color: #e6e6e6;
+    overflow-x: hidden;
 }
 
 .error {
