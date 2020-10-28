@@ -71,13 +71,12 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
 }
 
 if (!$result->execute()) {
-    if ($raw->sucess == true)
+    if ($raw->sucess === true)
         $raw->sucess = "MySQL error";
 } else {
     foreach ($result as $row) {
         $raw->redactors[] = new Redactor($row['id_redactor'], $row['last_name'], $row['first_name'], $row['mail']);
     }
-    $raw->sucess = true;
 }
 
 echo json_encode($raw);

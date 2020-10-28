@@ -108,17 +108,17 @@ if (isset($_SESSION["login"]) and !isset($_GET['ID']))
 <body class="iframable">
     <form name="redactor" method="post" onsubmit="return validate()">
         <div>
-            <input type="text" name="lname" value=<?php echo '"' . $lname . '"' ?> required />
+            <input type="text" name="lname" value=<?= '"' . $lname . '"' ?> required />
             <label for="lname">Nom*</label>
             <?php showError("lname") ?>
         </div>
         <div>
-            <input type="text" name="fname" value=<?php echo '"' . $fname . '"' ?> required />
+            <input type="text" name="fname" value=<?= '"' . $fname . '"' ?> required />
             <label for="fname">Prénom*</label>
             <?php showError("fname") ?>
         </div>
         <div>
-            <input type="text" name="login" value=<?php echo '"' . $login . '"' ?> required />
+            <input type="text" name="login" value=<?= '"' . $login . '"' ?> required />
             <label for="login">Adresse mail*</label>
             <?php showError("login") ?>
         </div>

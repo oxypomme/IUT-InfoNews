@@ -64,20 +64,20 @@ function setupNews(array) {
         if (sessionvars.idlogin == news.redactor.id) {
             let div = document.createElement("div");
             div.classList.add("buttonsholder");
-            let btn = document.createElement("button");
-            btn.innerHTML = "Supprimer";
-            btn.onclick = function () {
+            let delBtn = document.createElement("button");
+            delBtn.innerHTML = "Supprimer";
+            delBtn.onclick = function () {
                 jsonRequest("api/news.php", function (response) {
                     onFilterChange();
-                }, "POST", "method=DELETE&id=" + news.id)
+                }, "POST", "method=DELETE&ID=" + news.id)
             };
-            div.appendChild(btn);
-            btn = document.createElement("button");
-            btn.innerHTML = "Editer";
-            btn.onclick = function () {
+            div.appendChild(delBtn);
+            let editBtn = document.createElement("button");
+            editBtn.innerHTML = "Editer";
+            editBtn.onclick = function () {
                 window.location.href = "news_view.php?ID=" + news.id;
             };
-            div.appendChild(btn);
+            div.appendChild(editBtn);
             footer.appendChild(div);
         }
         lig.appendChild(footer);
