@@ -47,11 +47,11 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'UPDATE') {
         $result = $objPdo->prepare("UPDATE `theme` SET `label`=:label, `color`=:color, `icon_theme`=:iconURL WHERE `id_theme`=:id");
-        if (isset($_POST['label']) and isset($_POST['color']) and isset($_POST['iconURL']) and isset($_POST['id'])) {
+        if (isset($_POST['label']) and isset($_POST['color']) and isset($_POST['iconURL']) and isset($_POST['ID'])) {
             $result->bindValue('label', $_POST['label'], PDO::PARAM_STR);
             $result->bindValue('color', htmlentities($_POST['color']), PDO::PARAM_STR);
             $result->bindValue('iconURL', htmlentities($_POST['iconURL']), PDO::PARAM_STR);
-            $result->bindValue('id', htmlentities($_POST['id']), PDO::PARAM_INT);
+            $result->bindValue('id', htmlentities($_POST['ID']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'DELETE') {
@@ -66,8 +66,8 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
 }
 
 if (!$result->execute()) {
-    if ($raw->sucess == true)
-        $raw->sucess = "MySQL error";
+    //if ($raw->sucess == true)
+    //    $raw->sucess = "MySQL error";
 } else {
     foreach ($result as $row) {
         $raw->themes[] = new Theme($row['id_theme'], $row['label'], $row['color'], $row['icon_theme']);
