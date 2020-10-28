@@ -231,16 +231,16 @@ form select {
     outline: none;
 }
 
-:not(aside)>form select {
-    background-color: white;
-}
-
 form label.select-container div {
     margin: 0;
     border: 1px solid rgba(204, 204, 204, 0.87);
     border-radius: 0.25em;
     cursor: pointer;
     background-color: transparent;
+}
+
+:not(aside)>form label.select-container div {
+    background-color: white;
 }
 
 form select option {
