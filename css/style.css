@@ -119,7 +119,7 @@ body:not(.iframable)>*:not(aside):not(header) {
 
 #news article p:last-child>img {
     width: 16px;
-    vertical-align: text-top;
+    vertical-align: -9%;
 }
 
 #news article div.buttonsholder {
@@ -362,7 +362,7 @@ iframe {
 .dropdown-content img {
     width: 16px;
     margin-right: 4px;
-    vertical-align: text-top;
+    vertical-align: -9%;
 }
 
 .show {
