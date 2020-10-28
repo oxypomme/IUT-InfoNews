@@ -10,6 +10,14 @@ aside {
     height: auto;
 }
 
+form fieldset {
+    width: auto;
+}
+
+form select {
+    width: calc(100vw - 14px);
+}
+
 body:not(.iframable)>*:not(aside):not(header) {
     padding-left: inherit;
 }
@@ -28,3 +36,5 @@ nav>ul>li>* {
     height: 30px;
     padding: 0;
 }
+
+/* TODO fix dropdown */

@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito');
 
+:root {
+    --secondary-color: #ef921c
+}
+
 * {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -80,6 +84,12 @@ body:not(.iframable)>*:not(aside):not(header) {
     margin: 0;
 }
 
+#news article:hover {
+    /* background-color: var(--secondary-color); */
+    box-shadow: 0px 2px 1px -1px var(--secondary-color), 0px 1px 1px 0px var(--secondary-color), 0px 1px 3px 0px var(--secondary-color);
+    transition: background-color 0.25s ease-in-out;
+}
+
 #news article .spacer {
     margin-bottom: 4px;
 }
@@ -88,6 +98,7 @@ body:not(.iframable)>*:not(aside):not(header) {
     width: 25%;
     float: left;
     margin: 5px;
+    cursor: pointer
 }
 
 #news article a img {
@@ -138,7 +149,8 @@ body:not(.iframable)>*:not(aside):not(header) {
 }
 
 #news article div.buttonsholder>button:hover {
-    background-color: #ccc;
+    background-color: var(--secondary-color);
+    color: #fff;
     transition: background-color 0.25s ease-in-out;
 }
 
@@ -185,6 +197,7 @@ form input[type="radio"] {
     width: 0;
 }
 
+
 form input[type="radio"]+span {
     position: absolute;
     top: 5px;
@@ -196,13 +209,18 @@ form input[type="radio"]+span {
     border-radius: 50%;
 }
 
+form label.radio-container:hover {
+    color: var(--secondary-color);
+    transition: color 0.25s ease-in-out;
+}
+
 form label.radio-container:hover input[type="radio"]~span {
-    background-color: #ccc;
+    background-color: var(--secondary-color);
     transition: background-color 0.25s ease-in-out;
 }
 
 form label.radio-container input[type="radio"]:checked~span {
-    background-color: #2196F3;
+    background-color: var(--secondary-color);
     top: 9px;
     left: 9px;
     height: 5px;
@@ -226,7 +244,7 @@ form label.radio-container input[type="radio"]+span:after {
     height: 9px;
     border-radius: 50%;
     background: transparent;
-    border: solid #2196f3 2px;
+    border: solid var(--secondary-color) 2px;
 }
 
 form select {
@@ -260,6 +278,11 @@ form .select-container {
     width: max-content;
     min-width: 190px;
     width: auto;
+}
+
+form .select-container:hover {
+    border-color: var(--secondary-color);
+    transition: border 0.25s ease-in-out;
 }
 
 :not(aside)>form .select-container {
@@ -312,7 +335,7 @@ form input[type="text"]:focus,
 form input[type="url"]:focus,
 form input[type="password"]:focus,
 textarea:focus {
-    border-color: #222;
+    border-color: var(--secondary-color);
     transition: border-color 0.25s ease-in-out;
 }
 
@@ -327,6 +350,13 @@ form textarea:valid~label {
     top: -20px;
     font-size: 14px;
     color: #111;
+}
+
+form input[type="text"]:focus~label,
+form input[type="url"]:focus~label,
+form input[type="password"]:focus~label,
+form textarea:focus~label {
+    color: var(--secondary-color);
 }
 
 form .select-container~label,
@@ -352,7 +382,8 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-    background-color: #ccc;
+    background-color: #ef921c;
+    color: #fff;
     transition: background-color 0.25s ease-in-out;
 }
 
@@ -415,7 +446,7 @@ nav li a {
 .dropbtn:hover,
 nav li a:hover,
 nav .active {
-    background-color: #111;
+    background-color: var(--secondary-color);
     transition: background-color 0.15s ease-in-out;
 }
 
