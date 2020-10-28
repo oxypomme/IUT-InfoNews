@@ -46,23 +46,23 @@ if (isset($_GET['target']))
     <meta charset="UTF-8">
     <title>Info News - Login</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" href="../favicon.ico" />
 </head>
 
 <body class="iframable">
     <form method="post">
         <div>
-            <label>Adresse mail :</br>
-                <input type="text" name="login" value="" />
-            </label>
+            <input type="text" name="login" value="" required />
+            <label for="login">Adresse mail*</label>
         </div>
         <div>
-            <label>Mot de passe :</br>
-                <input type="password" name="passwd" value="" />
-            </label>
+            <input type="password" name="passwd" value="" required />
+            <label for="passwd">Mot de passe*</label>
         </div>
 
         <input type="submit" name="submit" value="Valider" />
     </form>
+    Les champs marqués d'un * sont obligatoires.
 </body>
 
 </html>

@@ -29,31 +29,34 @@ include "php/createTheme.php";
         <form method="post">
             <fieldset>
                 <legend>Nom</legend>
-                <label>Français :
-                    <input type="text" name="frname" value=<?php echo '"' . $frname . '"' ?> />
-                </label>
-                <?php showError("frname") ?>
-                <label>Anglais :
-                    <input type="text" name="enname" value=<?php echo '"' . $enname . '"' ?> />
-                </label>
-                <?php showError("enname") ?>
+                <div>
+                    <input type="text" name="frname" value=<?php echo '"' . $frname . '"' ?> required />
+                    <label>Français*</label>
+                    <?php showError("frname") ?>
+                </div>
+                <div>
+                    <input type="text" name="enname" value=<?php echo '"' . $enname . '"' ?> required />
+                    <label>Anglais*</label>
+                    <?php showError("enname") ?>
+                </div>
             </fieldset>
             <div>
-                <label>Couleur :
-                    <input type="color" name="color" value=<?php echo '"' . ($color ? $color : '#ffffff') . '"' ?> />
-                </label>
+                <div class="color-container">
+                    <input type="color" name="color" value=<?php echo '"' . ($color ? $color : '#000000') . '"' ?> />
+                </div>
+                <label for="color">Couleur du theme</label>
                 <?php showError("color") ?>
             </div>
             <div>
-                <label>Icone :</br>
-                    <input type="url" name="iconURL" value=<?php echo '"' . $iconURL . '"' ?> />
-                </label>
+                <input type="url" name="iconURL" value=<?php echo '"' . $iconURL . '"' ?> required />
+                <label for="iconURL">Icone*</label>
                 <?php showError("iconURL") ?>
             </div>
             <?php showError("others") ?><br />
 
             <input type="submit" name="submit" value="Valider" />
         </form>
+        Les champs marqués d'un * sont obligatoires.
     </main>
 
     <footer>

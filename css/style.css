@@ -149,6 +149,11 @@ body:not(.iframable)>*:not(aside):not(header) {
 
 /*== FORMS ==*/
 
+form {
+    margin-top: 25px;
+    margin-bottom: 5px;
+}
+
 form label {
     display: block;
 }
@@ -230,39 +235,73 @@ form select {
     padding: 0;
     margin: 0;
     width: 100%;
-    color: rgb(134, 134, 134);
+    color: #111;
     font-family: inherit;
     cursor: inherit;
     line-height: inherit;
     outline: none;
 }
 
-form label.select-container div {
+aside>form select {
+    color: white;
+}
+
+:not(aside)>form select {
+    font-size: 1em;
+}
+
+form .select-container {
     display: inline-block;
     margin: 0;
     border: 1px solid rgba(204, 204, 204, 0.87);
     border-radius: 0.25em;
     cursor: pointer;
     background-color: transparent;
-    min-width: 125px;
+    width: max-content;
+    min-width: 190px;
     width: auto;
 }
 
-:not(aside)>form label.select-container div {
+:not(aside)>form .select-container {
     background-color: white;
+    line-height: 2em;
 }
 
 form select option {
     background-color: transparent;
+    color: rgb(134, 134, 134);
+}
+
+form div {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+:not(aside)>form div:not(:last-of-type) {
+    margin-bottom: 25px;
+}
+
+form div label {
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 8px;
+    transition: 0.2s ease all;
+    color: #111;
+}
+
+aside>form div label {
+    color: white;
 }
 
 form input[type="text"],
 form input[type="url"],
 form input[type="password"],
 textarea {
+    display: block;
     border: solid #ccc 1px;
     transition: border-color 0.25s ease-in-out;
-    border-radius: 16px;
+    border-radius: 4px;
     line-height: 2em;
     padding: 5px;
     margin: 5px 0;
@@ -275,6 +314,30 @@ form input[type="password"]:focus,
 textarea:focus {
     border-color: #222;
     transition: border-color 0.25s ease-in-out;
+}
+
+form input[type="text"]:focus~label,
+form input[type="text"]:valid~label,
+form input[type="url"]:focus~label,
+form input[type="url"]:valid~label,
+form input[type="password"]:focus~label,
+form input[type="password"]:valid~label,
+form textarea:focus~label,
+form textarea:valid~label {
+    top: -20px;
+    font-size: 14px;
+    color: #111;
+}
+
+form .select-container~label,
+#createPass,
+.color-container~label {
+    top: -20px;
+    font-size: 14px;
+}
+
+.color-container input[type="color"] {
+    margin-left: 10px;
 }
 
 form input[type="submit"] {
@@ -299,7 +362,15 @@ form input[type="submit"]:focus {
 }
 
 form fieldset {
+    border: solid #222 1px;
     width: max-content;
+    min-width: 183px;
+    padding: 6px;
+    margin-bottom: 30px;
+}
+
+aside form fieldset {
+    border: solid #fff 1px;
 }
 
 /*== NAVBAR ==*/

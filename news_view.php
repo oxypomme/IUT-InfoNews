@@ -34,41 +34,43 @@ include "php/createNews.php";
     <main>
         <form method="post">
             <div>
-                <label>Nom :
-                    <input type="text" name="name" value=<?php echo '"' . $name . '"' ?> />
-                    <?php showError("name") ?>
-                </label>
-                <label class="select-container">Theme :
-                    <div>
-                        <select name="themes" id="themes" onfocus="onLoad();">
-                        </select>
-                    </div>
-                    <?php showError("theme") ?>
-                </label>
-                <label>Image d'en-tête :
-                    <input type="url" name="imgURL" value=<?php echo '"' . $imgURL . '"' ?> />
-                </label>
+                <input type="text" name="name" value=<?php echo '"' . $name . '"' ?> required />
+                <?php showError("name") ?>
+                <label for="name">Nom*</label>
             </div>
             <div>
-                <label>Texte :<br />
-                    <textarea name="text" rows="4" cols="50"><?php echo $text ?></textarea>
-                    <?php showError("text") ?>
-                </label>
-                <label class="select-container">Langue :
-                    <div>
-                        <select name="lang" value=<?php echo '"' . $lang . '"' ?>>
-                            <option value="fr">Français</option>
-                            <option value="en">English</option>
-                        </select>
-                    </div>
-                    <?php showError("lang") ?>
-                </label>
+                <div class="select-container">
+                    <select name="themes" id="themes" onfocus="onLoad();">
+                    </select>
+                </div>
+                <label for="themes">Theme*</label>
+                <?php showError("theme") ?>
+            </div>
+            <div>
+                <input type="url" name="imgURL" value=<?php echo '"' . $imgURL . '"' ?> />
+                <label for="imgURL">Image d'en-tête</label>
+            </div>
+            <div>
+                <textarea name="text" rows="4" cols="50" required><?php echo $text ?></textarea>
+                <?php showError("text") ?>
+                <label for="text">Texte*</label>
+            </div>
+            <div>
+                <div class="select-container">
+                    <select name="lang" value=<?php echo '"' . $lang . '"' ?>>
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <label>Langue</label>
+                <?php showError("lang") ?>
             </div>
             <?php showError("others") ?><br />
 
             <input type="submit" name="submit" value="Valider" />
             <input type="submit" name="cancel" value="Annuler" />
         </form>
+        Les champs marqués d'un * sont obligatoires.
     </main>
 
     <footer>

@@ -18,8 +18,8 @@
 
     <aside>
         <form id="filters" onchange="onFilterChange();">
-            <div>
-                Trier par :<br />
+            <fieldset>
+                <legend>Trier par</legend>
                 <label class="radio-container">
                     <input type="radio" name="sort" value="desc" checked />
                     <span></span>
@@ -30,16 +30,15 @@
                     <span></span>
                     Plus vieux d'abord
                 </label>
-            </div>
+            </fieldset>
             <div>
-                <label class="select-container">Theme :
-                    <div>
-                        <select name="themes" id="themes" onfocus="onThemeFocus();"></select>
-                    </div>
-                </label>
+                <div class="select-container">
+                    <select name="themes" id="themes" onfocus="onThemeFocus();"></select>
+                </div>
+                <label for="themes">Theme</label>
             </div>
-            <div>
-                Afficher :<br />
+            <fieldset>
+                <legend>Afficher</legend>
                 <label class="radio-container">
                     <input type="radio" name="lang" value="" checked />
                     <span></span>
@@ -55,7 +54,7 @@
                     <span></span>
                     Anglais
                 </label>
-            </div>
+            </fieldset>
         </form>
     </aside>
 
