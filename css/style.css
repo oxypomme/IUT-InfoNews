@@ -298,6 +298,10 @@ form input[type="submit"]:focus {
     transition: border-color 0.25s ease-in-out;
 }
 
+form fieldset {
+    width: max-content;
+}
+
 /*== NAVBAR ==*/
 
 nav>ul {

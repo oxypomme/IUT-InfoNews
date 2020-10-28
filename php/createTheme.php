@@ -60,7 +60,6 @@ if (isset($_GET['ID'])) {
     $result = file_get_contents($base_path . '?ID=' . htmlentities($_GET['ID']));
     if ($result !== false) {
         $themes = json_decode($result);
-        var_dump($themes);
         if ($themes->sucess) {
             $themes = $themes->themes[0];
         }

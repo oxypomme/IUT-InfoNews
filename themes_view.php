@@ -12,10 +12,11 @@ include "php/createTheme.php";
 
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Info News - Création d'un theme</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" media="screen and (max-width:720px)" href="css/mobile.css" />
+    <script src="js/apiController.js"></script>
 </head>
 
 <body>
@@ -26,7 +27,8 @@ include "php/createTheme.php";
 
     <main>
         <form method="post">
-            <div>Nom :</br>
+            <fieldset>
+                <legend>Nom</legend>
                 <label>Français :
                     <input type="text" name="frname" value=<?php echo '"' . $frname . '"' ?> />
                 </label>
@@ -35,7 +37,7 @@ include "php/createTheme.php";
                     <input type="text" name="enname" value=<?php echo '"' . $enname . '"' ?> />
                 </label>
                 <?php showError("enname") ?>
-            </div>
+            </fieldset>
             <div>
                 <label>Couleur :
                     <input type="color" name="color" value=<?php echo '"' . ($color ? $color : '#ffffff') . '"' ?> />
