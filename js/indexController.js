@@ -6,6 +6,7 @@ function setupThemes(array) {
 
     var blankOption = document.createElement("option");
     blankOption.selected = true;
+    blankOption.innerHTML = "Tous";
     document.getElementById('themes').appendChild(blankOption);
 
     array.forEach(theme => {
