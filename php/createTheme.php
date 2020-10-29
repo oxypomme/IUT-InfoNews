@@ -63,7 +63,7 @@ if (isset($_GET['ID'])) {
         if ($themes->sucess) {
             $themes = $themes->themes[0];
         }
-        //Insert condition
+        //TODO: Admin condition
         $label = json_decode($themes->label);
         $frname = $label->fr;
         $enname = $label->en;

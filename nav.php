@@ -13,7 +13,7 @@
             echo '<li><a href="themes_view.php">Creer un theme</a></li>';
 
             include "api/connect.php";
-            $result = $objPdo->prepare("SELECT id_redactor, last_name, first_name FROM redactor WHERE id_redactor = '$id' LIMIT 1");
+            $result = $objPdo->prepare("SELECT last_name, first_name FROM redactor WHERE id_redactor = '$id' LIMIT 1");
             $result->execute();
             foreach ($result as $row) {
                 echo '<li class="dropbtn connect dropbtn-min" onclick="showDropdown(this); updateLangDropdown();"> ' . $row['last_name'] . ' ' . $row['first_name'];

@@ -44,6 +44,18 @@ async function setupNews(array) {
         var theme = document.createElement("h4");
         theme.style.color = news.theme.color || "#333";
         theme.innerHTML = news.theme;
+        var sessionvars = await jsonRequest("api/session.php?Name=idlogin");
+        if (sessionvars.idlogin && sessionvars.idlogin < 3) { //TODO: Admin condition
+            theme.style.cursor = "pointer";
+            theme.classList.toggle("tooltip");
+            theme.onclick = function () {
+                window.location.href = "themes_view.php?ID=" + news.theme;
+            };
+            let tooltip = document.createElement("span");
+            tooltip.classList.toggle("tooltiptext");
+            tooltip.innerHTML = "Cliquer pour éditer le theme";
+            theme.appendChild(tooltip);
+        }
         header.appendChild(theme);
 
         var title = document.createElement("h3");
@@ -61,7 +73,6 @@ async function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
-        var sessionvars = await jsonRequest("api/session.php?Name=idlogin");
         if (sessionvars.idlogin == news.redactor.id) {
             let div = document.createElement("div");
             div.classList.add("buttonsholder");

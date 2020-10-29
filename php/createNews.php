@@ -69,7 +69,7 @@ if (isset($_GET['ID'])) {
             $news = $news->news[0];
             if (session_id() == "")
                 session_start();
-            if ($_SESSION['login'] != $news->redactor) {
+            if ($_SESSION['login'] != $news->redactor) { //TODO: Admin condition
                 echo "<script lang=\"javascript\" type=\"text/javascript\">
                     alert(\"Vous n'êtes pas autorisé à modifier cet article !\");
                     window.location.href = 'index.php';
