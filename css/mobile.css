@@ -48,3 +48,11 @@ section {
 }
 
 /* TODO fix dropdown */
+.dropdown-content {
+    background-color: #111;
+    transform: translateX(0);
+    position: absolute;
+    top: 150px;
+    left: 0px;
+    width: 100%;
+}
