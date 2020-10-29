@@ -10,7 +10,7 @@ $inputErrors = array(
 $name = isset($_POST["name"]) ? htmlentities($_POST['name']) : '';
 $theme = isset($_POST["themes"]) ? htmlentities($_POST['themes']) : '';
 $text = isset($_POST["text"]) ? htmlentities($_POST['text']) : '';
-$lang = isset($_POST["lang"]) ? htmlentities($_POST['lang']) : ($_COOKIE['lang'] ?: 'fr');
+$lang = isset($_POST["lang"]) ? htmlentities($_POST['lang']) : (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fr');
 $imgURL = isset($_POST["imgURL"]) ? htmlentities($_POST['imgURL']) : '';
 
 function showError($errorName)
@@ -21,7 +21,8 @@ function showError($errorName)
 
 include 'models/newsClass.php';
 
-$base_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI']) . '/api/news.php';
+$api_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 1) . '/api';
+$base_path = $api_path . '/news.php';
 
 if (session_id() == "")
     session_start();
@@ -67,14 +68,34 @@ if (isset($_GET['ID'])) {
         $news = json_decode($result);
         if ($news->sucess) {
             $news = $news->news[0];
-            if (session_id() == "")
-                session_start();
-            if ($_SESSION['login'] != $news->redactor) { //TODO: Admin condition
+
+            try {
+                if (session_id() == "")
+                    session_start();
+                if ($_SESSION['login'] != $news->redactor) {
+                    $result = file_get_contents($api_path . '/redactors.php?ID=' . $_SESSION['login']);
+                    if ($result !== false) {
+                        $redacs = json_decode($result);
+                        if ($redacs->sucess) {
+                            $redacs = $redacs->redactors[0];
+                            if ($redacs->role != 1) {
+                                throw new Exception('Permission denied');
+                            }
+                        } else {
+                            throw new Exception($redacs->sucess);
+                        }
+                    } else {
+                        throw new Exception('HTTP error');
+                    }
+                }
+            } catch (Exception $e) {
                 echo "<script lang=\"javascript\" type=\"text/javascript\">
-                    alert(\"Vous n'êtes pas autorisé à modifier cet article !\");
+                    alert(\"Une erreur est survenue : " . $e->getMessage() . "\");
                     window.location.href = 'index.php';
                 </script>";
+                exit;
             }
+
             $theme = $news->theme;
             $content = json_decode($news->content);
             $name = $content->title;

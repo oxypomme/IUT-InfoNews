@@ -10,12 +10,13 @@
             $id = $_SESSION['login'];
 
             echo '<li><a href="news_view.php">Creer un article</a></li>';
-            echo '<li><a href="themes_view.php">Creer un theme</a></li>';
 
             include "api/connect.php";
-            $result = $objPdo->prepare("SELECT last_name, first_name FROM redactor WHERE id_redactor = '$id' LIMIT 1");
+            $result = $objPdo->prepare("SELECT last_name, first_name, `role` FROM redactor WHERE id_redactor = '$id' LIMIT 1");
             $result->execute();
             foreach ($result as $row) {
+                if ($row['role'] == 1)
+                    echo '<li><a href="themes_view.php">Creer un theme</a></li>';
                 echo '<li class="dropbtn connect dropbtn-min" onclick="showDropdown(this); updateLangDropdown();"> ' . $row['last_name'] . ' ' . $row['first_name'];
                 echo '<ul class="dropdown-content">';
                 echo '<li><a href="#" onclick="setIframe(\'php/createAccount.php?ID=' . $id . '\', 240)">Profil</a></li>';

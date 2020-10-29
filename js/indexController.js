@@ -45,16 +45,20 @@ async function setupNews(array) {
         theme.style.color = news.theme.color || "#333";
         theme.innerHTML = news.theme;
         var sessionvars = await jsonRequest("api/session.php?Name=idlogin");
-        if (sessionvars.idlogin && sessionvars.idlogin < 3) { //TODO: Admin condition
-            theme.style.cursor = "pointer";
-            theme.classList.toggle("tooltip");
-            theme.onclick = function () {
-                window.location.href = "themes_view.php?ID=" + news.theme;
-            };
-            let tooltip = document.createElement("span");
-            tooltip.classList.toggle("tooltiptext");
-            tooltip.innerHTML = "Cliquer pour éditer le theme";
-            theme.appendChild(tooltip);
+        if (sessionvars.idlogin) {
+            var curr_redactor = await getRedactors(sessionvars.idlogin);
+            curr_redactor = curr_redactor[0];
+            if (curr_redactor.role == 1) {
+                theme.style.cursor = "pointer";
+                theme.classList.toggle("tooltip");
+                theme.onclick = function () {
+                    window.location.href = "themes_view.php?ID=" + news.theme;
+                };
+                let tooltip = document.createElement("span");
+                tooltip.classList.toggle("tooltiptext");
+                tooltip.innerHTML = "Cliquer pour éditer le theme";
+                theme.appendChild(tooltip);
+            }
         }
         header.appendChild(theme);
 
@@ -73,7 +77,7 @@ async function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
-        if (sessionvars.idlogin == news.redactor.id) { //TODO: Admin condition
+        if (sessionvars.idlogin && (curr_redactor.id == news.redactor.id || curr_redactor.role == 1)) {
             let div = document.createElement("div");
             div.classList.add("buttonsholder");
             let delBtn = document.createElement("button");

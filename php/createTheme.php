@@ -18,7 +18,35 @@ function showError($errorName)
         echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
 }
 
-$base_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 1) . '/api/themes.php';
+$api_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 1) . '/api';
+$base_path = $api_path . '/themes.php';
+
+try {
+    if (session_id() == "")
+        session_start();
+    $result_redac = file_get_contents($api_path . '/redactors.php?ID=' . $_SESSION['login']);
+    if ($result_redac !== false) {
+        $redacs = json_decode($result_redac);
+        if ($redacs->sucess) {
+            $redacs = $redacs->redactors[0];
+            if ($redacs->role != 1) {
+                throw new Exception('Permission denied');
+            }
+        } else {
+            throw new Exception($redacs->sucess);
+        }
+    } else {
+        throw new Exception('HTTP error');
+    }
+    unset($result_redac);
+    unset($redacs);
+} catch (Exception $e) {
+    echo "<script lang=\"javascript\" type=\"text/javascript\">
+        alert(\"Une erreur est survenue : " . $e->getMessage() . "\");
+        window.location.href = 'index.php';
+    </script>";
+    exit;
+}
 
 if (session_id() == "")
     session_start();
@@ -62,12 +90,12 @@ if (isset($_GET['ID'])) {
         $themes = json_decode($result);
         if ($themes->sucess) {
             $themes = $themes->themes[0];
+
+            $label = json_decode($themes->label);
+            $frname = $label->fr;
+            $enname = $label->en;
+            $color = $themes->color;
+            $iconURL = $themes->iconURL;
         }
-        //TODO: Admin condition
-        $label = json_decode($themes->label);
-        $frname = $label->fr;
-        $enname = $label->en;
-        $color = $themes->color;
-        $iconURL = $themes->iconURL;
     }
 }

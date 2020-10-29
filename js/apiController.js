@@ -1,10 +1,11 @@
 class Redactor {
-    constructor(id, lname, fname, mail) {
+    constructor(id, lname, fname, mail, role) {
         this.id = id;
 
         this.lname = lname;
         this.fname = fname;
         this.mail = mail;
+        this.role = role;
     }
 
     toString() {
@@ -72,7 +73,7 @@ function jsonToRedactors(docJSON) {
     var redactorList = new Array();
     if (docJSON['redactors'] != null)
         docJSON['redactors'].forEach(redactor => {
-            redactorList.push(new Redactor(redactor.id, redactor.lname, redactor.fname, redactor.mail));
+            redactorList.push(new Redactor(redactor.id, redactor.lname, redactor.fname, redactor.mail, redactor.role));
         });
     return redactorList;
 }
