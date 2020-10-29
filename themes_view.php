@@ -5,7 +5,10 @@
 if (session_id() == "")
     session_start();
 if (!isset($_SESSION['login'])) {
-    header("Location:php/login.php?target=themes_view.php");
+    echo "<script lang=\"javascript\" type=\"text/javascript\">
+            alert(\"Vous dezvez être connecté pour accéder à cette page.\");
+            window.location.href = 'index.php';
+        </script>";
 }
 include "php/createTheme.php";
 ?>

@@ -1,4 +1,7 @@
 <?php
+if (!is_dir('models/'))
+    header('Location:../index.php');
+
 $inputErrors = array(
     'name' => false,
     'theme' => false,

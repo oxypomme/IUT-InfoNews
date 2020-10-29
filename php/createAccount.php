@@ -16,7 +16,6 @@ function showError($errorName)
 {
     if ($GLOBALS['inputErrors'][$errorName])
         echo '<span id="' . $errorName . '" class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
-    //echo $GLOBALS['inputErrors'][$errorName];
 }
 
 $base_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/api/redactors.php';

@@ -45,10 +45,10 @@ async function setupNews(array) {
         theme.style.color = news.theme.color || "#333";
         theme.innerHTML = news.theme;
         var sessionvars = await jsonRequest("api/session.php?Name=idlogin");
-        if (sessionvars.idlogin) {
+        if (sessionvars.idlogin) { // Check if a user is logged
             var curr_redactor = await getRedactors(sessionvars.idlogin);
             curr_redactor = curr_redactor[0];
-            if (curr_redactor.role == 1) {
+            if (curr_redactor.role == 1) { // Check if it's an admin
                 theme.style.cursor = "pointer";
                 theme.classList.toggle("tooltip");
                 theme.onclick = function () {
@@ -77,7 +77,7 @@ async function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
-        if (sessionvars.idlogin && (curr_redactor.id == news.redactor.id || curr_redactor.role == 1)) {
+        if (sessionvars.idlogin && (curr_redactor.id == news.redactor.id || curr_redactor.role == 1)) { // Check if a user is logged and if it's the creator, or an admin
             let div = document.createElement("div");
             div.classList.add("buttonsholder");
             let delBtn = document.createElement("button");
