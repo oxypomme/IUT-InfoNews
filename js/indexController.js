@@ -18,12 +18,12 @@ function setupThemes(array) {
     });
 }
 
-function setupNews(array) {
+async function setupNews(array) {
     while (document.getElementById('news').childNodes.length > 0)
         document.getElementById('news').removeChild(
             document.getElementById('news').childNodes[0]
         );
-    array.forEach(news => {
+    for (const news of array) {
         var lig = document.createElement("article");
 
         var elmnt;
@@ -61,33 +61,29 @@ function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
-        var promise = jsonRequest("api/session.php?Name=idlogin", true);
-        promise.then((sessionvars) => {
-            if (sessionvars.idlogin == news.redactor.id) {
-                let div = document.createElement("div");
-                div.classList.add("buttonsholder");
-                let delBtn = document.createElement("button");
-                delBtn.innerHTML = "Supprimer";
-                delBtn.onclick = function () {
-                    let delpromise = jsonRequest("api/news.php", true, "POST", "method=DELETE&ID=" + news.id)
-                    delpromise.then(() => {
-                        onFilterChange();
-                    });
-                };
-                div.appendChild(delBtn);
-                let editBtn = document.createElement("button");
-                editBtn.innerHTML = "Editer";
-                editBtn.onclick = function () {
-                    window.location.href = "news_view.php?ID=" + news.id;
-                };
-                div.appendChild(editBtn);
-                footer.appendChild(div);
-            }
-            lig.appendChild(footer);
+        var sessionvars = await jsonRequest("api/session.php?Name=idlogin", true);
+        if (sessionvars.idlogin == news.redactor.id) {
+            let div = document.createElement("div");
+            div.classList.add("buttonsholder");
+            let delBtn = document.createElement("button");
+            delBtn.innerHTML = "Supprimer";
+            delBtn.onclick = async function () {
+                await jsonRequest("api/news.php", true, "POST", "method=DELETE&ID=" + news.id);
+                onFilterChange();
+            };
+            div.appendChild(delBtn);
+            let editBtn = document.createElement("button");
+            editBtn.innerHTML = "Editer";
+            editBtn.onclick = function () {
+                window.location.href = "news_view.php?ID=" + news.id;
+            };
+            div.appendChild(editBtn);
+            footer.appendChild(div);
+        }
+        lig.appendChild(footer);
 
-            document.getElementById('news').appendChild(lig);
-        });
-    });
+        document.getElementById('news').appendChild(lig);
+    };
 }
 
 function getRadio(radios) {
@@ -111,16 +107,10 @@ function onChangeLanguage() {
     onThemeFocus();
 }
 
-function onFilterChange() {
-    let promise = getNews(document.getElementById("themes").value, getRadio(document.getElementsByName('sort')), getRadio(document.getElementsByName('lang')), true);
-    promise.then((value) => {
-        setupNews(value);
-    });
+async function onFilterChange() {
+    setupNews(await getNews(document.getElementById("themes").value, getRadio(document.getElementsByName('sort')), getRadio(document.getElementsByName('lang')), true));
 }
 
-function onThemeFocus() {
-    let promise = getThemes("", true);
-    promise.then((value) => {
-        setupThemes(value);
-    });
+async function onThemeFocus() {
+    setupThemes(await getThemes("", true));
 }

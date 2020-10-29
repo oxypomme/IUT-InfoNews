@@ -77,17 +77,12 @@ function jsonToRedactors(docJSON) {
     return redactorList;
 }
 
-function getRedactors(id = "", asyncProc = false) {
+async function getRedactors(id = "", asyncProc = false) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/redactors.php?ID=" + id));
         return jsonToRedactors(docJSON);
     } else {
-        return new Promise(resolve => {
-            let promise = jsonRequest("api/redactors.php?ID=" + id, true);
-            promise.then((value) => {
-                resolve(jsonToRedactors(value));
-            });
-        });
+        return jsonToRedactors(await jsonRequest("api/redactors.php?ID=" + id, true));
     }
 }
 
@@ -100,17 +95,12 @@ function jsonToTheme(docJSON) {
     return themeList;
 }
 
-function getThemes(id = "", asyncProc = false) {
+async function getThemes(id = "", asyncProc = false) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/themes.php?ID=" + id));
         return jsonToTheme(docJSON);
     } else {
-        return new Promise(resolve => {
-            let promise = jsonRequest("api/themes.php?ID=" + id, true);
-            promise.then((value) => {
-                resolve(jsonToTheme(value));
-            });
-        });
+        return jsonToTheme(await jsonRequest("api/themes.php?ID=" + id, true));
     }
 }
 
@@ -126,17 +116,12 @@ async function jsonToNews(docJSON) {
     return newsList;
 }
 
-function getNews(theme = "", sort = "", lang = "", asyncProc = false) {
+async function getNews(theme = "", sort = "", lang = "", asyncProc = false) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang));
         jsonToNews(docJSON);
     } else {
-        return new Promise(resolve => {
-            let promise = jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, true);
-            promise.then((value) => {
-                resolve(jsonToNews(value));
-            });
-        });
+        return jsonToNews(await jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, true));
     }
 }
 

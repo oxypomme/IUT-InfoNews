@@ -26,9 +26,6 @@ function onChangeLanguage() {
     onLoad();
 }
 
-function onLoad() {
-    let promise = getThemes("", true);
-    promise.then((value) => {
-        setupThemes(value);
-    });
+async function onLoad() {
+    setupThemes(await getThemes("", true));
 }
