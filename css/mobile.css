@@ -1,5 +1,10 @@
+main {
+    overflow-x: hidden;
+}
+
 h1 {
     margin-top: 15px;
+    text-align: center;
 }
 
 aside {
@@ -35,6 +40,11 @@ nav>ul>.connect {
 nav>ul>li>* {
     height: 30px;
     padding: 0;
+}
+
+h1,
+section {
+    padding-left: 0 !important;
 }
 
 /* TODO fix dropdown */
