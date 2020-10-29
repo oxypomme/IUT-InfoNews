@@ -364,11 +364,18 @@ form textarea:focus~label {
     color: var(--secondary-color);
 }
 
-form .select-container~label,
 form .color-container~label,
+form .select-container~label,
 #createPass {
     top: -20px;
     font-size: 14px;
+    color: #111;
+}
+
+aside>form .select-container~label {
+    top: -20px;
+    left: 10px;
+    font-size: inherit;
     color: #111;
 }
 
@@ -399,15 +406,16 @@ form input[type="submit"]:focus {
 }
 
 form fieldset {
-    border: solid #222 1px;
+    border: none;
+    border-left: solid var(--secondary-color) 1px;
     width: max-content;
     min-width: 183px;
     padding: 6px;
     margin-bottom: 30px;
 }
 
-aside form fieldset {
-    border: solid #fff 1px;
+form fieldset legend {
+    color: var(--secondary-color);
 }
 
 /*== NAVBAR ==*/

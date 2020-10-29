@@ -12,7 +12,7 @@ include "php/createTheme.php";
 
 <head>
     <meta charset="UTF-8">
-    <title>Info News - Création d'un theme</title>
+    <title>Info News - Création de Theme</title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" media="screen and (max-width:720px)" href="css/mobile.css" />
@@ -29,7 +29,7 @@ include "php/createTheme.php";
     <main>
         <form method="post">
             <fieldset>
-                <legend>Nom</legend>
+                <legend>Noms</legend>
                 <div>
                     <input type="text" name="frname" value=<?= '"' . $frname . '"' ?> required />
                     <label>Français*</label>
