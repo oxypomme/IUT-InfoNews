@@ -10,7 +10,7 @@ $inputErrors = array(
 $name = isset($_POST["name"]) ? htmlentities($_POST['name']) : '';
 $theme = isset($_POST["themes"]) ? htmlentities($_POST['themes']) : '';
 $text = isset($_POST["text"]) ? htmlentities($_POST['text']) : '';
-$lang = isset($_POST["lang"]) ? htmlentities($_POST['lang']) : '';
+$lang = isset($_POST["lang"]) ? htmlentities($_POST['lang']) : ($_COOKIE['lang'] ?: 'fr');
 $imgURL = isset($_POST["imgURL"]) ? htmlentities($_POST['imgURL']) : '';
 
 function showError($errorName)

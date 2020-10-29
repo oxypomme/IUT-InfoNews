@@ -13,7 +13,11 @@ function showDropdown(elt) {
 }
 
 function updateLangDropdown() {
-    var element = document.getElementById("nav-" + getCookie('lang'));
+    var element;
+    if (getCookie('lang') == "")
+        element = document.getElementById("nav-fr");
+    else
+        element = document.getElementById("nav-" + getCookie('lang'));
     if (element != null && element.classList != null)
         element.classList.toggle("active");
 }

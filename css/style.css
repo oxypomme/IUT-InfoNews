@@ -295,6 +295,13 @@ form .select-container:hover {
     line-height: 2em;
 }
 
+aside>form .select-container~label {
+    top: -20px;
+    left: 10px;
+    font-size: inherit;
+    color: var(--secondary-color);
+}
+
 form select option {
     background-color: transparent;
     color: rgb(134, 134, 134);
@@ -318,9 +325,6 @@ form div label {
     color: #777;
 }
 
-aside>form div label {
-    color: white !important;
-}
 
 form input[type="text"],
 form input[type="url"],
@@ -372,13 +376,6 @@ form .select-container~label,
     color: #111;
 }
 
-aside>form .select-container~label {
-    top: -20px;
-    left: 10px;
-    font-size: inherit;
-    color: #111;
-}
-
 .color-container input[type="color"] {
     margin-left: 10px;
 }
@@ -395,7 +392,7 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-    background-color: #ef921c;
+    background-color: var(--secondary-color);
     color: #fff;
     transition: background-color 0.25s ease-in-out;
 }
@@ -501,9 +498,10 @@ iframe {
     transition: visibility 0s, opacity 0.1s linear;
 }
 
-.dropdown-content li:last-child a {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+.dropdown-content li:last-child a,
+.dropdown-content li:last-child.active {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 .dropdown-content a {
