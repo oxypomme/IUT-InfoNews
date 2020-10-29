@@ -61,14 +61,14 @@ async function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
-        var sessionvars = await jsonRequest("api/session.php?Name=idlogin", true);
+        var sessionvars = await jsonRequest("api/session.php?Name=idlogin");
         if (sessionvars.idlogin == news.redactor.id) {
             let div = document.createElement("div");
             div.classList.add("buttonsholder");
             let delBtn = document.createElement("button");
             delBtn.innerHTML = "Supprimer";
             delBtn.onclick = async function () {
-                await jsonRequest("api/news.php", true, "POST", "method=DELETE&ID=" + news.id);
+                await jsonRequest("api/news.php", "POST", "method=DELETE&ID=" + news.id);
                 onFilterChange();
             };
             div.appendChild(delBtn);
@@ -108,9 +108,9 @@ function onChangeLanguage() {
 }
 
 async function onFilterChange() {
-    setupNews(await getNews(document.getElementById("themes").value, getRadio(document.getElementsByName('sort')), getRadio(document.getElementsByName('lang')), true));
+    setupNews(await getNews(document.getElementById("themes").value, getRadio(document.getElementsByName('sort')), getRadio(document.getElementsByName('lang'))));
 }
 
 async function onThemeFocus() {
-    setupThemes(await getThemes("", true));
+    setupThemes(await getThemes(""));
 }

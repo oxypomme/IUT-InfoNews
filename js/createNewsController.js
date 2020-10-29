@@ -27,5 +27,5 @@ function onChangeLanguage() {
 }
 
 async function onLoad() {
-    setupThemes(await getThemes("", true));
+    setupThemes(await getThemes(""));
 }

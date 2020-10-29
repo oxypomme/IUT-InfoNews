@@ -46,7 +46,7 @@ class News {
     }
 }
 
-function jsonRequest(address, asyncProc = false, reqType = "GET", content = '') {
+function jsonRequest(address, reqType = "GET", content = '', asyncProc = true) {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
     var promise;
     if (asyncProc) {
@@ -77,12 +77,12 @@ function jsonToRedactors(docJSON) {
     return redactorList;
 }
 
-async function getRedactors(id = "", asyncProc = false) {
+async function getRedactors(id = "", asyncProc = true) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/redactors.php?ID=" + id));
         return jsonToRedactors(docJSON);
     } else {
-        return jsonToRedactors(await jsonRequest("api/redactors.php?ID=" + id, true));
+        return jsonToRedactors(await jsonRequest("api/redactors.php?ID=" + id));
     }
 }
 
@@ -95,12 +95,12 @@ function jsonToTheme(docJSON) {
     return themeList;
 }
 
-async function getThemes(id = "", asyncProc = false) {
+async function getThemes(id = "", asyncProc = true) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/themes.php?ID=" + id));
         return jsonToTheme(docJSON);
     } else {
-        return jsonToTheme(await jsonRequest("api/themes.php?ID=" + id, true));
+        return jsonToTheme(await jsonRequest("api/themes.php?ID=" + id));
     }
 }
 
@@ -108,20 +108,20 @@ async function jsonToNews(docJSON) {
     var newsList = new Array();
     if (docJSON['news'] != null)
         for (const news of docJSON['news']) {
-            let themes = await getThemes(news.theme, true);
-            let redactors = await getRedactors(news.redactor, true);
+            let themes = await getThemes(news.theme);
+            let redactors = await getRedactors(news.redactor);
 
             newsList.push(new News(news.id, news.content, themes[0], redactors[0], news.date, news.lang));
         };
     return newsList;
 }
 
-async function getNews(theme = "", sort = "", lang = "", asyncProc = false) {
+async function getNews(theme = "", sort = "", lang = "", asyncProc = true) {
     if (!asyncProc) {
         var docJSON = JSON.parse(jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang));
         jsonToNews(docJSON);
     } else {
-        return jsonToNews(await jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang, true));
+        return jsonToNews(await jsonRequest("api/news.php?Theme=" + theme + "&Sort=" + sort + "&Lang=" + lang));
     }
 }
 
