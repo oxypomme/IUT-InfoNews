@@ -16,7 +16,7 @@
             $result = $objPdo->prepare("SELECT id_redactor, last_name, first_name FROM redactor WHERE id_redactor = '$id' LIMIT 1");
             $result->execute();
             foreach ($result as $row) {
-                echo '<li class="dropbtn connect" onclick="showDropdown(this); updateLangDropdown();"> ' . $row['last_name'] . ' ' . $row['first_name'];
+                echo '<li class="dropbtn connect dropbtn-min" onclick="showDropdown(this); updateLangDropdown();"> ' . $row['last_name'] . ' ' . $row['first_name'];
                 echo '<ul class="dropdown-content">';
                 echo '<li><a href="#" onclick="setIframe(\'php/createAccount.php?ID=' . $id . '\', 240)">Profil</a></li>';
                 echo '<li><a href="#" onclick="unlogAccount()">Déconnexion</a></li>';
@@ -25,7 +25,7 @@
             echo '</ul>';
             echo '</li>';
         } else {
-            echo '<li class="dropbtn connect" onclick="showDropdown(this); updateLangDropdown();"> Compte';
+            echo '<li class="dropbtn connect dropbtn-min" onclick="showDropdown(this); updateLangDropdown();"> Compte';
             echo '<ul class="dropdown-content">';
             echo '<li><a href="#" onclick="setIframe(\'php/login.php\', 160)">Connexion</a></li>';
             echo '<li><a href="#" onclick="setIframe(\'php/createAccount.php\', 240)">Créer un compte</a></li>';

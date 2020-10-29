@@ -479,6 +479,10 @@ iframe {
     text-align: center;
 }
 
+.dropbtn.dropbtn-min {
+    min-width: 150px;
+}
+
 .dropdown-content {
     display: block;
     visibility: hidden;
