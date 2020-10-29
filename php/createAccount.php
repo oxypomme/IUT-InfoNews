@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
                     } else
                         // header('Location:login.php');
                         echo "<script lang=\"javascript\" type=\"text/javascript\">
-                        parent.closeIFrame();
+                        parent.document.location.reload();
                         </script>";
                 } else
                     $inputErrors['passwd'] = 'Mot de passe vide ou incorrect';
@@ -90,7 +90,7 @@ if (session_id() == "")
 if (isset($_SESSION["login"]) and !isset($_GET['ID']))
     // header('Location:../index.php');
     echo "<script lang=\"javascript\" type=\"text/javascript\">
-    parent.closeIFrame();
+    parent.document.location.reload();
     </script>";
 
 ?>

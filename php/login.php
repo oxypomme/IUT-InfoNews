@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
                 } else
                     // header('Location:../index.php');
                     echo "<script lang=\"javascript\" type=\"text/javascript\">
-                    parent.closeIFrame();
+                    parent.document.location.reload();
                     </script>";
             } else
                 echo '<span class="error">Adresse mail ou mot de passe incorect</span>';
@@ -31,7 +31,7 @@ if (isset($_SESSION["login"])) {
     // else
     //     header('Location:../index.php');
     echo "<script lang=\"javascript\" type=\"text/javascript\">
-    parent.closeIFrame();
+    parent.document.location.reload();
     </script>";
 }
 
