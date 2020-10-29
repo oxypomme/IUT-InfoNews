@@ -73,7 +73,7 @@ async function setupNews(array) {
         icon.src = "res/" + news.lang + ".png";
         icon.alt = news.lang;
         footer.appendChild(icon);
-        if (sessionvars.idlogin == news.redactor.id) {
+        if (sessionvars.idlogin == news.redactor.id) { //TODO: Admin condition
             let div = document.createElement("div");
             div.classList.add("buttonsholder");
             let delBtn = document.createElement("button");
