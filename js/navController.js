@@ -55,9 +55,9 @@ function unlogAccount() {
 }
 
 function closeIFrame() {
-    document.getElementById('iframeLog').remove();
+    document.getElementById('iframeLog').src = "";
+    document.getElementById('iframeLog').style.display = "none";
     isIframeShown = false;
-    document.location.reload();
 }
 
 function setIframe(link, height) {
