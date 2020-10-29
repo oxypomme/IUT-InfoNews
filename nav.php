@@ -3,13 +3,15 @@
 <nav>
     <ul>
         <li><a href="index.php">Accueil</a></li>
-        <li><a href="news_view.php">Creer un article</a></li>
-        <li><a href="themes_view.php">Creer un theme</a></li>
         <?php
         if (session_id() == "")
             session_start();
         if (isset($_SESSION['login'])) {
             $id = $_SESSION['login'];
+
+            echo '<li><a href="news_view.php">Creer un article</a></li>';
+            echo '<li><a href="themes_view.php">Creer un theme</a></li>';
+
             include "api/connect.php";
             $result = $objPdo->prepare("SELECT id_redactor, last_name, first_name FROM redactor WHERE id_redactor = '$id' LIMIT 1");
             $result->execute();
