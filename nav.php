@@ -1,9 +1,11 @@
+<?php include_once 'lang/lang.php' ?>
 <script src="js/navController.js"></script>
 
 <nav>
     <ul>
-        <li><a href="index.php">Accueil</a></li>
+        <li><a href="index.php"><?= getTrad('home') ?></a></li>
         <?php
+
         if (session_id() == "")
             session_start();
         if (isset($_SESSION['login'])) {

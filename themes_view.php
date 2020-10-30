@@ -6,7 +6,7 @@ if (session_id() == "")
     session_start();
 if (!isset($_SESSION['login'])) {
     echo "<script lang=\"javascript\" type=\"text/javascript\">
-            alert(\"Vous dezvez être connecté pour accéder à cette page.\");
+            alert(\"Vous devez être connecté pour accéder à cette page.\");
             window.location.href = 'index.php';
         </script>";
 }
