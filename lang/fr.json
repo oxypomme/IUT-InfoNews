@@ -39,7 +39,7 @@
     "requiredFieldText":"Les champs marqués d'un * sont obligatoires.",
     "mustLoggedin": "Vous devez être connecté pour accéder à cette page.",
     "baseError": "Une erreur est survenue : ",
-    "httpError": "Une erreur HTTP est sruvenue.",
+    "httpError": "Une erreur HTTP est survenue.",
     "colorError": "Couleur invalide",
     "nameError": "Nom(s) vide(s) ou invalide(s)",
     "langError": "Langue incorrecte",
