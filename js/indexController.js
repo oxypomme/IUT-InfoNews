@@ -41,11 +41,7 @@ function setupNews(array) {
 }
 
 function setDetailedNews(id) {
-    // detailedNews
-    while (document.getElementById('detailedNews').childNodes.length > 0)
-        document.getElementById('detailedNews').removeChild(
-            document.getElementById('detailedNews').childNodes[0]
-        );
+    clearDetailedNews()
 
     for (const news of newsTab) {
         if (news.id == id) {
@@ -56,6 +52,13 @@ function setDetailedNews(id) {
             document.getElementById('detailedNews').appendChild(lig);
         }
     };
+}
+
+function clearDetailedNews() {
+    while (document.getElementById('detailedNews').childNodes.length > 0)
+        document.getElementById('detailedNews').removeChild(
+            document.getElementById('detailedNews').childNodes[0]
+        );
 }
 
 async function CreateNewsArticle(lig, news) {
@@ -118,6 +121,7 @@ async function CreateNewsArticle(lig, news) {
         delBtn.onclick = async function () {
             await jsonRequest("api/news.php", "POST", "method=DELETE&ID=" + news.id);
             onFilterChange();
+            clearDetailedNews()
         };
         div.appendChild(delBtn);
         let editBtn = document.createElement("button");
