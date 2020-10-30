@@ -51,5 +51,6 @@
     "loginInUse": "This email is already in use",
     "fnameError": "Empty or invalid firstname",
     "lnameError": "Empty or invalid lastname",
-    "mailPasswdError": "Invalid email or password"
+    "mailPasswdError": "Invalid email or password",
+    "invalid": "Invalid"
 }
