@@ -48,5 +48,6 @@
     "passwdError": "Mot de passe vide ou incorrect",
     "loginError": "Mail vide ou incorrect",
     "fnameError": "Prénom vide ou incorrect",
-    "lnameError": "Nom vide ou incorrect"
+    "lnameError": "Nom vide ou incorrect",
+    "mailPasswdError": "Adresse mail ou mot de passe incorect"
 }

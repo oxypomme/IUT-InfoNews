@@ -48,5 +48,6 @@
     "passwdError": "",
     "loginError": "",
     "fnameError": "",
-    "lnameError": ""
+    "lnameError": "",
+    "mailPasswdError": ""
 }
