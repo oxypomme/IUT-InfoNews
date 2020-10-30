@@ -36,6 +36,7 @@
     "weak": "Faible",
     "mid": "Moyen",
     "strong": "Fort",
+    "invalid":"Invalide",
     "requiredFieldText":"Les champs marqués d'un * sont obligatoires.",
     "mustLoggedin": "Vous devez être connecté pour accéder à cette page.",
     "baseError": "Une erreur est survenue : ",
