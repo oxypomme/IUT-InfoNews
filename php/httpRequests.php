@@ -1,4 +1,6 @@
 <?php
+$api_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 1) . '/api/';
+
 function httpRequest($path, $data, $method = 'POST')
 {
     $options = array(
@@ -9,5 +11,5 @@ function httpRequest($path, $data, $method = 'POST')
         )
     );
     $context = stream_context_create($options);
-    return file_get_contents($path, false, $context);
+    return file_get_contents($GLOBALS['api_path'] . $path, false, $context);
 }

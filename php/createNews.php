@@ -23,9 +23,7 @@ function showError($errorName)
 }
 
 include 'models/newsClass.php';
-
-$api_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 1) . '/api';
-$base_path = $api_path . '/news.php';
+include 'httpRequests.php';
 
 if (session_id() == "")
     session_start();
@@ -34,8 +32,6 @@ if (isset($_POST['submit'])) {
         if (isset($_POST['themes']) && !empty($_POST['themes'])) {
             if (isset($_POST['text']) && !empty($_POST['text'])) {
                 if (isset($_POST['lang']) && !empty($_POST['lang'])) {
-                    include 'httpRequests.php';
-
                     $content = new News($name, $text, $imgURL);
                     $data = array('theme' => $theme, 'content' => json_encode($content), 'lang' => $lang);
                     if (isset($_GET['ID'])) {
@@ -45,7 +41,7 @@ if (isset($_POST['submit'])) {
                         $data['method'] = 'NEW';
                         $data['idredact'] = $_SESSION['login'];
                     }
-                    $result = httpRequest($base_path, $data);
+                    $result = httpRequest('news.php', $data);
 
                     if ($result === FALSE)
                         $inputErrors['others'] = 'Une erreur HTTP est survenue.';
@@ -66,7 +62,7 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_GET['ID'])) {
-    $result = file_get_contents($base_path . '?ID=' . htmlentities($_GET['ID']));
+    $result = file_get_contents($api_path . 'news.php' . '?ID=' . htmlentities($_GET['ID']));
     if ($result !== false) {
         $news = json_decode($result);
         if ($news->sucess) {
@@ -76,7 +72,7 @@ if (isset($_GET['ID'])) {
                 if (session_id() == "")
                     session_start();
                 if ($_SESSION['login'] != $news->redactor) {
-                    $result = file_get_contents($api_path . '/redactors.php?ID=' . $_SESSION['login']);
+                    $result = file_get_contents($api_path . 'redactors.php?ID=' . $_SESSION['login']);
                     if ($result !== false) {
                         $redacs = json_decode($result);
                         if ($redacs->sucess) {

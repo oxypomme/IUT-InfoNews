@@ -1,4 +1,6 @@
 <?php
+include 'httpRequests.php';
+
 $inputErrors = array(
     'frname' => false,
     'enname' => false,
@@ -17,9 +19,6 @@ function showError($errorName)
     if ($GLOBALS['inputErrors'][$errorName])
         echo '<span class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
 }
-
-$api_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 1) . '/api';
-$base_path = $api_path . '/themes.php';
 
 try {
     if (session_id() == "")
@@ -54,8 +53,6 @@ if (isset($_POST['submit'])) {
     if (isset($_POST["frname"]) && !empty($_POST['frname'])) {
         if (isset($_POST['enname']) && !empty($_POST['enname'])) {
             if (isset($_POST['color']) && !empty($_POST['color'])) {
-                include 'httpRequests.php';
-
                 $label = new stdClass();
                 $label->en = $enname;
                 $label->fr = $frname;
@@ -68,7 +65,7 @@ if (isset($_POST['submit'])) {
                 } else
                     $data['method'] = 'NEW';
 
-                $result = httpRequest($base_path, $data);
+                $result = httpRequest('themes.php', $data);
 
                 if ($result == FALSE)
                     $inputErrors['others'] = 'Une erreur HTTP est sruvenue.';
@@ -85,7 +82,7 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_GET['ID'])) {
-    $result = file_get_contents($base_path . '?ID=' . htmlentities($_GET['ID']));
+    $result = file_get_contents($api_path . 'themes.php?ID=' . htmlentities($_GET['ID']));
     if ($result !== false) {
         $themes = json_decode($result);
         if ($themes->sucess) {
