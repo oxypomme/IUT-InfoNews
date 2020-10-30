@@ -47,6 +47,7 @@
     "themeError": "",
     "passwdError": "",
     "loginError": "",
+    "loginInUse": "",
     "fnameError": "",
     "lnameError": "",
     "mailPasswdError": ""
