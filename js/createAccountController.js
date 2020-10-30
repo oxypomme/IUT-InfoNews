@@ -31,9 +31,9 @@ function checkPassword() {
     if (document.forms["redactor"].passwd) {
         var score = getPasswordScore(document.forms["redactor"].passwd.value);
         document.getElementById("passwordStrenghBar").value = score;
-        if (score > 45 && score <= 80)
+        if (score >= 45 && score < 80)
             document.getElementById("passwordStrengh").innerHTML = "Moyen";
-        else if (score > 80)
+        else if (score >= 80)
             document.getElementById("passwordStrengh").innerHTML = "Fort";
         else
             document.getElementById("passwordStrengh").innerHTML = "Faible";
