@@ -1,4 +1,5 @@
 <?php
+include_once 'lang/lang.php';
 if (!is_dir('models/'))
     header('Location:../index.php');
 
@@ -44,19 +45,19 @@ if (isset($_POST['submit'])) {
                     $result = httpRequest('news.php', $data);
 
                     if ($result === FALSE)
-                        $inputErrors['others'] = 'Une erreur HTTP est survenue.';
+                        $inputErrors['others'] = getTrad('httpError');
                     else if (($err = json_decode($result)->sucess) !== true)
                         $inputErrors['others'] = $err;
                     else
                         header('Location:index.php');
                 } else
-                    $inputErrors['lang'] = "Langue incorrecte";
+                    $inputErrors['lang'] = getTrad('langError');
             } else
-                $inputErrors['text'] = "Texte vide ou incorrect";
+                $inputErrors['text'] = getTrad('textError');
         } else
-            $inputErrors['theme'] = "Theme vide ou incorrect";
+            $inputErrors['theme'] = getTrad('themeError');
     } else
-        $inputErrors['name'] = "Nom vide ou incorrect";
+        $inputErrors['name'] = getTrad('nameError');
 } else if (isset($_POST['cancel'])) {
     header('Location:index.php');
 }
@@ -89,7 +90,7 @@ if (isset($_GET['ID'])) {
                 }
             } catch (Exception $e) {
                 echo "<script lang=\"javascript\" type=\"text/javascript\">
-                    alert(\"Une erreur est survenue : " . $e->getMessage() . "\");
+                    alert(\"" . getTrad('baseError') . $e->getMessage() . "\");
                     window.location.href = 'index.php';
                 </script>";
                 exit;

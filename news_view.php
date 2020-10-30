@@ -1,3 +1,4 @@
+<?php include_once 'lang/lang.php' ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,7 +7,7 @@ if (session_id() == "")
     session_start();
 if (!isset($_SESSION['login'])) {
     echo "<script lang=\"javascript\" type=\"text/javascript\">
-            alert(\"Vous devez être connecté pour accéder à cette page.\");
+            alert(\"" . getTrad('recentFirst') . "\");
             window.location.href = 'index.php';
         </script>";
 }
@@ -15,7 +16,7 @@ include "php/createNews.php";
 
 <head>
     <meta charset="UTF-8">
-    <title>Info News - Création d'Article</title>
+    <title>Info News - <?= getTrad('createNews') ?></title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" media="screen and (max-width:720px)" href="css/mobile.css" />
@@ -32,7 +33,7 @@ include "php/createNews.php";
 <body onLoad="onLoad();">
     <header>
         <?php include "nav.php" ?>
-        <h1>Créer un article</h1>
+        <h1><?= getTrad('createNews') ?></h1>
     </header>
 
     <main>
@@ -40,33 +41,33 @@ include "php/createNews.php";
             <div>
                 <input type="text" name="name" value=<?= '"' . $name . '"' ?> required />
                 <?php showError("name") ?>
-                <label for="name">Nom*</label>
+                <label for="name"><?= getTrad('name') ?>*</label>
             </div>
             <div>
                 <div class="select-container">
                     <select name="themes" id="themes" onfocus="onLoad();">
                     </select>
                 </div>
-                <label for="themes">Theme*</label>
+                <label for="themes"><?= getTrad('theme') ?>*</label>
                 <?php showError("theme") ?>
             </div>
             <div>
                 <input type="url" name="imgURL" value=<?= '"' . $imgURL . '"' ?> />
-                <label for="imgURL">Image d'en-tête</label>
+                <label for="imgURL"><?= getTrad('imgHeader') ?></label>
             </div>
             <div>
                 <textarea name="text" rows="4" cols="50" required><?= $text ?></textarea>
                 <?php showError("text") ?>
-                <label for="text">Texte*</label>
+                <label for="text"><?= getTrad('text') ?>*</label>
             </div>
             <div>
                 <div class="select-container">
                     <select name="lang">
-                        <option value="fr" <?= ($lang == 'fr' ? 'selected' : '') ?>>Français</option>
-                        <option value="en" <?= ($lang == 'en' ? 'selected' : '') ?>>English</option>
+                        <option value="fr" <?= ($lang == 'fr' ? 'selected' : '') ?>><?= getTrad('fr') ?></option>
+                        <option value="en" <?= ($lang == 'en' ? 'selected' : '') ?>><?= getTrad('en') ?></option>
                     </select>
                 </div>
-                <label for="lang">Langue</label>
+                <label for="lang"><?= getTrad('lang') ?></label>
                 <?php showError("lang") ?>
             </div>
             <?php showError("others") ?><br />
@@ -74,7 +75,7 @@ include "php/createNews.php";
             <input type="submit" name="submit" value="Valider" />
             <input type="submit" name="cancel" value="Annuler" />
         </form>
-        Les champs marqués d'un * sont obligatoires.
+        <?= getTrad('requiredFieldText') ?>
     </main>
 
     <footer>

@@ -1,4 +1,5 @@
 <?php
+include_once '../lang/lang.php';
 $inputErrors = array(
     'lname' => false,
     'fname' => false,
@@ -32,7 +33,7 @@ if (isset($_POST['submit'])) {
                     $result = httpRequest('redactors.php', $data);
 
                     if ($result === FALSE)
-                        $inputErrors['others'] = 'Une erreur HTTP est survenue.';
+                        $inputErrors['others'] = getTrad('httpError');
                     else if (($err = json_decode($result)->sucess) !== true) {
                         $inputErrors['others'] = $err;
 
@@ -41,20 +42,20 @@ if (isset($_POST['submit'])) {
                         $reslog->execute();
                         foreach ($reslog as $row)
                             if ($row['match'] != 0)
-                                $inputErrors['others'] = "L'adresse mail est déjà utilisée.";
+                                $inputErrors['others'] = getTrad('loginInUse');
                     } else
                         // header('Location:login.php');
                         echo "<script lang=\"javascript\" type=\"text/javascript\">
                         parent.document.location.reload();
                         </script>";
                 } else
-                    $inputErrors['passwd'] = 'Mot de passe vide ou incorrect';
+                    $inputErrors['passwd'] = getTrad('passwdError');
             } else
-                $inputErrors['login'] = 'Mail vide ou incorrect';
+                $inputErrors['login'] = getTrad('loginError');
         } else
-            $inputErrors['fname'] = 'Prénom vide ou incorrect';
+            $inputErrors['fname'] = getTrad('fnameError');
     } else
-        $inputErrors['lname'] = 'Nom vide ou incorrect';
+        $inputErrors['lname'] = getTrad('lnameError');
 }
 
 if (isset($_GET['ID'])) {
@@ -69,7 +70,7 @@ if (isset($_GET['ID'])) {
                 session_start();
             if ($_SESSION['login'] != $redactors->id) { //Maybe useless but it safier
                 echo "<script lang=\"javascript\" type=\"text/javascript\">
-                    alert(\"Vous n'êtes pas autorisé à modifier le profil d'un autre !\");
+                    alert(\"Permission denied\");
                     window.location.href = 'index.php';
                 </script>";
             }
