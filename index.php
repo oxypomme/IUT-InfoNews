@@ -60,8 +60,8 @@
     </aside>
 
     <main>
-        <div id="detailedNews"></div>
         <h1>Info News</h1>
+        <div id="detailedNews"></div>
         <section id="news"></section>
     </main>
 

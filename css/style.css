@@ -109,6 +109,7 @@ main>h1 {
 
 /*== NEWS ==*/
 
+#detailedNews,
 #news {
     display: flex;
     flex-wrap: wrap;
@@ -127,6 +128,13 @@ main>h1 {
     cursor: pointer;
 }
 
+#detailedNews article {
+    margin: 10px;
+    background-color: #fff9;
+    border-radius: 12px;
+    box-shadow: 0px 2px 1px -1px var(--secondary-color), 0px 1px 1px 0px var(--secondary-color), 0px 1px 3px 0px var(--secondary-color);
+}
+
 @media (max-width: 1050px) {
     #news article {
         margin-left: auto;
@@ -134,6 +142,7 @@ main>h1 {
     }
 }
 
+#detailedNews article *,
 #news article * {
     width: 100%;
     word-break: break-word;
@@ -150,6 +159,7 @@ main>h1 {
     margin-bottom: 4px;
 }
 
+#detailedNews button,
 #news button {
     width: 25%;
     float: left;
@@ -157,6 +167,7 @@ main>h1 {
     cursor: pointer
 }
 
+#detailedNews article a img,
 #news article a img {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -165,15 +176,18 @@ main>h1 {
     z-index: 0;
 }
 
+#detailedNews article a:hover img,
 #news article a:hover img {
     filter: brightness(80%);
     transition: filter 0.25s ease-in-out;
 }
 
+#detailedNews article>div:nth-child(2),
 #news article>div:nth-child(2) {
     margin: 16px;
 }
 
+#detailedNews article p,
 #news article p {
     margin: 0 16px 8px 16px;
     width: calc(100% - 32px);
@@ -185,32 +199,46 @@ main>h1 {
     border-bottom: solid #666 1px;
 }
 
+#news article p:nth-last-child(2) {
+    max-height: 70px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 #detailedNews article p:last-child>img,
 #news article p:last-child>img {
     width: 16px;
     vertical-align: -9%;
 }
 
+#detailedNews article div.buttonsholder,
 #news article div.buttonsholder {
-    margin-bottom: 32px;
+    /* margin-bottom: 8px; */
+    height: 32px;
 }
 
+#detailedNews article div.buttonsholder>button,
 #news article div.buttonsholder>button {
     font-family: 'Nunito', Arial, Helvetica, sans-serif;
     background-color: #ddd;
     transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
     border-radius: 15px;
+    min-width: 120px;
     border-color: transparent;
     text-transform: uppercase;
     outline: none;
 }
 
+#detailedNews article div.buttonsholder>button:hover,
 #news article div.buttonsholder>button:hover {
     background-color: var(--secondary-color);
     color: #fff;
     transition: background-color 0.25s ease-in-out;
 }
 
+#detailedNews article div.buttonsholder>button:focus,
 #news article div.buttonsholder>button:focus {
     border-color: #222;
     transition: border-color 0.25s ease-in-out;
@@ -382,7 +410,7 @@ textarea {
     border: solid #ccc 1px;
     transition: border-color 0.25s ease-in-out;
     border-radius: 4px;
-    line-height: 2em;
+    line-height: 1.2em;
     padding: 5px;
     margin: 5px 0;
     outline: none;
