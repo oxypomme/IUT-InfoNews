@@ -58,7 +58,7 @@ if (isset($_SESSION["login"])) {
             <label for="passwd"><?= getTrad('passwd') ?>*</label>
         </div>
 
-        <input type="submit" name="submit" value="Valider" />
+        <input type="submit" name="submit" value="<?= getTrad('validate') ?>" />
     </form>
     <?= getTrad('requiredFieldText') ?>
 </body>

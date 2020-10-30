@@ -50,7 +50,7 @@ window.onclick = function (e) {
 }
 
 function unlogAccount() {
-    if (confirm("Souhaitez vous vous déconnecter ?"))
+    if (confirm(trads.getTrad('logoutText')))
         window.location.assign("php/logout.php")
 }
 

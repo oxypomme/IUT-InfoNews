@@ -59,7 +59,7 @@ include "php/createTheme.php";
             </div>
             <?php showError("others") ?><br />
 
-            <input type="submit" name="submit" value="Valider" />
+            <input type="submit" name="submit" value="<?= getTrad('validate') ?>" />
         </form>
         <?= getTrad('requiredFieldText') ?>
     </main>

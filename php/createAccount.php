@@ -106,30 +106,30 @@ if (isset($_SESSION["login"]) and !isset($_GET['ID']))
     <form name="redactor" method="post" onsubmit="return validate();">
         <div>
             <input type="text" name="lname" value=<?= '"' . $lname . '"' ?> required />
-            <label for="lname">Nom*</label>
+            <label for="lname"><?= getTrad('lname') ?>*</label>
             <?php showError("lname") ?>
         </div>
         <div>
             <input type="text" name="fname" value=<?= '"' . $fname . '"' ?> required />
-            <label for="fname">Prénom*</label>
+            <label for="fname"><?= getTrad('fname') ?>*</label>
             <?php showError("fname") ?>
         </div>
         <div>
             <input type="text" name="login" value=<?= '"' . $login . '"' ?> required />
-            <label for="login">Adresse mail*</label>
+            <label for="login"><?= getTrad('login') ?>*</label>
             <?php showError("login") ?>
         </div>
         <div>
             <input type="password" name="passwd" value=<?php echo '"' . $passwd . '"' ?> onkeyup="checkPassword()" placeholder="6 caractères" required />
-            <label id="createPass" for="passwd">Mot de passe*</label>
-            <meter id="passwordStrenghBar" min="0" max="100" low="45" high="80" optimum="100" value="0"></meter><span id="passwordStrengh">Faible</span>
+            <label id="createPass" for="passwd"><?= getTrad('passwd') ?>*</label>
+            <meter id="passwordStrenghBar" min="0" max="100" low="45" high="80" optimum="100" value="0"></meter><span id="passwordStrengh"><?= getTrad('weak') ?></span>
             <?php showError("passwd") ?>
         </div>
         <?php showError("others") ?>
 
-        <input type="submit" name="submit" value="Valider" />
+        <input type="submit" name="submit" value="<?= getTrad('validate') ?>" />
     </form>
-    Les champs marqués d'un * sont obligatoires.
+    <?= getTrad('requiredFieldText') ?>
 </body>
 
 </html>
