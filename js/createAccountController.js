@@ -1,26 +1,28 @@
+const trads = new Trads(false);
+
 function validate() {
     var result = true;
     if (!document.forms["redactor"].lname || !document.forms["redactor"].lname.value.match(/^.{3,}$/)) {
-        document.getElementById("lname").innerHTML = "Le nom doit être valide";
         result = false;
+        document.getElementById("lname").innerHTML = trads.getTrad('lnameError');
     } else
         document.getElementById("lname").innerHTML = "";
 
     if (!document.forms["redactor"].fname || !document.forms["redactor"].fname.value.match(/^.{3,}$/)) {
-        document.getElementById("fname").innerHTML = "Le prénom doit être valide";
         result = false;
+        document.getElementById("lname").innerHTML = trads.getTrad('fnameError');
     } else
         document.getElementById("fname").innerHTML = "";
 
     if (!document.forms["redactor"].login || !document.forms["redactor"].login.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-zA-Z0-9-]+){2,4}$/)) {
-        document.getElementById("login").innerHTML = "L'adresse mail doit être valide";
         result = false;
+        document.getElementById("lname").innerHTML = trads.getTrad('loginError');
     } else
         document.getElementById("login").innerHTML = "";
 
     if (!document.forms["redactor"].passwd || !document.forms["redactor"].passwd.value.match(/^.{6,}$/)) {
-        document.getElementById("passwd").innerHTML = "Le mot de passe doit faire au minimum 6 charactères";
         result = false;
+        document.getElementById("lname").innerHTML = trads.getTrad('passwdLengthError');
     } else
         document.getElementById("passwd").innerHTML = "";
 
@@ -32,13 +34,13 @@ function checkPassword() {
         var score = getPasswordScore(document.forms["redactor"].passwd.value);
         document.getElementById("passwordStrenghBar").value = score;
         if (score >= 45 && score < 80)
-            document.getElementById("passwordStrengh").innerHTML = "Moyen";
+            document.getElementById("passwordStrengh").innerHTML = trads.getTrad('mid');
         else if (score >= 80)
-            document.getElementById("passwordStrengh").innerHTML = "Fort";
+            document.getElementById("passwordStrengh").innerHTML = trads.getTrad('strong');
         else
-            document.getElementById("passwordStrengh").innerHTML = "Faible";
+            document.getElementById("passwordStrengh").innerHTML = trads.getTrad('weak');
     } else
-        document.getElementById("passwordStrengh").innerHTML = "Invalide";
+        document.getElementById("passwordStrengh").innerHTML = trads.getTrad('invalid');
 }
 
 function getPasswordScore(password) {

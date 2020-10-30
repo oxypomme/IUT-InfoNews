@@ -1,3 +1,4 @@
+const trads = new Trads();
 var newsTab = new Array();
 
 function setupThemes(array) {
@@ -8,7 +9,7 @@ function setupThemes(array) {
 
     var blankOption = document.createElement("option");
     blankOption.selected = true;
-    blankOption.innerHTML = "Tous";
+    blankOption.innerHTML = trads.getTrad('all');
     document.getElementById('themes').appendChild(blankOption);
 
     array.forEach(theme => {
@@ -88,7 +89,7 @@ async function CreateNewsArticle(lig, news) {
             };
             let tooltip = document.createElement("span");
             tooltip.classList.toggle("tooltiptext");
-            tooltip.innerHTML = "Cliquer pour éditer le theme";
+            tooltip.innerHTML = trads.getTrad('editTheme');
             theme.appendChild(tooltip);
         }
     }
@@ -113,14 +114,14 @@ async function CreateNewsArticle(lig, news) {
         let div = document.createElement("div");
         div.classList.add("buttonsholder");
         let delBtn = document.createElement("button");
-        delBtn.innerHTML = "Supprimer";
+        delBtn.innerHTML = trads.getTrad('delete');
         delBtn.onclick = async function () {
             await jsonRequest("api/news.php", "POST", "method=DELETE&ID=" + news.id);
             onFilterChange();
         };
         div.appendChild(delBtn);
         let editBtn = document.createElement("button");
-        editBtn.innerHTML = "Editer";
+        editBtn.innerHTML = trads.getTrad('edit');
         editBtn.onclick = function () {
             window.location.href = "news_view.php?ID=" + news.id;
         };
@@ -136,7 +137,7 @@ function getRadio(radios) {
             if (radios[i].checked)
                 return radios[i].value;
 
-    } catch (error) { }
+    } catch (error) {}
     return '';
 }
 

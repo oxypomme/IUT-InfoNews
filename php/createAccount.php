@@ -98,11 +98,12 @@ if (isset($_SESSION["login"]) and !isset($_GET['ID']))
     <meta charset="UTF-8">
     <title>Info redactors - Login</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/apiController.js"></script>
     <script src="../js/createAccountController.js"></script>
 </head>
 
 <body class="iframable">
-    <form name="redactor" method="post" onsubmit="return validate()">
+    <form name="redactor" method="post" onsubmit="return validate();">
         <div>
             <input type="text" name="lname" value=<?= '"' . $lname . '"' ?> required />
             <label for="lname">Nom*</label>

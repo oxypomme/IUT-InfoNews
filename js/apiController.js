@@ -47,6 +47,16 @@ class News {
     }
 }
 
+class Trads {
+    constructor(isRoot = true) {
+        this.trads = JSON.parse(jsonRequest((!isRoot ? '../' : './') + "lang/" + (getCookie('lang') || 'fr') + '.json', 'GET', '', false));
+    }
+
+    getTrad(field) {
+        return this.trads[field];
+    }
+}
+
 function jsonRequest(address, reqType = "GET", content = '', asyncProc = true) {
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
     var promise;
