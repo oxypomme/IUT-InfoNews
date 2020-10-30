@@ -1,5 +1,5 @@
 <?php
-include_once 'lang/lang.php';
+include_once '../lang/lang.php';
 $inputErrors = array(
     'lname' => false,
     'fname' => false,
