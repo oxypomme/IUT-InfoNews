@@ -109,7 +109,13 @@ main>h1 {
 
 /*== NEWS ==*/
 
-#detailedNews,
+#detailedNews {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1080px;
+    margin: 0 auto
+}
+
 #news {
     display: flex;
     flex-wrap: wrap;
