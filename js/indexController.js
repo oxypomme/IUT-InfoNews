@@ -1,3 +1,5 @@
+var newsTab = new Array();
+
 function setupThemes(array) {
     while (document.getElementById('themes').childNodes.length > 0)
         document.getElementById('themes').removeChild(
@@ -18,7 +20,8 @@ function setupThemes(array) {
     });
 }
 
-async function setupNews(array) {
+function setupNews(array) {
+    newsTab = array;
     while (document.getElementById('news').childNodes.length > 0)
         document.getElementById('news').removeChild(
             document.getElementById('news').childNodes[0]
@@ -26,79 +29,105 @@ async function setupNews(array) {
     for (const news of array) {
         var lig = document.createElement("article");
 
-        var elmnt;
-        if (news.imgURL != "") {
-            elmnt = document.createElement("a");
-            elmnt.href = news.imgURL;
-            var img = document.createElement("img");
-            img.src = news.imgURL;
-            img.alt = news.title + "_image";
-            elmnt.appendChild(img);
-        } else {
-            elmnt = document.createElement("div");
-            elmnt.className = "spacer image";
-        }
-        lig.appendChild(elmnt);
+        CreateNewsArticle(lig, news);
 
-        let header = document.createElement("div");
-        var theme = document.createElement("h4");
-        theme.style.color = news.theme.color || "#333";
-        theme.innerHTML = news.theme;
-        var sessionvars = await jsonRequest("api/session.php?Name=idlogin");
-        if (sessionvars.idlogin) { // Check if a user is logged
-            var curr_redactor = await getRedactors(sessionvars.idlogin);
-            curr_redactor = curr_redactor[0];
-            if (curr_redactor.role == 1) { // Check if it's an admin
-                theme.style.cursor = "pointer";
-                theme.classList.toggle("tooltip");
-                theme.onclick = function () {
-                    window.location.href = "themes_view.php?ID=" + news.theme;
-                };
-                let tooltip = document.createElement("span");
-                tooltip.classList.toggle("tooltiptext");
-                tooltip.innerHTML = "Cliquer pour éditer le theme";
-                theme.appendChild(tooltip);
-            }
-        }
-        header.appendChild(theme);
-
-        var title = document.createElement("h3");
-        title.innerHTML = news.title;
-        header.appendChild(title);
-        lig.appendChild(header);
-
-        var txt = document.createElement("p");
-        txt.innerHTML = news.text;
-        lig.appendChild(txt);
-
-        var footer = document.createElement("p");
-        footer.innerHTML = news.redactor + " - " + news.date + " - ";
-        var icon = document.createElement("img");
-        icon.src = "res/" + news.lang + ".png";
-        icon.alt = news.lang;
-        footer.appendChild(icon);
-        if (sessionvars.idlogin && (curr_redactor.id == news.redactor.id || curr_redactor.role == 1)) { // Check if a user is logged and if it's the creator, or an admin
-            let div = document.createElement("div");
-            div.classList.add("buttonsholder");
-            let delBtn = document.createElement("button");
-            delBtn.innerHTML = "Supprimer";
-            delBtn.onclick = async function () {
-                await jsonRequest("api/news.php", "POST", "method=DELETE&ID=" + news.id);
-                onFilterChange();
-            };
-            div.appendChild(delBtn);
-            let editBtn = document.createElement("button");
-            editBtn.innerHTML = "Editer";
-            editBtn.onclick = function () {
-                window.location.href = "news_view.php?ID=" + news.id;
-            };
-            div.appendChild(editBtn);
-            footer.appendChild(div);
-        }
-        lig.appendChild(footer);
+        lig.onclick = function () {
+            setDetailedNews(news.id);
+        };
 
         document.getElementById('news').appendChild(lig);
     };
+}
+
+function setDetailedNews(id) {
+    // detailedNews
+    while (document.getElementById('detailedNews').childNodes.length > 0)
+        document.getElementById('detailedNews').removeChild(
+            document.getElementById('detailedNews').childNodes[0]
+        );
+
+    for (const news of newsTab) {
+        if (news.id == id) {
+            var lig = document.createElement("article");
+
+            CreateNewsArticle(lig, news);
+
+            document.getElementById('detailedNews').appendChild(lig);
+        }
+    };
+}
+
+async function CreateNewsArticle(lig, news) {
+    var elmnt;
+    if (news.imgURL != "") {
+        elmnt = document.createElement("a");
+        elmnt.href = news.imgURL;
+        var img = document.createElement("img");
+        img.src = news.imgURL;
+        img.alt = news.title + "_image";
+        elmnt.appendChild(img);
+    } else {
+        elmnt = document.createElement("div");
+        elmnt.className = "spacer image";
+    }
+    lig.appendChild(elmnt);
+
+    let header = document.createElement("div");
+    var theme = document.createElement("h4");
+    theme.style.color = news.theme.color || "#333";
+    theme.innerHTML = news.theme;
+    var sessionvars = await jsonRequest("api/session.php?Name=idlogin");
+    if (sessionvars.idlogin) { // Check if a user is logged
+        var curr_redactor = await getRedactors(sessionvars.idlogin);
+        curr_redactor = curr_redactor[0];
+        if (curr_redactor.role == 1) { // Check if it's an admin
+            theme.style.cursor = "pointer";
+            theme.classList.toggle("tooltip");
+            theme.onclick = function () {
+                window.location.href = "themes_view.php?ID=" + news.theme;
+            };
+            let tooltip = document.createElement("span");
+            tooltip.classList.toggle("tooltiptext");
+            tooltip.innerHTML = "Cliquer pour éditer le theme";
+            theme.appendChild(tooltip);
+        }
+    }
+    header.appendChild(theme);
+
+    var title = document.createElement("h3");
+    title.innerHTML = news.title;
+    header.appendChild(title);
+    lig.appendChild(header);
+
+    var txt = document.createElement("p");
+    txt.innerHTML = news.text;
+    lig.appendChild(txt);
+
+    var footer = document.createElement("p");
+    footer.innerHTML = news.redactor + " - " + news.date + " - ";
+    var icon = document.createElement("img");
+    icon.src = "res/" + news.lang + ".png";
+    icon.alt = news.lang;
+    footer.appendChild(icon);
+    if (sessionvars.idlogin && (curr_redactor.id == news.redactor.id || curr_redactor.role == 1)) { // Check if a user is logged and if it's the creator, or an admin
+        let div = document.createElement("div");
+        div.classList.add("buttonsholder");
+        let delBtn = document.createElement("button");
+        delBtn.innerHTML = "Supprimer";
+        delBtn.onclick = async function () {
+            await jsonRequest("api/news.php", "POST", "method=DELETE&ID=" + news.id);
+            onFilterChange();
+        };
+        div.appendChild(delBtn);
+        let editBtn = document.createElement("button");
+        editBtn.innerHTML = "Editer";
+        editBtn.onclick = function () {
+            window.location.href = "news_view.php?ID=" + news.id;
+        };
+        div.appendChild(editBtn);
+        footer.appendChild(div);
+    }
+    lig.appendChild(footer);
 }
 
 function getRadio(radios) {
@@ -107,7 +136,7 @@ function getRadio(radios) {
             if (radios[i].checked)
                 return radios[i].value;
 
-    } catch (error) {}
+    } catch (error) { }
     return '';
 }
 
