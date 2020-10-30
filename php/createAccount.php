@@ -14,8 +14,7 @@ $passwd = isset($_POST["passwd"]) ? htmlentities($_POST['passwd']) : '';
 
 function showError($errorName)
 {
-    if ($GLOBALS['inputErrors'][$errorName])
-        echo '<span id="' . $errorName . '" class="error">' . $GLOBALS['inputErrors'][$errorName] . '</span>';
+    echo '<span id="' . $errorName . '" class="error">' . ($GLOBALS['inputErrors'][$errorName] ? $GLOBALS['inputErrors'][$errorName] : "") . '</span>';
 }
 
 $base_path = 'http://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['REQUEST_URI'], 2) . '/api/redactors.php';
@@ -124,7 +123,6 @@ if (isset($_SESSION["login"]) and !isset($_GET['ID']))
         <div>
             <input type="password" name="passwd" value=<?php echo '"' . $passwd . '"' ?> onkeyup="checkPassword()" placeholder="6 caractères" required />
             <label id="createPass" for="passwd">Mot de passe*</label>
-            <!-- <progrsess id="passwordStrenghBar" max="100" value="0"></progress><span id="passwordStrengh">Faible</span> -->
             <meter id="passwordStrenghBar" min="0" max="100" low="45" high="80" optimum="100" value="0"></meter><span id="passwordStrengh">Faible</span>
             <?php showError("passwd") ?>
         </div>
