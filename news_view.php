@@ -72,8 +72,8 @@ include "php/createNews.php";
             </div>
             <?php showError("others") ?><br />
 
-            <input type="submit" name="submit" value="Valider" />
-            <input type="submit" name="cancel" value="Annuler" />
+            <input type="submit" name="submit" value="<?= getTrad('validate') ?>" />
+            <input type="submit" name="cancel" value="<?= getTrad('cancel') ?>" />
         </form>
         <?= getTrad('requiredFieldText') ?>
     </main>
