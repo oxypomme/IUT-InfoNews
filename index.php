@@ -1,3 +1,4 @@
+<?php include_once 'lang/lang.php' ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -20,40 +21,40 @@
     <aside>
         <form id="filters" onchange="onFilterChange();">
             <fieldset>
-                <legend>Trier par</legend>
+                <legend><?= getTrad('sort') ?></legend>
                 <label class="radio-container">
                     <input type="radio" name="sort" value="desc" checked />
                     <span></span>
-                    Plus récent d'abord
+                    <?= getTrad('recentFirst') ?>
                 </label>
                 <label class="radio-container">
                     <input type="radio" name="sort" value="asc" />
                     <span></span>
-                    Plus vieux d'abord
+                    <?= getTrad('oldFirst') ?>
                 </label>
             </fieldset>
             <div>
                 <div class="select-container">
                     <select name="themes" id="themes" onfocus="onThemeFocus();"></select>
                 </div>
-                <label for="themes">Theme</label>
+                <label for="themes"><?= getTrad('theme') ?></label>
             </div>
             <fieldset>
-                <legend>Afficher</legend>
+                <legend><?= getTrad('filter') ?></legend>
                 <label class="radio-container">
                     <input type="radio" name="lang" value="" checked />
                     <span></span>
-                    Tous
+                    <?= getTrad('all') ?>
                 </label>
                 <label class="radio-container">
                     <input type="radio" name="lang" value="fr" />
                     <span></span>
-                    Français
+                    <?= getTrad('fr') ?>
                 </label>
                 <label class="radio-container">
                     <input type="radio" name="lang" value="en" />
                     <span></span>
-                    Anglais
+                    <?= getTrad('en') ?>
                 </label>
             </fieldset>
         </form>

@@ -1,4 +1,5 @@
 <?php
+include_once '../lang/lang.php';
 include "../api/connect.php";
 if (session_id() == "")
     session_start();
@@ -19,7 +20,7 @@ if (isset($_POST['submit'])) {
                     parent.document.location.reload();
                     </script>";
             } else
-                echo '<span class="error">Adresse mail ou mot de passe incorect</span>';
+                echo '<span class="error">' . getTrad('mailPasswdError') . '</span>';
             break;
         }
     }
@@ -34,9 +35,6 @@ if (isset($_SESSION["login"])) {
     parent.document.location.reload();
     </script>";
 }
-
-if (isset($_GET['target']))
-    echo 'Pour accèder à cette page il est nécessaire de se connecter avec votre identifiant :';
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +42,7 @@ if (isset($_GET['target']))
 
 <head>
     <meta charset="UTF-8">
-    <title>Info News - Login</title>
+    <title>Info News - <?= getTrad('login') ?></title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="icon" href="../favicon.ico" />
 </head>
@@ -53,16 +51,16 @@ if (isset($_GET['target']))
     <form method="post">
         <div>
             <input type="text" name="login" value="" required />
-            <label for="login">Adresse mail*</label>
+            <label for="login"><?= getTrad('mail') ?>*</label>
         </div>
         <div>
             <input type="password" name="passwd" value="" required />
-            <label for="passwd">Mot de passe*</label>
+            <label for="passwd"><?= getTrad('passwd') ?>*</label>
         </div>
 
         <input type="submit" name="submit" value="Valider" />
     </form>
-    Les champs marqués d'un * sont obligatoires.
+    <?= getTrad('requiredFieldText') ?>
 </body>
 
 </html>

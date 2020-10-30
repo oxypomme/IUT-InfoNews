@@ -1,3 +1,4 @@
+<?php include_once 'lang/lang.php' ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -15,7 +16,7 @@ include "php/createTheme.php";
 
 <head>
     <meta charset="UTF-8">
-    <title>Info News - Création de Theme</title>
+    <title>Info News - <?= getTrad('createTheme') ?></title>
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" media="screen and (max-width:720px)" href="css/mobile.css" />
@@ -26,21 +27,21 @@ include "php/createTheme.php";
 <body>
     <header>
         <?php include "nav.php" ?>
-        <h1>Créer un thème</h1>
+        <h1><?= getTrad('createTheme') ?></h1>
     </header>
 
     <main>
         <form method="post">
             <fieldset>
-                <legend>Noms</legend>
+                <legend><?= getTrad('names') ?></legend>
                 <div>
                     <input type="text" name="frname" value=<?= '"' . $frname . '"' ?> required />
-                    <label>Français*</label>
+                    <label><?= getTrad('fr') ?>*</label>
                     <?php showError("frname") ?>
                 </div>
                 <div>
                     <input type="text" name="enname" value=<?= '"' . $enname . '"' ?> required />
-                    <label>Anglais*</label>
+                    <label><?= getTrad('en') ?>*</label>
                     <?php showError("enname") ?>
                 </div>
             </fieldset>
@@ -48,19 +49,19 @@ include "php/createTheme.php";
                 <div class="color-container">
                     <input type="color" name="color" value=<?= '"' . ($color ? $color : '#000000') . '"' ?> />
                 </div>
-                <label for="color">Couleur du theme</label>
+                <label for="color"><?= getTrad('color') ?></label>
                 <?php showError("color") ?>
             </div>
             <div>
                 <input type="url" name="iconURL" value=<?= '"' . $iconURL . '"' ?> required />
-                <label for="iconURL">Icone*</label>
+                <label for="iconURL"><?= getTrad('icon') ?>*</label>
                 <?php showError("iconURL") ?>
             </div>
             <?php showError("others") ?><br />
 
             <input type="submit" name="submit" value="Valider" />
         </form>
-        Les champs marqués d'un * sont obligatoires.
+        <?= getTrad('requiredFieldText') ?>
     </main>
 
     <footer>

@@ -1,4 +1,5 @@
 <?php
+include_once 'lang/lang.php';
 include 'httpRequests.php';
 
 $inputErrors = array(
@@ -41,7 +42,7 @@ try {
     unset($redacs);
 } catch (Exception $e) {
     echo "<script lang=\"javascript\" type=\"text/javascript\">
-        alert(\"Une erreur est survenue : " . $e->getMessage() . "\");
+        alert(\"" . getTrad('baseError') . $e->getMessage() . "\");
         window.location.href = 'index.php';
     </script>";
     exit;
@@ -68,17 +69,17 @@ if (isset($_POST['submit'])) {
                 $result = httpRequest('themes.php', $data);
 
                 if ($result == FALSE)
-                    $inputErrors['others'] = 'Une erreur HTTP est sruvenue.';
+                    $inputErrors['others'] = getTrad('httpError');
                 else if (($err = json_decode($result)->sucess) !== true)
                     $inputErrors['others'] = $err;
                 else
                     header('Location:index.php');
             } else
-                $inputErrors['color'] = "Couleur invalide";
+                $inputErrors['color'] = getTrad('color');
         } else
-            $inputErrors['enname'] = "Nom invalide";
+            $inputErrors['enname'] = getTrad('nameError');
     } else
-        $inputErrors['frname'] = 'Nom invalide';
+        $inputErrors['frname'] = getTrad('nameError');
 }
 
 if (isset($_GET['ID'])) {
