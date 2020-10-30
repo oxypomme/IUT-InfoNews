@@ -22,10 +22,6 @@ function setupThemes(array) {
     });
 }
 
-function onChangeLanguage() {
-    onLoad();
-}
-
 async function onLoad() {
     setupThemes(await getThemes(""));
 }

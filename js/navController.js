@@ -2,7 +2,7 @@ var isIframeShown = false;
 
 function changeLanguage(lang) {
     document.cookie = "lang=" + lang;
-    onChangeLanguage(lang);
+    document.location.reload();
 }
 
 function showDropdown(elt) {

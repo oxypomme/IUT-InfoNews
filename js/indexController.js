@@ -137,7 +137,7 @@ function getRadio(radios) {
             if (radios[i].checked)
                 return radios[i].value;
 
-    } catch (error) {}
+    } catch (error) { }
     return '';
 }
 
@@ -145,11 +145,6 @@ function onLoad() {
     onFilterChange();
     onThemeFocus();
     setTimeout("onLoad()", 60000);
-}
-
-function onChangeLanguage() {
-    onFilterChange();
-    onThemeFocus();
 }
 
 async function onFilterChange() {
