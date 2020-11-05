@@ -20,10 +20,10 @@ function showError($errorName)
 
 include 'httpRequests.php';
 if (isset($_POST['submit'])) {
-    if (isset($_POST["lname"]) && !empty($_POST['lname'])) {
-        if (isset($_POST["fname"]) && !empty($_POST['fname'])) {
-            if (isset($_POST["login"]) && !empty($_POST['login'])) {
-                if (isset($_POST["passwd"]) && !empty($_POST['passwd'])) {
+    if (isset($_POST["lname"]) && !empty($_POST['lname']) && preg_match("/^.{3,}$/", $_POST['lname'])) {
+        if (isset($_POST["fname"]) && !empty($_POST['fname']) && preg_match("/^.{3,}$/", $_POST['fname'])) {
+            if (isset($_POST["login"]) && !empty($_POST['login']) && preg_match("/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-zA-Z0-9-]+){2,4}$/", $_POST['login'])) {
+                if (isset($_POST["passwd"]) && !empty($_POST['passwd']) && preg_match("/^.{6,}$/", $_POST['passwd'])) {
                     $data = array('lname' => $lname, 'fname' => $fname, 'mail' => $login, 'pass' => $passwd);
                     if (isset($_GET['ID'])) {
                         $data['ID'] = htmlentities($_GET['ID']);
