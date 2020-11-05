@@ -42,7 +42,7 @@ function clearAllDropdowns() {
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function (e) {
-    if (!e.target.matches('.dropbtn') && !e.target.matches('.dropdown-content > li > a')) {
+    if (isIframeShown && !e.target.matches('.dropdown-content > li > a')) {
         clearAllDropdowns();
         if (isIframeShown)
             closeIFrame();
