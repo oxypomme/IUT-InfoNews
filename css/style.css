@@ -402,7 +402,7 @@ form div label {
     position: absolute;
     pointer-events: none;
     left: 5px;
-    top: 8px;
+    top: 4px;
     transition: 0.2s ease all;
     color: #777;
 }
