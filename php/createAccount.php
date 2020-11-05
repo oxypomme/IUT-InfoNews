@@ -120,7 +120,7 @@ if (isset($_SESSION["login"]) and !isset($_GET['ID']))
             <?php showError("login") ?>
         </div>
         <div>
-            <input type="password" name="passwd" value=<?php echo '"' . $passwd . '"' ?> onkeyup="checkPassword()" placeholder="6 caractères" required />
+            <input type="password" name="passwd" value=<?php echo '"' . $passwd . '"' ?> onkeyup="checkPassword()" placeholder="<?= getTrad('characNeeded') ?>" required />
             <label id="createPass" for="passwd"><?= getTrad('passwd') ?>*</label>
             <meter id="passwordStrenghBar" min="0" max="100" low="45" high="80" optimum="100" value="0"></meter><span id="passwordStrengh"><?= getTrad('weak') ?></span>
             <?php showError("passwd") ?>

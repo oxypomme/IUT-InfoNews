@@ -47,6 +47,7 @@
     "themeError": "Empty or invalid theme",
     "passwdError": "Empty or invalid password",
     "passwdLengthError": "Password must be at least 6 characters long.",
+    "characNeeded": "6 characters",
     "loginError": "Empty or invalid email",
     "loginInUse": "This email is already in use",
     "fnameError": "Empty or invalid firstname",
