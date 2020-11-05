@@ -10,19 +10,19 @@ function validate() {
 
     if (!document.forms["redactor"].fname || !document.forms["redactor"].fname.value.match(/^.{3,}$/)) {
         result = false;
-        document.getElementById("lname").innerHTML = trads.getTrad('fnameError');
+        document.getElementById("fname").innerHTML = trads.getTrad('fnameError');
     } else
         document.getElementById("fname").innerHTML = "";
 
     if (!document.forms["redactor"].login || !document.forms["redactor"].login.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.([a-zA-Z0-9-]+){2,4}$/)) {
         result = false;
-        document.getElementById("lname").innerHTML = trads.getTrad('loginError');
+        document.getElementById("login").innerHTML = trads.getTrad('loginError');
     } else
         document.getElementById("login").innerHTML = "";
 
     if (!document.forms["redactor"].passwd || !document.forms["redactor"].passwd.value.match(/^.{6,}$/)) {
         result = false;
-        document.getElementById("lname").innerHTML = trads.getTrad('passwdLengthError');
+        document.getElementById("passwd").innerHTML = trads.getTrad('passwdLengthError');
     } else
         document.getElementById("passwd").innerHTML = "";
 
