@@ -422,37 +422,30 @@ textarea {
     outline: none;
 }
 
-form input[type="text"]:focus,
-form input[type="url"]:focus,
-form input[type="password"]:focus,
-textarea:focus {
+form input:required:focus,
+textarea:required:focus {
     border-color: var(--secondary-color);
     transition: border-color 0.25s ease-in-out;
 }
 
-form input[type="text"]:focus~label,
-form input[type="text"]:valid~label,
-form input[type="url"]:focus~label,
-form input[type="url"]:valid~label,
-form input[type="password"]:focus~label,
-form input[type="password"]:valid~label,
-form textarea:focus~label,
-form textarea:valid~label {
+form input:required:focus~label,
+form input:required:valid~label,
+form textarea:required:focus~label,
+form textarea:required:valid~label {
     top: -20px;
     font-size: 14px;
     color: #111;
 }
 
-form input[type="text"]:focus~label,
-form input[type="url"]:focus~label,
-form input[type="password"]:focus~label,
-form textarea:focus~label {
+form input:required:focus~label,
+form textarea:required:focus~label {
     color: var(--secondary-color);
 }
 
 form .color-container~label,
 form .select-container~label,
-#createPass {
+#createPass,
+form input:not(:required)~label {
     top: -20px;
     font-size: 14px;
     color: #111;
