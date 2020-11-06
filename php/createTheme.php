@@ -10,10 +10,10 @@ $inputErrors = array(
     'others' => false
 );
 
-$frname = isset($_POST["frname"]) ? htmlentities($_POST['frname']) : '';
-$enname = isset($_POST["enname"]) ? htmlentities($_POST['enname']) : '';
-$color = isset($_POST["color"]) ? htmlentities($_POST['color']) : '';
-$iconURL = isset($_POST["color"]) ? htmlentities($_POST['color']) : '';
+$frname = isset($_POST["frname"]) ? htmlspecialchars($_POST['frname']) : '';
+$enname = isset($_POST["enname"]) ? htmlspecialchars($_POST['enname']) : '';
+$color = isset($_POST["color"]) ? htmlspecialchars($_POST['color']) : '';
+$iconURL = isset($_POST["color"]) ? htmlspecialchars($_POST['color']) : '';
 
 function showError($errorName)
 {
@@ -59,9 +59,9 @@ if (isset($_POST['submit'])) {
                 $label->fr = utf8_encode($frname);
                 $data = array('label' => json_encode($label), 'color' => $color);
                 if (isset($_POST['iconURL']))
-                    $data['iconURL'] = htmlentities($_POST['iconURL']);
+                    $data['iconURL'] = htmlspecialchars($_POST['iconURL']);
                 if (isset($_GET['ID'])) {
-                    $data['ID'] = htmlentities($_GET['ID']);
+                    $data['ID'] = htmlspecialchars($_GET['ID']);
                     $data['method'] = 'UPDATE';
                 } else
                     $data['method'] = 'NEW';
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_GET['ID'])) {
-    $result = file_get_contents($api_path . 'themes.php?ID=' . htmlentities($_GET['ID']));
+    $result = file_get_contents($api_path . 'themes.php?ID=' . htmlspecialchars($_GET['ID']));
     if ($result !== false) {
         $themes = json_decode($result);
         if ($themes->sucess) {

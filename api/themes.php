@@ -41,23 +41,23 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
         $result = $objPdo->prepare("INSERT INTO `theme`(`label`, `color`, `icon_theme`) VALUES (:label, :color, :iconURL)");
         if (isset($_POST['label']) and isset($_POST['color']) and isset($_POST['iconURL'])) {
             $result->bindValue('label', $_POST['label'], PDO::PARAM_STR);
-            $result->bindValue('color', htmlentities($_POST['color']), PDO::PARAM_STR);
-            $result->bindValue('iconURL', htmlentities($_POST['iconURL']), PDO::PARAM_STR);
+            $result->bindValue('color', htmlspecialchars($_POST['color']), PDO::PARAM_STR);
+            $result->bindValue('iconURL', htmlspecialchars($_POST['iconURL']), PDO::PARAM_STR);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'UPDATE') {
         $result = $objPdo->prepare("UPDATE `theme` SET `label`=:label, `color`=:color, `icon_theme`=:iconURL WHERE `id_theme`=:id");
         if (isset($_POST['label']) and isset($_POST['color']) and isset($_POST['iconURL']) and isset($_POST['ID'])) {
             $result->bindValue('label', $_POST['label'], PDO::PARAM_STR);
-            $result->bindValue('color', htmlentities($_POST['color']), PDO::PARAM_STR);
-            $result->bindValue('iconURL', htmlentities($_POST['iconURL']), PDO::PARAM_STR);
-            $result->bindValue('id', htmlentities($_POST['ID']), PDO::PARAM_INT);
+            $result->bindValue('color', htmlspecialchars($_POST['color']), PDO::PARAM_STR);
+            $result->bindValue('iconURL', htmlspecialchars($_POST['iconURL']), PDO::PARAM_STR);
+            $result->bindValue('id', htmlspecialchars($_POST['ID']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'DELETE') {
         $result = $objPdo->prepare("DELETE FROM `theme` WHERE `id_theme`=:id");
         if (isset($_POST['ID'])) {
-            $result->bindValue('id', htmlentities($_POST['ID']), PDO::PARAM_INT);
+            $result->bindValue('id', htmlspecialchars($_POST['ID']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else {

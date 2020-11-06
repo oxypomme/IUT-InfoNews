@@ -5,8 +5,8 @@ if (session_id() == "")
     session_start();
 if (isset($_POST['submit'])) {
     if (isset($_POST["login"]) and isset($_POST["passwd"])) {
-        $login = htmlentities($_POST["login"]);
-        $pass = crypt(htmlentities($_POST["passwd"]), '$2a$07$usesomesillystringforsalt');
+        $login = htmlspecialchars($_POST["login"]);
+        $pass = crypt(htmlspecialchars($_POST["passwd"]), '$2a$07$usesomesillystringforsalt');
         $reslog = $objPdo->prepare("SELECT id_redactor, COUNT(*) AS 'match' FROM redactor WHERE mail = '$login' AND passwrd = '$pass' LIMIT 1");
         $reslog->execute();
         foreach ($reslog as $row) {

@@ -57,25 +57,25 @@ if (!isset($_POST['method']) or $_POST['method'] == 'GET') {
     if ($_POST['method'] == 'NEW') {
         $result = $objPdo->prepare("INSERT INTO `news`(`id_theme`, `content`, `id_redactor`, `language`) VALUES (:theme, :content, :redactor, :lang)");
         if (isset($_POST['theme']) and isset($_POST['content']) and isset($_POST['idredact']) and isset($_POST['lang'])) {
-            $result->bindValue('theme', htmlentities($_POST['theme']), PDO::PARAM_INT);
+            $result->bindValue('theme', htmlspecialchars($_POST['theme']), PDO::PARAM_INT);
             $result->bindValue('content',  $_POST['content'], PDO::PARAM_STR);
-            $result->bindValue('redactor', htmlentities($_POST['idredact']), PDO::PARAM_INT);
-            $result->bindValue('lang', htmlentities($_POST['lang']), PDO::PARAM_STR);
+            $result->bindValue('redactor', htmlspecialchars($_POST['idredact']), PDO::PARAM_INT);
+            $result->bindValue('lang', htmlspecialchars($_POST['lang']), PDO::PARAM_STR);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'UPDATE') {
         $result = $objPdo->prepare("UPDATE `news` SET `id_theme`=:theme, `content`=:content, `language`=:lang WHERE `id_news`=:id");
         if (isset($_POST['ID']) and isset($_POST['theme']) and isset($_POST['content']) and isset($_POST['lang'])) {
-            $result->bindValue('theme', htmlentities($_POST['theme']), PDO::PARAM_STR);
+            $result->bindValue('theme', htmlspecialchars($_POST['theme']), PDO::PARAM_STR);
             $result->bindValue('content', $_POST['content'], PDO::PARAM_STR);
-            $result->bindValue('lang', htmlentities($_POST['lang']), PDO::PARAM_STR);
-            $result->bindValue('id', htmlentities($_POST['ID']), PDO::PARAM_INT);
+            $result->bindValue('lang', htmlspecialchars($_POST['lang']), PDO::PARAM_STR);
+            $result->bindValue('id', htmlspecialchars($_POST['ID']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else  if ($_POST['method'] == 'DELETE') {
         $result = $objPdo->prepare("DELETE FROM `news` WHERE `id_news`=:id");
         if (isset($_POST['ID'])) {
-            $result->bindValue('id', htmlentities($_POST['ID']), PDO::PARAM_INT);
+            $result->bindValue('id', htmlspecialchars($_POST['ID']), PDO::PARAM_INT);
         } else
             $raw->sucess = "missing arguments";
     } else {

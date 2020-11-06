@@ -11,11 +11,11 @@ $inputErrors = array(
     'others' => false
 );
 
-$name = isset($_POST["name"]) ? htmlentities($_POST['name']) : '';
-$theme = isset($_POST["themes"]) ? htmlentities($_POST['themes']) : '';
-$text = isset($_POST["text"]) ? htmlentities($_POST['text']) : '';
-$lang = isset($_POST["lang"]) ? htmlentities($_POST['lang']) : (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fr');
-$imgURL = isset($_POST["imgURL"]) ? htmlentities($_POST['imgURL']) : '';
+$name = isset($_POST["name"]) ? htmlspecialchars($_POST['name']) : '';
+$theme = isset($_POST["themes"]) ? htmlspecialchars($_POST['themes']) : '';
+$text = isset($_POST["text"]) ? htmlspecialchars($_POST['text']) : '';
+$lang = isset($_POST["lang"]) ? htmlspecialchars($_POST['lang']) : (isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'fr');
+$imgURL = isset($_POST["imgURL"]) ? htmlspecialchars($_POST['imgURL']) : '';
 
 function showError($errorName)
 {
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
                     $content = new News($name, $text, $imgURL);
                     $data = array('theme' => $theme, 'content' => json_encode($content), 'lang' => $lang);
                     if (isset($_GET['ID'])) {
-                        $data['ID'] = htmlentities($_GET['ID']);
+                        $data['ID'] = htmlspecialchars($_GET['ID']);
                         $data['method'] = 'UPDATE';
                     } else {
                         $data['method'] = 'NEW';
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_GET['ID'])) {
-    $result = file_get_contents($api_path . 'news.php' . '?ID=' . htmlentities($_GET['ID']));
+    $result = file_get_contents($api_path . 'news.php' . '?ID=' . htmlspecialchars($_GET['ID']));
     if ($result !== false) {
         $news = json_decode($result);
         if ($news->sucess) {

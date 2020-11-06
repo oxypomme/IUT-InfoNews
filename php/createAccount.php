@@ -8,10 +8,10 @@ $inputErrors = array(
     'others' => false
 );
 
-$lname = isset($_POST["lname"]) ? htmlentities($_POST['lname']) : '';
-$fname = isset($_POST["fname"]) ? htmlentities($_POST['fname']) : '';
-$login = isset($_POST["login"]) ? htmlentities($_POST['login']) : '';
-$passwd = isset($_POST["passwd"]) ? htmlentities($_POST['passwd']) : '';
+$lname = isset($_POST["lname"]) ? htmlspecialchars($_POST['lname']) : '';
+$fname = isset($_POST["fname"]) ? htmlspecialchars($_POST['fname']) : '';
+$login = isset($_POST["login"]) ? htmlspecialchars($_POST['login']) : '';
+$passwd = isset($_POST["passwd"]) ? htmlspecialchars($_POST['passwd']) : '';
 
 function showError($errorName)
 {
@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
                 if (isset($_POST["passwd"]) && !empty($_POST['passwd']) && preg_match("/^.{6,}$/", $_POST['passwd'])) {
                     $data = array('lname' => $lname, 'fname' => $fname, 'mail' => $login, 'pass' => $passwd);
                     if (isset($_GET['ID'])) {
-                        $data['ID'] = htmlentities($_GET['ID']);
+                        $data['ID'] = htmlspecialchars($_GET['ID']);
                         $data['method'] = 'UPDATE';
                     } else
                         $data['method'] = 'NEW';
