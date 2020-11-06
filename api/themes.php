@@ -18,10 +18,10 @@ class Theme
 
     function __construct($id, $label, $color, $iconURL)
     {
-        $this->id = iconv(mb_detect_encoding($id, mb_detect_order(), true), "UTF-8", $id);
-        $this->label = iconv(mb_detect_encoding($label, mb_detect_order(), true), "UTF-8", $label);
-        $this->color = iconv(mb_detect_encoding($color, mb_detect_order(), true), "UTF-8", $color);
-        $this->iconURL = iconv(mb_detect_encoding($iconURL, mb_detect_order(), true), "UTF-8", $iconURL);
+        $this->id = utf8_encode($id);
+        $this->label = utf8_encode($label);
+        $this->color = utf8_encode($color);
+        $this->iconURL = utf8_encode($iconURL);
     }
 }
 

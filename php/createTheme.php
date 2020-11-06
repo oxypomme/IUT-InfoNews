@@ -55,8 +55,8 @@ if (isset($_POST['submit'])) {
         if (isset($_POST['enname']) && !empty($_POST['enname'])) {
             if (isset($_POST['color']) && !empty($_POST['color'])) {
                 $label = new stdClass();
-                $label->en = $enname;
-                $label->fr = $frname;
+                $label->en = utf8_encode($enname);
+                $label->fr = utf8_encode($frname);
                 $data = array('label' => json_encode($label), 'color' => $color);
                 if (isset($_POST['iconURL']))
                     $data['iconURL'] = htmlentities($_POST['iconURL']);

@@ -20,12 +20,12 @@ class News
 
     function __construct($id, $theme, $content, $date, $redactor, $lang)
     {
-        $this->id = iconv(mb_detect_encoding($id, mb_detect_order(), true), "UTF-8", $id);
-        $this->theme = iconv(mb_detect_encoding($theme, mb_detect_order(), true), "UTF-8", $theme);
-        $this->content = iconv(mb_detect_encoding($content, mb_detect_order(), true), "UTF-8", $content);
-        $this->date = iconv(mb_detect_encoding($date, mb_detect_order(), true), "UTF-8", $date);
-        $this->redactor = iconv(mb_detect_encoding($redactor, mb_detect_order(), true), "UTF-8", $redactor);
-        $this->lang = iconv(mb_detect_encoding($lang, mb_detect_order(), true), "UTF-8", $lang);
+        $this->id = utf8_encode($id);
+        $this->theme = utf8_encode($theme);
+        $this->content = utf8_encode($content);
+        $this->date = utf8_encode($date);
+        $this->redactor = utf8_encode($redactor);
+        $this->lang = utf8_encode($lang);
     }
 }
 

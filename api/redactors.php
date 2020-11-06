@@ -19,11 +19,11 @@ class Redactor
 
     function __construct($id, $lname, $fname, $mail, $role)
     {
-        $this->id = iconv(mb_detect_encoding($id, mb_detect_order(), true), "UTF-8", $id);
-        $this->lname = iconv(mb_detect_encoding($lname, mb_detect_order(), true), "UTF-8", $lname);
-        $this->fname = iconv(mb_detect_encoding($fname, mb_detect_order(), true), "UTF-8", $fname);
-        $this->mail = iconv(mb_detect_encoding($mail, mb_detect_order(), true), "UTF-8", $mail);
-        $this->role = iconv(mb_detect_encoding($role, mb_detect_order(), true), "UTF-8", $role);
+        $this->id = utf8_encode($id);
+        $this->lname = utf8_encode($lname);
+        $this->fname = utf8_encode($fname);
+        $this->mail = utf8_encode($mail);
+        $this->role = utf8_encode($role);
     }
 }
 
