@@ -116,7 +116,7 @@ if (isset($_SESSION["login"]) and !isset($_GET['ID']))
         </div>
         <div>
             <input type="text" name="login" value=<?= '"' . $login . '"' ?> required />
-            <label for="login"><?= getTrad('login') ?>*</label>
+            <label for="login"><?= getTrad('mail') ?>*</label>
             <?php showError("login") ?>
         </div>
         <div>
