@@ -455,6 +455,7 @@ form input:not(:required)~label {
     margin-left: 10px;
 }
 
+form input[type="submit"],
 form input[type="submit"] {
     border-color: transparent;
     border-radius: 16px;
@@ -466,12 +467,14 @@ form input[type="submit"] {
     outline: none;
 }
 
+form input[type="submit"]:hover,
 form input[type="submit"]:hover {
     background-color: var(--secondary-color);
     color: #fff;
     transition: background-color 0.25s ease-in-out;
 }
 
+form input[type="submit"]:focus,
 form input[type="submit"]:focus {
     border: solid #222 2px;
     transition: border-color 0.25s ease-in-out;

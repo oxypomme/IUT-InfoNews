@@ -73,7 +73,7 @@ include "php/createNews.php";
             <?php showError("others") ?><br />
 
             <input type="submit" name="submit" value="<?= getTrad('validate') ?>" />
-            <input type="submit" name="cancel" value="<?= getTrad('cancel') ?>" />
+            <input type="button" value="<?= getTrad('cancel') ?>" onclick="history.back();" />
         </form>
         <?= getTrad('requiredFieldText') ?>
     </main>
