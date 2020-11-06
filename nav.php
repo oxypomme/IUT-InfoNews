@@ -19,7 +19,7 @@
             foreach ($result as $row) {
                 if ($row['role'] == 1)
                     echo '<li><a href="themes_view.php">' . getTrad('createTheme') . '</a></li>';
-                echo '<li class="dropbtn connect dropbtn-min" onclick="showDropdown(this); updateLangDropdown();"> ' . $row['last_name'] . ' ' . $row['first_name'];
+                echo '<li class="dropbtn connect dropbtn-min" onclick="showDropdown(this); updateLangDropdown();"> ' . utf8_encode($row['last_name']) . ' ' . utf8_encode($row['first_name']);
                 echo '<ul class="dropdown-content">';
                 echo '<li><a href="#" onclick="setIframe(\'php/createAccount.php?ID=' . $id . '\', 240)">' . getTrad('profile') . '</a></li>';
                 echo '<li><a href="#" onclick="unlogAccount()">' . getTrad('logout') . '</a></li>';
